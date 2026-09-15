@@ -19,7 +19,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.55}
 a{color:var(--sky)}
-body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
+body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .snip{display:none;margin:0 0 18px;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px} .snip .sk{font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px} .snip pre{margin:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--text);white-space:pre-wrap;word-break:break-all} .snip .more{color:var(--muted);font-size:12px;margin-top:8px} body.shot .snip{display:block} .xtop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px} .xtop .xl{color:var(--muted);font-size:11px;font-family:var(--disp);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-right:4px} .xtop button{padding:6px 12px;font-size:12px} body.shot .xtop{display:none} .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
 h1,h2{font-family:var(--disp);margin:0}
 h1{font-size:clamp(26px,4vw,36px);line-height:1.15;font-weight:700}
 h2{font-size:18px;font-weight:700;margin-bottom:8px}
@@ -98,7 +98,7 @@ details.card>summary{cursor:pointer;list-style:none;font-family:var(--disp);font
 .warn{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px} .warn li{margin:6px 0} .warn b{color:var(--text)} .warn .tag{font-style:normal;font-family:var(--disp);font-weight:700;font-size:12px;color:var(--muted)} .warn .tag.red{color:var(--red)} .warn .tag.amber{color:var(--amber)} .warn code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--text)} .warn li.red b{color:var(--red)} .warn li.amber b{color:var(--amber)}
 table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
 .tog{margin:8px 0 2px} .tog a.toggle{color:var(--sky);font-size:13px;font-weight:600;text-decoration:none} .card:not(.open) .tog a.end{display:none} #matrixend,#othersend{margin-top:6px}
-@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} @page{margin:10mm} body{background:var(--bg)!important;color:var(--text)!important} .card::before{display:none} button,.byline,textarea,.instr,#copied,#paste,#exports{display:none!important} details{display:block} details>*{display:block} details summary{list-style:none}}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} @page{margin:10mm} body{background:var(--bg)!important;color:var(--text)!important} .card::before{display:none} button,.byline,textarea,.instr,#copied,#paste,#exports,.xtop{display:none!important} .snip{display:block!important} details{display:block} details>*{display:block} details summary{list-style:none}}
 </style>
 </head>
 <body>
@@ -129,6 +129,8 @@ Allow: /"></textarea>
 
   <div id="results" class="hidden">
     <div class="section">
+      <div class="xtop"><span class="xl">Export</span><button id="xcopy">Copy as markdown</button><button id="xmd">.md</button><button id="xcsv">.csv</button><button id="xjson">.json</button><button id="xpng">PNG</button><button id="xpdf">PDF</button></div>
+      <div class="snip" id="snip"></div>
       <div class="kicker">The verdict</div>
       <ul class="story" id="story"></ul>
       <div class="cards" id="cards"></div>
@@ -602,7 +604,9 @@ function run(){
     document.querySelectorAll(`a.toggle[data-for="${a.dataset.for}"]`).forEach(x=>{ if(x.classList.contains('end')) return; x.textContent=open?'Show less':x.dataset.label; });
     if(!open&&a.classList.contains('end')) tb.scrollIntoView({behavior:'smooth',block:'start'}); }); });
   document.querySelectorAll('a.toggle:not(.end)').forEach(a=>{ a.dataset.label=a.textContent; });
-  $('#results').classList.remove('hidden');
+  { const lines=txt.replace(/\r/g,'').split('\n'); const shown=lines.slice(0,10).map(l=>l.length>110?l.slice(0,110)+'…':l); const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); const when=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+    $('#snip').innerHTML=`<div class="sk">The file you checked · ${lines.length} line${lines.length===1?'':'s'} · ${when}</div><pre>${esc(shown.join('\n'))}</pre>${lines.length>10?`<div class="more">First 10 lines shown, ${lines.length-10} more in the file.</div>`:''}`; }
+$('#results').classList.remove('hidden');
   LAST={generated:new Date().toISOString(),verdict:items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'').replace(/<li class="st-[a-z]+">/g,' ').replace(/<[^>]+>/g,'').trim()),conclusion:'',zones:zoneDefs.map(z=>({label:z.label.long,paths:z.paths,byLLM:Object.fromEntries(z.at.map((x,i)=>[LLMS[i].name,x.state]))})).concat([{label:zoneDefs.length?'Everything else':'Whole site',paths:[],byLLM:Object.fromEntries(S.map((x,i)=>[LLMS[i].name,x.state]))}]),warnings:warn.map(w=>w.replace(/<[^>]+>/g,'')),llms:report,folders:matrix,others:oreport};
   $('#results').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -899,6 +903,7 @@ $('#dlmd').addEventListener('click',()=>LAST&&download(stamp()+'.md',toMd(LAST),
 $('#dlcsv').addEventListener('click',()=>LAST&&download(stamp()+'.csv',toCsv(LAST),'text/csv'));
 $('#dljson').addEventListener('click',()=>LAST&&download(stamp()+'.json',JSON.stringify(LAST,null,2),'application/json'));
 $('#print').addEventListener('click',()=>window.print());
+[['xcopy','copy'],['xmd','dlmd'],['xcsv','dlcsv'],['xjson','dljson'],['xpng','dlpng'],['xpdf','print']].forEach(([a,b])=>$('#'+a).addEventListener('click',()=>$('#'+b).click()));
 $('#dlpng').addEventListener('click',async()=>{ if(!LAST) return; const b=$('#dlpng'); b.textContent='Rendering, a few seconds'; b.disabled=true; $('#copied').textContent='';
   try{ document.body.classList.add('shot'); window.scrollTo(0,0); await new Promise(r=>setTimeout(r,80));
     const bg=getComputedStyle(document.body).backgroundColor;
