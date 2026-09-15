@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robots.txt AI Visibility Audit | Orit Mutznik</title>
+<meta name="description" content="Free Robots.txt AI Visibility Audit: Paste any robots.txt and see which LLM crawlers can train on, search and fetch your content, your max AI visibility score and which line is costing you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0A;--surf:#161616;--surf2:#1D1D1D;--line:#262626;
+  --coral:#FF8A70;--sky:#8ECDF8;--text:#F5F5F3;--muted:#9C9C96;
+  --green:#4ADE80;--red:#F87171;--amber:#FF9F1C;
+  --disp:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
+  --body:Manrope,ui-sans-serif,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.55}
+a{color:var(--sky)}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 20px 64px}
+h1,h2{font-family:var(--disp);margin:0}
+h1{font-size:clamp(26px,4vw,36px);line-height:1.15;font-weight:700}
+h2{font-size:18px;font-weight:700;margin-bottom:8px}
+.kicker{font-family:var(--disp);font-size:12px;letter-spacing:2.4px;color:var(--coral);font-weight:700;text-transform:uppercase;margin-bottom:12px}
+.lede{color:var(--muted);max-width:760px;margin:12px 0 0}
+.byline{color:var(--muted);font-size:13.5px;margin:10px 0 0}
+.instr{color:var(--text);font-size:16px;font-weight:600;margin:18px 0 0;border:1px solid var(--text);border-radius:999px;padding:12px 22px;display:inline-block;max-width:100%;line-height:1.5} .instr .ih{font-family:var(--disp);font-weight:700;display:block;margin-bottom:4px} .instr .co{color:var(--coral);font-family:var(--disp);font-weight:700} .instr .lb{color:var(--sky);font-weight:700}
+@media(max-width:700px){.instr{border-radius:18px}}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:22px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--accent,var(--muted))}
+label{display:block;font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 8px}
+textarea{width:100%;min-height:240px;resize:vertical;background:var(--surf2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.4px;border-radius:999px;padding:10px 18px;cursor:pointer;border:1px solid var(--line);background:var(--surf2);color:var(--text)}
+button.primary{background:var(--coral);border-color:var(--coral);color:#0A0A0A}
+button.ghost{background:transparent;border-color:var(--text)}
+button.example{background:var(--sky);border-color:var(--sky);color:#0A0A0A}
+.hint{color:var(--muted);font-size:13px;margin-top:8px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:4px 11px;font-family:var(--disp);font-size:11px;font-weight:700;letter-spacing:.4px;border:1.2px solid;white-space:nowrap}
+.pill i{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.p-allow{color:var(--green);border-color:var(--green);background:rgba(74,222,128,.12)}
+.p-block{color:var(--red);border-color:var(--red);background:rgba(248,113,113,.12)}
+.p-amber{color:var(--amber);border-color:var(--amber);background:rgba(255,159,28,.12)}
+.p-muted{color:var(--muted);border-color:var(--muted);background:rgba(156,156,150,.10)}
+.p-sky{color:var(--sky);border-color:var(--sky);background:rgba(142,205,248,.12)}
+.via{font-size:10px;color:var(--muted);font-family:var(--body);letter-spacing:0;font-weight:600}
+.section{margin-top:24px}
+.verdict{font-family:var(--disp);font-size:20px;font-weight:700;line-height:1.35}
+.verdict .num.bad{color:var(--red)} .verdict .num.warn{color:var(--amber)} .verdict .num.good{color:var(--green)}
+.verdict .lead.good{color:var(--green)} .verdict .lead.bad{color:var(--red)}
+.verdict .cul{font-family:var(--body);font-weight:600;font-size:14px;color:var(--muted)}
+.bar{display:flex;height:18px;border-radius:999px;overflow:hidden;margin-top:14px;background:var(--surf2);border:1px solid var(--line)}
+.bar span{display:block;height:100%}
+.barkey{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:8px}
+.barkey i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.conclusion{margin:10px 0 0;color:var(--text);font-size:15px} .conclusion b{font-family:var(--disp)}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px} @media(max-width:820px){.summary{grid-template-columns:1fr}}
+.stat{padding:16px 18px} .stat .n{font-family:var(--disp);font-size:34px;font-weight:700;line-height:1} .stat .l{margin-top:6px;font-size:13.5px} .stat .s{color:var(--muted);font-size:12px;margin-top:4px}
+.hold{margin:14px 0 0;padding-left:20px;color:var(--muted);font-size:14px}
+.hold li{margin:6px 0} .hold b{color:var(--text)} .hold li.red b{color:var(--red)} .hold li.amber b{color:var(--amber)}
+.hold code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--text)}
+table{width:100%;border-collapse:collapse;margin-top:4px}
+th{font-family:var(--disp);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.name{font-family:var(--disp);font-weight:700;font-size:15px;max-width:230px}
+td.name small{display:block;color:var(--muted);font-family:var(--body);font-weight:600;font-size:12px;margin-top:3px}
+.bot{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:var(--muted);display:block;margin-top:4px}
+td.means{color:var(--muted);font-size:13px;min-width:300px} td.means b{color:var(--text)}
+.tblwrap{overflow-x:auto}
+.other td.name{font-size:13.5px}
+.type{font-size:11px;font-family:var(--disp);font-weight:700;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+.type.llm{color:var(--coral)} .type.mixed{color:var(--sky)} .type.trad{color:var(--muted)}
+table.matrix td{padding:8px 8px} table.matrix td.pth{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--text);max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tsu{display:inline-flex;gap:4px} .tsu i{font-style:normal;font-family:var(--disp);font-weight:700;font-size:11px;width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;border:1px solid}
+.tsu i.y{color:var(--green);border-color:rgba(74,222,128,.5);background:rgba(74,222,128,.10)} .tsu i.n{color:var(--red);border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.10)} .tsu i.x{color:var(--muted);border-color:var(--line)}
+details.more summary{cursor:pointer;color:var(--sky);font-size:13px;font-weight:600;list-style:none;margin-top:8px} details.more summary::-webkit-details-marker{display:none}
+details.card>summary{cursor:pointer;list-style:none;font-family:var(--disp);font-size:18px;font-weight:700} details.card>summary::-webkit-details-marker{display:none} details.card>summary .hint{display:block;font-family:var(--body);font-weight:400;margin-top:4px}
+.foot{color:var(--muted);font-size:12.5px;margin-top:28px;border-top:1px solid var(--line);padding-top:18px} .foot p{margin:8px 0} .foot .fk{color:var(--text);font-weight:600} .foot ul.caveats{margin:4px 0 0;padding-left:20px} .foot ul.caveats li{margin:4px 0}
+.hidden{display:none}
+.story{font-family:var(--disp);font-size:17px;font-weight:700;line-height:1.45;margin:0 0 14px;padding-left:22px} .story li{margin:6px 0} .story li.head{list-style:none;margin:0 0 12px -22px;font-size:21px;line-height:1.3} .story li.head .judge{display:block;font-family:var(--body);font-weight:500;font-size:15px;color:var(--muted);margin-top:4px} .story .st-full{color:var(--green)} .story .st-reduced{color:var(--amber)} .story .st-none{color:var(--red)} .story .st-training{color:var(--red)}
+.story li.miss>ul{margin:6px 0 0;padding-left:20px;font-family:var(--body);font-weight:500;font-size:14.5px} .story li.miss>ul li{margin:5px 0} .story li.miss>ul li.st-none{color:var(--red)} .story li.miss>ul li.st-reduced{color:var(--amber)} .story li.miss>ul li.st-training{color:var(--red)} .story li.miss>ul li.st-full{color:var(--green)} .story li.miss>ul li a{color:inherit;text-decoration:underline} .story li.miss>ul li b{color:inherit;font-family:var(--body);font-weight:700}
+.story details{display:inline} .story summary{display:inline;cursor:pointer;color:var(--sky);font-family:var(--body);font-weight:600;font-size:13px;list-style:none} .story summary::-webkit-details-marker{display:none}
+.story .plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:5px;margin:8px 0 4px;font-family:var(--body);font-weight:400}
+.story .plist code{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--text);background:var(--surf2);border:1px solid var(--line);border-radius:6px;padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lc .zones li .r{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:0 0 auto} .lc .tsu i{width:18px;height:18px;font-size:10px}
+.lc .zones li .z a{color:var(--sky);text-decoration:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px} @media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}} @media(max-width:560px){.cards{grid-template-columns:1fr}}
+.lc{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.lc::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--accent)}
+.lc h3{font-family:var(--disp);font-size:17px;margin:0} .lc h3 small{display:block;font-family:var(--body);font-weight:600;font-size:12px;color:var(--muted);margin-top:2px}
+.lc .zones{margin:12px 0 0;padding:0;list-style:none} .lc .zones li{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:7px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.lc .zones li .z{min-width:0} .lc .zones li .z b{display:block;color:var(--text);font-weight:600;font-family:var(--body);font-size:12.5px} .lc .zones li .z code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--muted)}
+.lc .pill{flex:0 0 auto;padding:3px 9px;font-size:10px}
+.lc .bots{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+.warn{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px} .warn li{margin:6px 0} .warn b{color:var(--text)} .warn .tag{font-style:normal;font-family:var(--disp);font-weight:700;font-size:12px;color:var(--muted)} .warn .tag.red{color:var(--red)} .warn .tag.amber{color:var(--amber)} .warn code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--text)} .warn li.red b{color:var(--red)} .warn li.amber b{color:var(--amber)}
+table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
+.tog{margin:8px 0 2px} .tog a.toggle{color:var(--sky);font-size:13px;font-weight:600;text-decoration:none} .card:not(.open) .tog a.end{display:none} #matrixend,#othersend{margin-top:6px}
+@media print{.card::before{display:none} button,.byline,textarea{display:none!important} body{background:#fff;color:#111} .card{border-color:#ddd;background:#fff} .hint,td.means{color:#444} a{color:#111} details{display:block} details>*{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Free tool · A publisher's robots.txt playbook</div>
+  <h1>Robots.txt AI Visibility Audit</h1>
+  <p class="lede">Reads a robots.txt file and shows, for every LLM, whether its training, search and user crawlers are allowed or blocked, what that does to your AI visibility and where the file is costing you. Built from <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/" target="_blank" rel="noopener">Can Publishers Block AI Training Without Losing AI Visibility?</a></p>
+  <div class="instr"><b class="ih">Instructions:</b> Copy-paste the contents of your robots.txt below and hit <span class="co">Check</span>, or click any of the <span class="lb">example buttons</span> for anonymised real robots.txt examples and what they mean.</div>
+
+  <div class="card" style="--accent:var(--coral);margin-top:24px">
+    <label for="robots">Paste your robots.txt content</label>
+    <textarea id="robots" spellcheck="false" placeholder="User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Allow: /"></textarea>
+    <div class="row" style="margin-top:12px">
+      <button class="primary" id="run">Check</button>
+      <button class="example" id="sample">Publisher example</button>
+      <button class="example" id="sample3">Multiple blocked folders example</button>
+      <button class="example" id="sample4">Fully open example</button>
+      <button class="example" id="sample2">Fallback example</button>
+      <button class="ghost" id="clear">Clear</button>
+      </div>
+    <p class="hint" style="margin-top:12px">Nothing you paste is retained or shared, not even for learning purposes. The file is read in your browser and goes nowhere else.</p>
+    <p class="byline">Built by <a href="https://www.oritmutznik.com/" target="_blank" rel="noopener">Orit Mutznik</a> · Contact or feedback: <a href="https://www.linkedin.com/in/oritsimu/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://x.com/OritSiMu" target="_blank" rel="noopener">X</a></p>
+  </div>
+
+  <div id="results" class="hidden">
+    <div class="section">
+      <div class="kicker">The verdict</div>
+      <ul class="story" id="story"></ul>
+      <div class="cards" id="cards"></div>
+      <p class="hint" style="margin-top:10px"><b style="color:var(--text)">T</b> train · <b style="color:var(--text)">S</b> search and cite · <b style="color:var(--text)">U</b> open on request. BLOCKED means every crawler that LLM has is blocked there. CITE ONLY means the training crawler is blocked and the search and user crawlers are open. A letter is left out where that LLM has no crawler for the job (Gemini has one switch for training and grounding, Perplexity does not train).</p>
+      <div class="card" id="warnwrap" style="--accent:var(--amber);margin-top:16px"><h2 style="font-size:15px;margin:0" id="warnhead">Worth checking</h2><p class="hint" style="margin:2px 0 0">Each line ends with a call: Almost certainly not intended, worth confirming, or for information.</p><ol class="warn" id="warn" style="margin-top:8px"></ol></div>
+    </div>
+
+    <div class="section card" style="--accent:var(--sky)" id="mwrap">
+      <h2>Folders the file treats differently</h2>
+      <p class="hint" style="margin:0 0 6px">One row per path that behaves differently from the site default, most restrictive first, and what each LLM's crawlers can do there. <b style="color:var(--text)">T</b> train, <b style="color:var(--text)">S</b> search and cite, <b style="color:var(--text)">U</b> open on request. Green allowed, red blocked. A letter is left out where that LLM has no crawler for the job.</p>
+      <div id="matrixmore" class="tog"></div>
+      <div class="tblwrap"><table class="matrix" id="matrix"><thead></thead><tbody></tbody></table></div>
+      <div id="matrixend" class="tog"></div>
+    </div>
+
+    <div class="section card other" style="--accent:var(--muted)">
+      <h2>Every other crawler worth knowing</h2>
+      <p class="hint" style="margin:0 0 6px" id="othersum">Googlebot and Bingbot first, then DeepSeek and Grok, then Common Crawl and the LLM-first crawlers most people have never heard of. Full list at <a href="https://knownagents.com/agents" target="_blank" rel="noopener">knownagents.com/agents</a>.</p>
+      <div id="othersmore" class="tog"></div>
+      <div class="tblwrap"><table id="others"><thead><tr><th>Crawler</th><th>Type</th><th>Job</th><th>Status</th><th>What it means</th></tr></thead><tbody></tbody></table></div>
+      <div id="othersend" class="tog"></div>
+    </div>
+
+    <div class="section card" style="--accent:var(--sky)">
+      <div class="row">
+        <button id="copy">Copy as markdown</button>
+        <button id="dlmd">Download .md</button>
+        <button id="dlcsv">Download .csv</button>
+        <button id="dljson">Download .json</button>
+        <button id="print">Print or save as PDF</button>
+        <span class="hint" id="copied" style="margin:0"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p><b>How it reads your file.</b> It follows the robots.txt standard (RFC 9309). A crawler obeys the group that names it and only falls back to the <span class="mono">*</span> group when nothing names it. If the same crawler is named in several groups, the rules are merged. Where more than one rule matches a page, the longest one wins, and if an Allow and a Disallow are the same length, Allow wins. Every folder the file names is checked one by one and grouped by how the 5 LLMs see it: The largest 3 groups appear in the verdict and the cards, the rest in the folder table. "Everything else" means every page the file does not name. Housekeeping folders that also shut Googlebot out (logins, carts, admin areas) are left out, because search engines cannot see them either.</p>
+    <p><b>What the pills mean.</b> <span class="fk">Full:</span> The LLM can learn from these pages and link to them. <span class="fk">Cite only:</span> The training crawler is blocked and the search crawler is not, so the LLM can link to these pages only after a live web search, which <a href="https://searchengineland.com/chatgpt-search-prompts-data-463407" target="_blank" rel="noopener">Nectiv</a> found happens on about 31% of ChatGPT prompts. <span class="fk">Blocked:</span> No crawler that LLM has can reach these pages. <span class="fk">Train only:</span> The LLM learns from these pages but can never link to them, which nobody chooses on purpose. The percentage next to each LLM is its share of visits to AI products (Similarweb, August 2026, website visits only). It is there for scale; nothing is scored on it.</p>
+    <p><b>Languages and regions.</b> The language line appears only when the file names at least two language or region folders, such as <span class="mono">/de/</span> or <span class="mono">/pt-br/</span>, or one with a region code. Language sites on their own domain or subdomain (<span class="mono">de.example.com</span>, <span class="mono">example.de</span>) have their own robots.txt and do not show up here.</p>
+    <p><b>What this tool cannot tell you.</b></p>
+    <ul class="caveats">
+      <li>Robots.txt is a set of directives that nothing enforces. The big companies say their crawlers follow it, but a crawler can ignore it and newer or less careful ones sometimes do. This tool reads what your file asks for, not who actually turns up.</li>
+      <li>It reads only what you paste. It does not fetch your pages, so it cannot tell whether an allowed folder is behind a paywall, redirects somewhere else or has been taken down.</li>
+      <li>It does not see other blocks. A firewall, a CDN rule or a meta tag can stop a crawler your file allows.</li>
+      <li>The 5 LLMs and their crawler names come from each company's own documentation as of September 2026: <a href="https://developers.openai.com/api/docs/bots" target="_blank" rel="noopener">OpenAI</a>, <a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers" target="_blank" rel="noopener">Google</a>, <a href="https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler" target="_blank" rel="noopener">Anthropic</a>, <a href="https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0" target="_blank" rel="noopener">Microsoft</a> and <a href="https://docs.perplexity.ai/guides/bots" target="_blank" rel="noopener">Perplexity</a>. Companies add and rename crawlers, so re-check your file against those pages every quarter. The community-maintained <a href="https://github.com/ai-robots-txt/ai.robots.txt" target="_blank" rel="noopener">ai.robots.txt</a> list is a quick way to spot new names.</li>
+      <li>The traffic shares are <a href="https://the-decoder.com/chatgpt-claws-back-web-traffic-share-to-55-5-percent-as-geminis-brief-comeback-fades/" target="_blank" rel="noopener">Similarweb's August 2026 figures</a> for website visits only. They understate products used mostly inside an app, Gemini above all.</li>
+      <li>It is a decision aid, not legal advice and not a substitute for an SEO, GEO or AEO consultation.</li>
+      <li>The latest version lives on <a href="https://github.com/oritsimu-new/robots-txt-ai-visibility-audit" target="_blank" rel="noopener">GitHub</a>. For feedback or a bug, open an issue there or message <a href="https://www.linkedin.com/in/oritsimu/" target="_blank" rel="noopener">Orit on LinkedIn</a>.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+
+/* ---------- crawler registry ---------- */
+const LLMS = [
+  { key:'chatgpt', name:'ChatGPT', company:'OpenAI', share:55.5, kind:'split',
+    train:'GPTBot', search:'OAI-SearchBot', user:'ChatGPT-User' },
+  { key:'gemini', name:'Gemini', company:'Google', share:25.6, kind:'google' },
+  { key:'claude', name:'Claude', company:'Anthropic', share:9.3, kind:'split',
+    train:'ClaudeBot', search:'Claude-SearchBot', user:'Claude-User', legacy:['anthropic-ai','Claude-Web'] },
+  { key:'copilot', name:'Copilot', company:'Microsoft', share:1.6, kind:'bing' },
+  { key:'perplexity', name:'Perplexity', company:'Perplexity', share:0.9, kind:'perplexity',
+    search:'PerplexityBot', user:'Perplexity-User' },
+];
+const TRACKED_SHARE = LLMS.reduce((a,l)=>a+l.share,0);
+
+/* type: 'mixed' = a search engine index that also feeds AI answers, 'llm' = LLM-first crawler, 'trad' = search only */
+const OTHERS = [
+  { ua:'Googlebot', who:'Google', type:'mixed', job:'Search index', means:'The one that matters most. Google Search, AI Overviews and AI Mode all run off this index. Blocking it removes you from Google entirely, which no AI decision is worth.' },
+  { ua:'Bingbot', who:'Microsoft', type:'mixed', job:'Search index + Copilot', means:'Feeds Bing Search and Copilot together. There is no Copilot-only crawler, so this is the second search engine and an AI assistant in one line.' },
+  { ua:'DeepSeekBot', who:'DeepSeek · 3.4%', type:'llm', job:'Training', means:'The only DeepSeek crawler documented, and it trains the model. Block it and you block training. Fetching has no lever, because no search or user crawler is published, so nobody outside DeepSeek can say whether its web search mode still reaches you.' },
+  { ua:'xAI-SearchBot', who:'xAI (Grok) · 2.4%', type:'llm', job:'Search', means:'The only xAI crawler documented, and it fetches for live Grok answers. Block it and you block Grok search and citations. Training has no lever, because xAI has never published a training crawler token.' },
+  { ua:'CCBot', who:'Common Crawl', type:'llm', job:'Training', means:'The open dataset behind a long list of models at once. The broadest single training block, and the leakiest, because old snapshots stay archived.' },
+  { ua:'Applebot', who:'Apple', type:'mixed', job:'Search', means:'Siri, Spotlight and Safari suggestions. Blocking it removes you from those, not from Apple Intelligence training.' },
+  { ua:'Applebot-Extended', who:'Apple', type:'llm', job:'Training', means:'Controls use of already-crawled content for Apple Intelligence training. A separate line from Applebot.' },
+  { ua:'Google-CloudVertexBot', who:'Google', type:'llm', job:'Retrieval for Vertex AI agents', means:'Fetches pages for customers building agents on Google Cloud. Not the Gemini app.' },
+  { ua:'Gemini-Deep-Research', who:'Google', type:'llm', job:'User', means:'Collects sources when someone runs a Deep Research report in Gemini.' },
+  { ua:'Google-NotebookLM', who:'Google', type:'llm', job:'User', means:'Fetches a page when someone adds it as a source in NotebookLM.' },
+  { ua:'AzureAI-SearchBot', who:'Microsoft', type:'llm', job:'Search', means:'Retrieval for Azure AI Search customers, separate from Bingbot.' },
+  { ua:'Amazonbot', who:'Amazon', type:'llm', job:'Training and assistant', means:'Alexa and Rufus, the shopping assistant. Blocking it cuts both.' },
+  { ua:'Amzn-SearchBot', who:'Amazon', type:'llm', job:'Search', means:'Retrieval crawler for Amazon AI answers, split out from Amazonbot.' },
+  { ua:'Amzn-User', who:'Amazon', type:'llm', job:'User', means:'Fetches a page when Alexa or another Amazon assistant is asked to read it.' },
+  { ua:'bedrockbot', who:'Amazon', type:'llm', job:'Retrieval for Bedrock', means:'Crawls URLs that Bedrock customers add to a knowledge base.' },
+  { ua:'meta-externalagent', who:'Meta', type:'llm', job:'Training', means:'Trains Meta AI. Meta-ExternalFetcher is the user-triggered counterpart.' },
+  { ua:'meta-webindexer', who:'Meta', type:'llm', job:'Search', means:'Retrieval index for Meta AI answers, split out from training in 2026.' },
+  { ua:'Meta-ExternalFetcher', who:'Meta', type:'llm', job:'User', means:'Fetches a page when someone asks Meta AI to read it.' },
+  { ua:'FacebookBot', who:'Meta', type:'llm', job:'Training', means:'Meta’s older crawler, used for speech and language model training.' },
+  { ua:'MistralBot', who:'Mistral', type:'llm', job:'Training', means:'Collects data for Mistral’s models.' },
+  { ua:'MistralAI-Index', who:'Mistral', type:'llm', job:'Search', means:'Retrieval index for Le Chat answers.' },
+  { ua:'MistralAI-User', who:'Mistral', type:'llm', job:'User', means:'Fetches a page when someone asks Le Chat to read it.' },
+  { ua:'Bytespider', who:'ByteDance', type:'llm', job:'Training', means:'Trains the models behind TikTok’s AI features. Widely blocked and widely reported to ignore the file.' },
+  { ua:'QwenBot', who:'Alibaba', type:'llm', job:'Training', means:'Trains the Qwen models. TongyiBot is the user-triggered fetcher for the Tongyi assistant.' },
+  { ua:'TongyiBot', who:'Alibaba', type:'llm', job:'User', means:'Fetches a page for the Tongyi Qianwen assistant on request.' },
+  { ua:'ERNIEBot', who:'Baidu', type:'llm', job:'Training', means:'Trains Baidu’s ERNIE models. YiyanBot is the user-triggered fetcher.' },
+  { ua:'YiyanBot', who:'Baidu', type:'llm', job:'User', means:'Fetches a page for Baidu’s Yiyan assistant on request.' },
+  { ua:'KimiBot', who:'Moonshot AI', type:'llm', job:'Training', means:'Trains the Kimi models. Also appears as MoonshotBot, KimiCrawler and MoonSpider.' },
+  { ua:'Kimi-SearchBot', who:'Moonshot AI', type:'llm', job:'Search', means:'Retrieval crawler for Kimi answers.' },
+  { ua:'PanguBot', who:'Huawei', type:'llm', job:'Training', means:'Trains Huawei’s Pangu models. PetalBot is the search crawler.' },
+  { ua:'PetalBot', who:'Huawei', type:'mixed', job:'Search', means:'Petal Search and Huawei’s AI answers.' },
+  { ua:'CohereBot', who:'Cohere', type:'llm', job:'Training', means:'Collects data for Cohere’s enterprise models. Older files name it cohere-ai.' },
+  { ua:'cohere-ai', who:'Cohere', type:'llm', job:'Training (older name)', means:'Earlier token for the same crawler. Name both if you mean to block it.' },
+  { ua:'AI2Bot', who:'Allen AI', type:'llm', job:'Training', means:'Collects data for open source models. Ai2Bot-Dolma is the dataset variant.' },
+  { ua:'DuckAssistBot', who:'DuckDuckGo', type:'llm', job:'Search', means:'Powers DuckAssist answers. Retrieval, not training.' },
+  { ua:'YouBot', who:'You.com', type:'llm', job:'Search', means:'Powers You.com answers.' },
+  { ua:'kagi-fetcher', who:'Kagi', type:'llm', job:'User', means:'Fetches a page for Kagi’s assistant on request.' },
+  { ua:'Diffbot', who:'Diffbot', type:'llm', job:'Training and data', means:'Structured web data sold on to AI and analytics customers.' },
+  { ua:'Timpibot', who:'Timpi', type:'llm', job:'Training', means:'Decentralised index used for AI training.' },
+  { ua:'omgili', who:'Webz.io', type:'llm', job:'Training and data', means:'Sells crawled data on, including to AI companies. webzio-extended is the newer token.' },
+];
+
+/* ---------- robots.txt parser, RFC 9309 ---------- */
+function parseRobots(txt){
+  const groups=[]; let cur=null; let lastWasUA=false;
+  txt.split(/\r?\n/).forEach((raw,ln)=>{
+    const line=raw.replace(/#.*$/,'').trim(); if(!line) return;
+    const m=line.match(/^([A-Za-z-]+)\s*:\s*(.*)$/); if(!m) return;
+    const field=m[1].toLowerCase(), val=m[2].trim();
+    if(field==='user-agent'){
+      if(!cur||!lastWasUA){cur={agents:[],rules:[]};groups.push(cur);}
+      cur.agents.push(val.toLowerCase()); lastWasUA=true;
+    } else if(field==='allow'||field==='disallow'){
+      if(!cur){cur={agents:['*'],rules:[]};groups.push(cur);}
+      cur.rules.push({allow:field==='allow',path:val,line:ln+1}); lastWasUA=false;
+    } else { lastWasUA=false; }
+  });
+  return groups;
+}
+function groupsFor(groups, token){
+  const t=token.toLowerCase();
+  let exact=groups.filter(g=>g.agents.some(a=>a===t));
+  if(exact.length) return {groups:exact,via:'named'};
+  let star=groups.filter(g=>g.agents.includes('*'));
+  if(star.length) return {groups:star,via:'*'};
+  return {groups:[],via:'none'};
+}
+const RE_CACHE=new Map();
+function patToRe(p){
+  if(RE_CACHE.has(p)) return RE_CACHE.get(p);
+  const key=p; let anchored=p.endsWith('$'); if(anchored)p=p.slice(0,-1);
+  let re='^'+p.split('*').map(s=>s.replace(/[.+?^${}()|[\]\\]/g,'\\$&')).join('.*');
+  if(anchored)re+='$';
+  const rx=new RegExp(re); RE_CACHE.set(key,rx); return rx;
+}
+function allowed(groups, token, path){
+  const {groups:gs,via}=groupsFor(groups,token);
+  if(!gs.length) return {allow:true,via:'none',paths:[],allows:[]};
+  let best=null; const paths=[]; const allows=[];
+  gs.forEach(g=>g.rules.forEach(r=>{
+    if(r.path==='') return;
+    if(!r.allow&&r.path!=='/') paths.push(r.path);
+    if(r.allow&&r.path!=='/') allows.push(r.path);
+    if(patToRe(r.path).test(path)){
+      const len=r.path.length;
+      if(!best||len>best.len||(len===best.len&&r.allow&&!best.allow)) best={len,allow:r.allow};
+    }
+  }));
+  return {allow: best?best.allow:true, via, paths, allows};
+}
+function mentioned(groups, token){ const t=token.toLowerCase(); return groups.some(g=>g.agents.some(a=>a===t)); }
+
+/* ---------- UI helpers ---------- */
+const $=s=>document.querySelector(s);
+function pill(cls,label,via){ return `<span class="pill ${cls}"><i></i>${label}${via==='*'?' <span class="via">via *</span>':''}</span>`; }
+function ad(r){ return r.allow===null?'':(r.allow?pill('p-allow','ALLOW',r.via):pill('p-block','DISALLOW',r.via)); }
+function vis(k){ return {full:pill('p-allow','FULL'),reduced:pill('p-amber','REDUCED'),none:pill('p-block','NONE'),training:pill('p-block','TRAINING ONLY')}[k]; }
+const list=a=>a.length>1?a.slice(0,-1).join(', ')+' and '+a[a.length-1]:(a[0]||'');
+const n=v=>Math.round(v/TRACKED_SHARE*1000)/10;
+const sample=p=>p.endsWith('$')?p.slice(0,-1):p;
+const firstSentence=h=>{ const m=h.match(/^(<b>.*?<\/b>\s*[^.]*\.)/); return m?m[1]:h; };
+
+/* ---------- meaning copy, from the article ---------- */
+function meaningSplit(l,t,s,u){
+  const name=l.name, share=l.share;
+  const key=(t.allow?'1':'0')+(s.allow?'1':'0')+(u.allow?'1':'0'); // train, search, user
+  const WHY='';
+  const M={
+    '111':{v:'full',txt:`<b>Fully open.</b> ${name} can train on your pages, fetch them for a live answer and open them on request. Maximum exposure both ways, ${share}% of AI product web traffic.`},
+    '110':{v:'full',txt:`<b>Open for training and search, closed to direct fetch.</b> ${name} can train on your pages and cite them in search answers, but ${l.user} is blocked, so someone who pastes your URL into ${name} gets nothing. Unusual, and rarely intended.`},
+    '011':{v:'reduced',txt:`<b>The middle path.</b> ${name} cannot train on your pages, but ${l.search} can still fetch and cite them, and a pasted URL still opens.`},
+    '010':{v:'reduced',txt:`<b>The middle path, minus direct fetch.</b> ${name} cannot train on your pages. ${l.search} can still cite them in search answers, but ${l.user} is blocked, so a pasted URL fails.`},
+    '001':{v:'none',txt:`<b>Opted out, except on request.</b> ${name} cannot train on your pages or fetch them for a search answer, so your own pages will never be the source it cites. A pasted URL still opens, because ${l.user} is allowed. You can still be mentioned from what other sites say about you, but that is their content, not yours. ${share}% of AI product web traffic.`},
+    '000':{v:'none',txt:`<b>Opted out entirely.</b> ${name} cannot train on your pages, fetch them for a search answer or open them on request. Your own pages will never appear inside ${name}. You can still be mentioned from what other sites say about you, but that is their content, not yours. ${share}% of AI product web traffic.`},
+    '101':{v:'training',txt:`<b>Trains on you, cannot cite you.</b> ${l.train} is open while ${l.search} is blocked, so ${name} learns from your pages for free and can only surface them from memory, never as a cited source. A pasted URL still opens. Check whether anyone chose this.`},
+    '100':{v:'training',txt:`<b>Probably a mistake.</b> ${l.train} is open while ${l.search} and ${l.user} are blocked. ${name} trains on your pages for free and blocks every route back to them. All the training risk, none of the visibility.`},
+  };
+  return M[key];
+}
+function meaningGoogle(ext,bot){
+  if(!bot.allow&&!ext.allow) return {v:'none',txt:`<b>Googlebot and Google-Extended are both blocked.</b> Googlebot blocked removes you from Google Search, AI Overviews and AI Mode, which is a far bigger problem than Gemini. Fix that first.`};
+  if(!bot.allow) return {v:'none',txt:`<b>Googlebot is blocked.</b> That removes you from Google Search, AI Overviews and AI Mode. Google-Extended being open changes nothing, because Gemini grounds on pages Googlebot has indexed.`};
+  if(!ext.allow) return {v:'none',txt:`<b>Out of the Gemini app.</b> Google-Extended blocks training and live grounding together, so you cannot keep one and lose the other. You are opting out of 25.6% of AI product web traffic, the second largest product on the list. AI Overviews and AI Mode are unaffected because they run off Googlebot.`};
+  return {v:'full',txt:`<b>Fully open.</b> Gemini can train on your content and ground answers in it. AI Overviews and AI Mode run off Googlebot either way.`};
+}
+function meaningBing(bot){
+  if(!bot.allow) return {v:'none',txt:`<b>Out of Bing and Copilot together.</b> There is no Copilot-only crawler, so blocking Bingbot removes you from Bing Search as well as the 1.6% of AI product web traffic Copilot carries. For most sites this is indefensible.`};
+  return {v:'full',txt:`<b>Open.</b> Bingbot indexes you for Bing Search and Copilot answers at the same time. There is no way to separate the two.`};
+}
+function meaningPerplexity(s,u){
+  const key=(s.allow?'1':'0')+(u.allow?'1':'0');
+  const M={
+    '11':{v:'full',txt:`<b>Open, with nothing to train.</b> Perplexity can fetch and cite you. By its stated policy PerplexityBot is not used to train models, so there is no training exposure to weigh here.`},
+    '10':{v:'full',txt:`<b>Open for search, closed to direct fetch.</b> PerplexityBot can cite you, but Perplexity-User is blocked, so a pasted URL fails. Nothing to train either way.`},
+    '01':{v:'none',txt:`<b>Out of Perplexity search.</b> PerplexityBot is retrieval only, so this block removes the citation and protects nothing extra. A pasted URL still opens. At 0.9% of AI product web traffic it is the cheapest place to test the opposite setting.`},
+    '00':{v:'none',txt:`<b>Out of Perplexity entirely.</b> No citations and no direct fetch. PerplexityBot is retrieval only, so this protects nothing extra. At 0.9% of AI product web traffic it is the cheapest place to test the opposite setting.`},
+  };
+  return M[key];
+}
+
+/* ---------- run ---------- */
+let LAST=null;
+function llmAt(g,l,p){
+  let t={allow:null},s={allow:null},u={allow:null},m,bots='';
+  if(l.kind==='split'){ t=allowed(g,l.train,p); s=allowed(g,l.search,p); u=allowed(g,l.user,p); m=meaningSplit(l,t,s,u); bots=`${l.train} / ${l.search} / ${l.user}`; }
+  else if(l.kind==='google'){ const ext=allowed(g,'Google-Extended',p), bot=allowed(g,'Googlebot',p); t=ext; s=ext; m=meaningGoogle(ext,bot); bots='Google-Extended (train + grounding) / Googlebot'; }
+  else if(l.kind==='bing'){ const bot=allowed(g,'Bingbot',p); t=bot; s=bot; m=meaningBing(bot); bots='Bingbot (Bing Search + Copilot)'; }
+  else { s=allowed(g,l.search,p); u=allowed(g,l.user,p); m=meaningPerplexity(s,u); bots='PerplexityBot (retrieval only) / Perplexity-User'; }
+  return {l,t,s,u,m,state:m.v,bots,sig:[t.allow,s.allow,u.allow].join('')};
+}
+function run(){
+  const txt=$('#robots').value; if(!txt.trim()){ alert('Paste a robots.txt first.'); return; }
+  const g=parseRobots(txt); const P='/';
+  const S=LLMS.map(l=>llmAt(g,l,P));
+
+  /* site-default numbers */
+  let optout=0,reduced=0,open=0,training=0; const outNames=[],redNames=[],openNames=[],trainNames=[]; const hold=[];
+  S.forEach(x=>{ const l=x.l, pts=n(l.share)+(n(l.share)===1?' point':' points');
+    if(x.state==='none'){ optout+=l.share; outNames.push(l.name);
+      const why=l.kind==='google'?(!allowed(g,'Googlebot',P).allow?'Googlebot is blocked, which also removes you from Google Search, AI Overviews and AI Mode':'Google-Extended is blocked, and it carries Gemini training and grounding together'):l.kind==='bing'?'Bingbot is blocked, which also removes you from Bing Search':l.kind==='perplexity'?'PerplexityBot is blocked, and it is retrieval only, so this protects nothing extra':`${l.train} and ${l.search} are both blocked`;
+      hold.push({pts,cls:'red',html:`<b>${l.name} is opted out entirely</b> (${pts}): ${why}.`}); }
+    else if(x.state==='reduced'){ reduced+=l.share; redNames.push(l.name); hold.push({pts,cls:'amber',html:`<b>${l.name} is search-only</b> (${pts}): ${l.train} is blocked, so you are cited only when a live search fires and never from memory.`}); }
+    else if(x.state==='full'){ open+=l.share; openNames.push(l.name); }
+    else { training+=l.share; trainNames.push(l.name); hold.push({pts,cls:'red',html:`<b>${l.name} trains on you and cannot cite you</b> (${pts}): ${l.search} is blocked while ${l.train} is open. Nobody chooses this on purpose.`}); }
+  });
+  hold.sort((a,b)=>b.pts-a.pts);
+  const O=n(optout),R=n(reduced),F=n(open),T=n(training),MAX=Math.round((100-O)*10)/10;
+  const band=MAX>=80?'good':MAX>=50?'warn':'bad'; const num=(v,c)=>`<span class="num ${c}">${v}%</span>`;
+
+  /* folders the file treats differently: every named path, plus wildcard paths that are not plain housekeeping */
+  const tokens=[]; LLMS.forEach(l=>{ if(l.kind==='split') tokens.push(l.train,l.search,l.user); else if(l.kind==='google') tokens.push('Google-Extended','Googlebot'); else if(l.kind==='bing') tokens.push('Bingbot'); else tokens.push(l.search,l.user); });
+  const named=new Set(), star=new Set();
+  tokens.forEach(tok=>{ const {groups:gs,via}=groupsFor(g,tok); gs.forEach(gr=>gr.rules.forEach(r=>{ if(r.path&&r.path!=='/') (via==='named'?named:star).add(r.path); })); });
+  const gRoot=allowed(g,'Googlebot',P).allow;
+  star.forEach(p=>{ if(!named.has(p)&&!(gRoot&&!allowed(g,'Googlebot',sample(p)).allow)) named.add(p); });
+  const defSig=S.map(x=>x.sig).join('|');
+  const diff=[...named].sort().filter(p=>LLMS.map(l=>llmAt(g,l,sample(p)).sig).join('|')!==defSig);
+  const opensMore=diff.filter(p=>{ const at=LLMS.map(l=>llmAt(g,l,sample(p))); return at.some((x,i)=>(x.state==='full'||x.state==='reduced')&&(S[i].state==='none')); });
+
+  /* zones: named paths grouped by how the five LLMs see them, housekeeping (Googlebot blocked too) dropped */
+  const cand=[...named].filter(p=>!(gRoot&&!allowed(g,'Googlebot',sample(p)).allow));
+  const sigAt=p=>LLMS.map(l=>llmAt(g,l,sample(p)).sig).join('|');
+  const zmap={}; cand.sort().forEach(p=>{ const s=sigAt(p); if(s===defSig) return; (zmap[s]=zmap[s]||[]).push(p); });
+  let zones=Object.values(zmap).sort((a,b)=>b.length-a.length);
+  const extraZones=zones.slice(3); zones=zones.slice(0,3);
+  const seg=p=>{ const m=p.match(/^\/([^\/*$]+)/); return m?'/'+m[1]+'/':'/'; };
+  const zlabel=paths=>{ if(paths.length<=3) return {b:paths.join(', '),s:'',long:paths.join(', ')};
+    const c={}; paths.forEach(p=>{ const k=seg(p); (c[k]=c[k]||[]).push(p); }); const top=Object.entries(c).sort((a,b)=>b[1].length-a[1].length);
+    if(top[0][0]==='/') return {b:`${paths.length} path patterns`,s:`${paths.length} paths`,long:`${paths.length} path patterns`};
+    const rest=[].concat(...top.slice(1).map(x=>x[1]));
+    const share=top[0][1].length/paths.length;
+    const long=share<0.5?`${paths.length} paths`:rest.length===0?`${paths.length} paths under ${top[0][0]}`:rest.length<=2?`${top[0][1].length} paths under ${top[0][0]}, plus ${list(rest)}`:`${paths.length} paths, ${top[0][1].length} of them under ${top[0][0]}`;
+    const shortL=share<0.5?'Named paths':`Mostly ${top[0][0]}`;
+    return {b:shortL,s:`${paths.length} paths`,long}; };
+  const zoneDefs=zones.map(paths=>({paths,label:zlabel(paths),at:LLMS.map(l=>llmAt(g,l,sample(paths[0])))}));
+  const restLabel={b:zoneDefs.length?'Everything else':'Whole site',s:''};
+
+  /* five cards */
+  const stPill=v=>({full:pill('p-allow','FULL'),reduced:pill('p-amber','CITE ONLY'),none:pill('p-block','BLOCKED'),training:pill('p-block','TRAIN ONLY')}[v]);
+  const worst=x=>x==='none'?3:x==='training'?2:x==='reduced'?1:0;
+  $('#cards').innerHTML=LLMS.map((l,i)=>{
+    const d=S[i]; const rowsZ=zoneDefs.map(z=>({label:z.label,st:z.at[i].state})); rowsZ.push({label:restLabel,st:d.state});
+    const overall=rowsZ.reduce((a,r)=>worst(r.st)>worst(a)?r.st:a,'full'); const best=rowsZ.reduce((a,r)=>worst(r.st)<worst(a)?r.st:a,'none');
+    const accent=best==='none'?'var(--red)':overall==='full'?'var(--green)':'var(--amber)';
+    const tsu=x=>{ const b=(v,ch,job)=>v===null?'':`<i class="${v?'y':'n'}" title="${job}: ${v?'allowed':'blocked'}">${ch}</i>`; const sv=l.kind==='perplexity'||l.kind==='split'?x.s.allow:x.t.allow; return `<span class="tsu">${b(x.t.allow,'T','train')}${b(sv,'S','search and cite')}${b(x.u.allow,'U','open on request')}</span>`; };
+    const rowsX=zoneDefs.map(z=>z.at[i]).concat([d]);
+    return `<div class="lc" style="--accent:${accent}"><h3>${l.name}<small>${l.company} · ${l.share}% of AI product web visits</small></h3><ul class="zones">${rowsZ.map((r,k)=>`<li><span class="z"><b>${r.label.b}</b>${r.label.s?`<a href="#zone-${k}" data-zone="${k}">${r.label.s}</a>`:''}</span><span class="r">${stPill(r.st)}${tsu(rowsX[k])}</span></li>`).join('')}</ul><div class="bots">${d.bots}</div></div>`; }).join('');
+  document.querySelectorAll('#cards a[data-zone]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const d=document.getElementById('zone-'+a.dataset.zone); if(d){ d.open=true; d.scrollIntoView({behavior:'smooth',block:'center'}); } }));
+
+  /* one sentence, built from the zones */
+  const phrase={full:'open to',reduced:'citable but not trained on for',none:'blocked to',training:'trained on but never cited by'};
+  const clause=(label,at,plural)=>{ const by={}; at.forEach((x,i)=>{ (by[x.state]=by[x.state]||[]).push(LLMS[i].name); }); const keys=Object.keys(by).sort((a,b)=>worst(b)-worst(a)); const is=plural?'are':'is';
+    if(keys.length===1&&keys[0]==='full') return `${label} ${is} <span class="st-full">open to every LLM</span>`;
+    return `${label} ${is} `+keys.filter(k=>k!=='full'||keys.length===1).map(k=>`<span class="st-${k}">${phrase[k]} ${list(by[k])}</span>`).join(', ');
+  };
+  const plist=(paths,k)=>`<details id="zone-${k}"><summary>Show the ${paths.length} paths</summary><div class="plist">${paths.map(x=>`<code title="${x}">${x}</code>`).join('')}</div></details>`;
+  const items=zoneDefs.map((z,k)=>{ const s=clause(`<b>${z.label.long}</b>`,z.at,z.paths.length>1); return `<li>${s.charAt(0).toUpperCase()+s.slice(1)}.${z.label.s?' '+plist(z.paths,k):''}</li>`; });
+  { const s=clause(`<b>${zoneDefs.length?'Everything else':'The whole site'}</b>`,S,false); items.push(`<li>${s.charAt(0).toUpperCase()+s.slice(1)}.</li>`); }
+  if(extraZones.length) items.push(`<li><span class="cul">Plus ${extraZones.reduce((a,z)=>a+z.length,0)} other paths with their own rules, in the folder table.</span></li>`);
+  /* what this costs you, in plain words */
+  const CITE_NOTE=` In practice that is a big gap: <a href="https://searchengineland.com/chatgpt-search-prompts-data-463407" target="_blank" rel="noopener">Nectiv</a> found ChatGPT runs a live web search on about 31% of prompts. <b>The other 69% of the time the answer comes from memory, and a page it never trained on does not exist there, so your brand will not be referenced.</b>`;
+  const miss=[];
+  const restNone=S.filter(x=>x.state==='none').map(x=>x.l), restRed=S.filter(x=>x.state==='reduced').map(x=>x.l), restTr=S.filter(x=>x.state==='training').map(x=>x.l);
+  const shareOf=ls=>Math.round(ls.reduce((a,l)=>a+l.share,0));
+  const where=zoneDefs.length?' outside the folders above':'';
+  if(restNone.length) miss.push(`<li class="st-none">${list(restNone.map(l=>l.name))} will not show any of your pages${where}. Roughly ${shareOf(restNone)}% of visits to AI products go to ${restNone.length>1?'those':'that'} ${restNone.length>1?'products':'product'}.</li>`);
+  if(restRed.length) miss.push(`<li class="st-reduced">${list(restRed.map(l=>l.name))} can only link to your pages${where} after running a live web search. ${restRed.length>1?'They':'It'} will not know them from memory, so you are missing from answers written without a search, which is most definition and how-to questions.${CITE_NOTE}</li>`);
+  if(restTr.length) miss.push(`<li class="st-training">${list(restTr.map(l=>l.name))} learns from your pages${where} but can never link to them, so your content can be used in an answer without anyone being sent to you.</li>`);
+  zoneDefs.forEach(z=>{ const lab=z.paths.length<=3?list(z.paths):'the '+z.label.long;
+    const zr=z.at.map((x,i)=>({x,l:LLMS[i]})).filter(o=>o.x.state==='reduced'&&S[LLMS.indexOf(o.l)].state!=='reduced').map(o=>o.l.name); if(zr.length) miss.push(`<li class="st-reduced">In ${lab}, ${list(zr)} can only link to a page after running a live web search. ${zr.length>1?'They':'It'} will not know those pages from memory.${restRed.length||miss.some(x=>x.includes('Nectiv'))?'':CITE_NOTE}</li>`);
+    const zn=z.at.map((x,i)=>({x,l:LLMS[i]})).filter(o=>o.x.state==='none'&&S[LLMS.indexOf(o.l)].state!=='none').map(o=>o.l.name); if(zn.length) miss.push(`<li class="st-none">In ${lab}, ${list(zn)} will not show any of your pages.</li>`);
+    const zt=z.at.map((x,i)=>({x,l:LLMS[i]})).filter(o=>o.x.state==='training'&&S[LLMS.indexOf(o.l)].state!=='training').map(o=>o.l.name); if(zt.length) miss.push(`<li class="st-training">In ${lab}, ${list(zt)} learns from your pages but can never link to them.</li>`); });
+  items.push(miss.length?`<li class="miss"><b>What this costs you:</b><ul>${miss.join('')}</ul></li>`:`<li class="miss"><b>What this costs you:</b> <span class="st-full">Nothing. Every LLM on the list can learn from and link to the whole site.</span></li>`);
+  const warn=[];
+  /* languages and regions: only when the file names at least two locale folders (or one with a region suffix) */
+  const LANG={en:'English',de:'German',fr:'French',es:'Spanish',pt:'Portuguese',ja:'Japanese',jp:'Japanese',zh:'Chinese',cn:'Chinese',ko:'Korean',kr:'Korean',ar:'Arabic',ru:'Russian',nl:'Dutch',sv:'Swedish',da:'Danish',fi:'Finnish',pl:'Polish',tr:'Turkish',he:'Hebrew',hi:'Hindi',th:'Thai',vi:'Vietnamese',cs:'Czech',hu:'Hungarian',ro:'Romanian',el:'Greek',uk:'Ukrainian',ms:'Malay',tw:'Chinese (Taiwan)',hk:'Chinese (Hong Kong)',mx:'Spanish (Mexico)',br:'Portuguese (Brazil)',it:'Italian',id:'Indonesian',no:'Norwegian',nb:'Norwegian',ca:'Catalan',us:'English (US)',gb:'English (UK)',au:'English (Australia)',ie:'English (Ireland)',sg:'English (Singapore)',ch:'Swiss',at:'Austrian',be:'Belgian',ae:'UAE',in:'India',nz:'New Zealand',za:'South Africa',eu:'Europe',la:'Latin America'};
+  const AMBIG=new Set(['it','in','no','id','us','to','be','at','ca','la','ie','ch','sg','ms','uk','eu']);
+  const locRe=/^\/([a-z]{2})(?:[-_]([a-z]{2}))?\/?$/i;
+  const locOf=p=>{ const m=(p.match(/^\/([^\/*$?]+)/)||[])[1]; if(!m) return null; const mm=m.match(/^([a-z]{2})(?:[-_]([a-z]{2}))?$/i); if(!mm) return null; const lang=mm[1].toLowerCase(), reg=mm[2]?mm[2].toLowerCase():null; if(!LANG[lang]&&!reg) return null; return {seg:'/'+m+'/',lang,reg,ambig:AMBIG.has(lang)&&!reg,name:reg?`${LANG[lang]||lang.toUpperCase()} (${reg.toUpperCase()})`:(LANG[lang]||lang.toUpperCase())}; };
+  const allPaths=[...new Set(cand)];
+  const locMap={}; allPaths.forEach(p=>{ const l=locOf(p); if(!l) return; (locMap[l.seg]=locMap[l.seg]||{...l,paths:[]}).paths.push(p); });
+  let locs=Object.values(locMap);
+  const strong=locs.filter(l=>!l.ambig);
+  /* an ambiguous code only counts when a clear locale folder also exists and it is shaped like one (short, no sub-folders of its own dominating) */
+  locs=locs.filter(l=>!l.ambig||(strong.length>0&&l.paths.some(p=>/^\/[a-z]{2}\/?\$?$/i.test(p))));
+  if(!(strong.length>=2||strong.some(l=>l.reg))) locs=[];
+  if(locs.length){
+    const stateAt=p=>LLMS.map(l=>llmAt(g,l,sample(p)).state);
+    const worstOf=st=>st.reduce((a,x)=>worst(x)>worst(a)?x:a,'full');
+    const rows=locs.map(l=>{ const per=l.paths.map(p=>({p,st:stateAt(p)})); const best=per.reduce((a,x)=>worst(worstOf(x.st))<worst(worstOf(a.st))?x:a,per[0]); return {...l,per,best}; });
+    const label=r=>{ const cover=r.paths.length===1&&/^\/[^\/]+\/[^\/]+/.test(r.paths[0])?` (<code>${r.paths[0]}</code> only)`:r.paths.length>1?` (${r.paths.length} paths)`:''; return `${r.name} <code>${r.seg}</code>${cover}`; };
+    const outcome=st=>{ const by={}; st.forEach((s,i)=>{ (by[s]=by[s]||[]).push(LLMS[i].name); }); const keys=Object.keys(by).sort((a,b)=>worst(b)-worst(a)); if(keys.length===1&&keys[0]==='full') return `<span class="st-full">open to every LLM</span>`; return keys.filter(k=>k!=='full'||keys.length===1).map(k=>`<span class="st-${k}">${phrase[k]} ${list(by[k])}</span>`).join(', '); };
+    const grouped={}; rows.forEach(r=>{ const k=r.best.st.join('|'); (grouped[k]=grouped[k]||{rs:[],st:r.best.st}).rs.push(r); });
+    const clauses=Object.values(grouped).sort((a,b)=>worst(worstOf(a.st))-worst(worstOf(b.st))).map(gp=>`${list(gp.rs.map(label))} ${gp.rs.length>1?'are':'is'} ${outcome(gp.st)}`);
+    const restBlocked=S.filter(x=>x.state==='none').map(x=>x.l.name);
+    const langLine=`<li><b>Languages and regions:</b> ${clauses.map(c=>c.charAt(0).toUpperCase()+c.slice(1)).join('. ')}.${restBlocked.length?` Any other language folder is <span class="st-none">blocked to ${list(restBlocked)}</span>, because it is not named.`:''}${rows.some(r=>r.ambig)?` <span class="cul">(${list(rows.filter(r=>r.ambig).map(r=>'<code>'+r.seg+'</code>'))} may not be a language folder.)</span>`:''}</li>`;
+    items.splice(items.length-1,0,langLine);
+    /* worth checking: one language opened, the rest not */
+    const openLangs=rows.filter(r=>worstOf(r.best.st)==='full'), shutLangs=rows.filter(r=>r.best.st.some(s=>s==='none'));
+    if(restBlocked.length&&openLangs.length&&openLangs.length<rows.length+1) warn.push(`<li class="amber"><b>Only ${list(openLangs.map(r=>r.name+(r.paths.length===1&&/^\/[^\/]+\/[^\/]+/.test(r.paths[0])?' ('+r.paths[0]+' only)':'')))} ${openLangs.length>1?'are':'is'} opened to ${list(restBlocked)}.</b> If the site publishes in other languages, those versions are invisible to ${restBlocked.length>1?'them':'it'}. Robots.txt is per host, so language sites on their own domain or subdomain are not covered here.</li>`);
+    else if(shutLangs.length&&!restBlocked.length) warn.push(`<li class="amber"><b>${list(shutLangs.map(r=>r.name))} ${shutLangs.length>1?'folders are':'folder is'} closed to some LLMs while the rest of the site is open.</b></li>`);
+  }
+  /* headline: the shape of the file, then the judgement */
+  const openAll=S.every(x=>x.state==='full'), shutAll=S.every(x=>x.state==='none');
+  const anyOpenAtDefault=S.some(x=>x.state==='full'), anyShutAtDefault=S.some(x=>x.state==='none');
+  const allowlistShape=anyShutAtDefault&&zoneDefs.some(z=>z.at.some((x,i)=>S[i].state==='none'&&x.state!=='none'));
+  const blocklistShape=!anyShutAtDefault&&zoneDefs.length>0;
+  const uneven=new Set(S.map(x=>x.state)).size>1;
+  const namedCount=zoneDefs.reduce((a,z)=>a+z.paths.length,0);
+  const backIn=zoneDefs.filter(z=>z.at.some((x,i)=>S[i].state==='none'&&x.state!=='none')).reduce((a,z)=>a+z.paths.length,0);
+  const shutNames=S.filter(x=>x.state==='none').map(x=>x.l.name), openNamesH=S.filter(x=>x.state==='full').map(x=>x.l.name), redNamesH=S.filter(x=>x.state==='reduced').map(x=>x.l.name), trNamesH=S.filter(x=>x.state==='training').map(x=>x.l.name);
+  let head='', judge='';
+  if(openAll&&!zoneDefs.length){ head='Open to every AI crawler, everywhere.'; judge='Maximum exposure both ways. Fine if the content is there to be found; if some of it is proprietary, close those folders by path.'; }
+  else if(shutAll&&!zoneDefs.length){ head='Shut to every AI crawler, everywhere.'; judge='A clean opt-out. Defensible if it was decided; make sure it was, because it also removes you from every AI answer.'; }
+  else if(allowlistShape){ const who=shutNames;
+    const backPaths=[].concat(...zoneDefs.filter(z=>z.at.some((x,i)=>S[i].state==='none'&&x.state!=='none')).map(z=>z.paths));
+    const names=[...new Set(backPaths.map(p=>{ const m=p.match(/^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?([^\/*$]+)/i); const n=m?m[1].replace(/-/g,' '):null; return n&&!/^[a-z]{2}( [a-z]{2})?$/i.test(n)?n:null; }).filter(Boolean))];
+    const namesTxt=names.length>6?names.slice(0,6).join(', ')+' and more':list(names);
+    const stayShut=[].concat(...zoneDefs.filter(z=>z.at.every((x,i)=>S[i].state!=='none'||x.state==='none')&&z.at.some((x,i)=>S[i].state==='none')).map(z=>z.paths));
+    head=`${who.length===S.length?'AI crawlers are':list(who)+' '+(who.length>1?'are':'is')} shut out of most of the site${uneven&&openNamesH.length?', but not evenly':''}.`;
+    judge=`The shape of it: Block everything, then hand back a list. ${who.length===S.length?'The AI crawlers are':list(who)+' '+(who.length>1?'are':'is')} shut out of the whole site, then allowed back into ${backIn} named path${backIn>1?'s':''}${names.length?` (${namesTxt})`:''}. Everything else stays shut${stayShut.length?`, and so ${stayShut.length>1?'do':'does'} ${stayShut.length<=3?list(stayShut.map(x=>'<code>'+x+'</code>')):stayShut.length+' other named paths'}`:''}. That part makes sense: Let the AI read what brings people in and keep it out of what they come to you for.${uneven&&openNamesH.length?` The problem is the unevenness: ${list(openNamesH)} ${openNamesH.length>1?'get':'gets'} the whole site.`:''}`; }
+  else if(trNamesH.length&&!shutNames.length){ head=`${list(trNamesH)} ${trNamesH.length>1?'train':'trains'} on the site and can never cite it.`; judge='Training open with search blocked is the one combination nobody chooses on purpose. Treat it as an error.'; }
+  else if(blocklistShape){ head=`Open ${openAll?'to every AI crawler ':''}everywhere except ${namedCount} named path${namedCount>1?'s':''}${uneven?', with the LLMs treated differently inside them':''}.`; judge=zoneDefs.some(z=>z.at.some(x=>x.state==='reduced'))&&!zoneDefs.some(z=>z.at.some(x=>x.state==='none'))?'The shape: Site open, specific folders closed to training only. That is the split-by-content-type setup the article recommends.':'The shape: Site open, specific folders closed. Check the closed folders are the ones you meant.'; }
+  else if(redNamesH.length&&!shutNames.length){ head=`Blocked from training, still citable${uneven?', for some LLMs':''}.`; judge='The middle path. You keep citations from live searches and give up answers written from memory, which is most definition and how-to questions.'; }
+  else { head=`Shut to ${list(shutNames)}${redNamesH.length?`, citable but not trained on for ${list(redNamesH)}`:''}${openNamesH.length?`, open to ${list(openNamesH)}`:''}.`; judge=uneven?'The LLMs are treated differently, which is usually history rather than a plan. Decide whether the gaps are intended.':''; }
+  items.unshift(`<li class="head"><b>${head}</b>${judge?`<span class="judge">${judge}</span>`:''}</li>`);
+  $('#story').innerHTML=items.join('');
+  const story=items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'')).join(' ');
+
+  /* warnings and inconsistencies worth checking */
+  const starRoot=allowed(g,'zzz-no-such-crawler',P);
+  if(starRoot.via==='*'&&!starRoot.allow) warn.push(`<li class="red"><b>Blanket disallow.</b> The wildcard group blocks the whole site for every crawler that is not named, Googlebot and Bingbot included. Name the crawlers you mean instead.</li>`);
+  else if(!gRoot) warn.push(`<li class="red"><b>Googlebot is blocked.</b> That removes you from Google Search, AI Overviews and AI Mode. Fix this before anything else.</li>`);
+  S.forEach(x=>{ if(x.state==='training') warn.push(`<li class="red"><b>${x.l.name} trains on you and cannot cite you:</b> ${x.l.search} is blocked while ${x.l.train} is open. Nobody chooses this on purpose.</li>`); });
+  zoneDefs.forEach(z=>z.at.forEach((x,i)=>{ if(x.state==='training'&&S[i].state!=='training') warn.push(`<li class="red"><b>${LLMS[i].name} trains on ${z.label.long} and cannot cite it:</b> ${LLMS[i].search} is blocked there while ${LLMS[i].train} is open.</li>`); }));
+  S.forEach(x=>{ const l=x.l; if(l.legacy){ const found=l.legacy.filter(y=>mentioned(g,y)); if(found.length) warn.push(`<li class="amber"><b>Legacy agent${found.length>1?'s':''} found:</b> ${found.join(' and ')} no longer ${found.length>1?'appear':'appears'} in Anthropic's documentation and ${found.length>1?'do':'does'} nothing. Name ClaudeBot, Claude-SearchBot and Claude-User instead.</li>`); } });
+  /* 1. crawlers listed more than once, and told two different things */
+  const tokenList=[...new Set(tokens)];
+  { const conflicts=[]; const multi=[];
+    tokenList.forEach(tok=>{ const {groups:gs,via}=groupsFor(g,tok); if(via!=='named') return; if(gs.length>1) multi.push({tok,n:gs.length}); const seen={}; gs.forEach(gr=>gr.rules.forEach(r=>{ if(!r.path) return; (seen[r.path]=seen[r.path]||[]).push(r); }));
+      Object.entries(seen).forEach(([pth,rs])=>{ const a=rs.filter(r=>r.allow), d=rs.filter(r=>!r.allow); if(a.length&&d.length&&pth!=='/') conflicts.push({tok,pth,d:d[0].line,a:a[0].line}); }); });
+    if(multi.length){ const times=n=>n===2?'twice':n===3?'three times':n+' times'; const byN={}; multi.forEach(m=>{ (byN[m.n]=byN[m.n]||[]).push(m.tok); });
+      const who=Object.entries(byN).sort((x,y)=>y[0]-x[0]).map(([n,toks])=>`${list(toks)} ${times(+n)}`).join(', ');
+      const ex=conflicts.slice(0,2).map(c=>`${c.tok} is told it can read <code>${c.pth}</code> (line ${c.a}) and also that it cannot (line ${c.d})`).join('; ');
+      warn.push(`<li class="${conflicts.length?'amber':''}"><b>Some crawlers are listed more than once${conflicts.length?', with instructions that contradict each other':''}.</b> ${who}.${conflicts.length?` ${ex}${conflicts.length>2?' and '+(conflicts.length-2)+' more':''}. The standard says merge the groups and let the longest matching rule win, with Allow winning a tie, which is how this tool reads it and how OpenAI and Google document their crawlers. Smaller crawlers may not follow the standard, so what actually happens can vary by company.`:' The standard says merge the groups, which is how this tool reads it.'}</li>`); } }
+  /* 2. named crawlers skip the wildcard housekeeping */
+  if(gRoot){ const house=[...star].filter(p=>!allowed(g,'Googlebot',sample(p)).allow); if(house.length){ const byList={}; tokenList.forEach(tok=>{ if(groupsFor(g,tok).via!=='named') return; const sk=house.filter(p=>allowed(g,tok,sample(p)).allow); if(sk.length){ const k=sk.join('|'); (byList[k]=byList[k]||{toks:[],sk}).toks.push(tok); } });
+    Object.values(byList).forEach(({toks,sk})=>{ warn.push(`<li class="amber"><b>${list(toks)} ${toks.length>1?'skip':'skips'} ${house.length===1?'the only housekeeping rule':sk.length===house.length?'all '+house.length+' housekeeping rules':sk.length+' of the '+house.length+' housekeeping rules'}.</b> A crawler with its own group does not inherit the wildcard group, so ${sk.slice(0,3).map(x=>`<code>${x}</code>`).join(', ')}${sk.length>3?' and '+(sk.length-3)+' more':''}, closed to everyone else, ${sk.length>1?'are':'is'} open to ${toks.length>1?'them':'it'}.</li>`); }); } }
+  /* 3. the same LLM split by role inside a folder, where the site default is not split */
+  LLMS.filter(l=>l.kind==='split').forEach(l=>{ const i=LLMS.indexOf(l); if(S[i].state==='reduced') return;
+    const zs=zoneDefs.filter(z=>z.at[i].state==='reduced'); if(zs.length) warn.push(`<li class="amber"><b>${l.name} is split inside ${list(zs.map(z=>z.label.long))}:</b> ${l.train} is kept out while ${l.search} and ${l.user} can enter, so those pages can be cited but not trained on.</li>`); });
+  /* 4. written for some companies, the others fall through to the default */
+  { const openL=S.filter(x=>x.state==='full').map(x=>x.l), shutL=S.filter(x=>x.state==='none'||x.state==='reduced').map(x=>x.l);
+    if(openL.length&&shutL.length){ const namedFor=l=>l.kind==='split'?[l.train,l.search,l.user].filter(tok=>mentioned(g,tok)):l.kind==='google'?['Google-Extended'].filter(tok=>mentioned(g,tok)):l.kind==='bing'?['Bingbot'].filter(tok=>mentioned(g,tok)):[l.search,l.user].filter(tok=>mentioned(g,tok));
+      const missing=openL.map(l=>({l,named:namedFor(l),all:l.kind==='split'?[l.train,l.search,l.user]:l.kind==='google'?['Google-Extended']:l.kind==='bing'?['Bingbot']:[l.search,l.user]}));
+      const notInFile=missing.filter(m=>m.named.length===0).map(m=>m.l.name); const partly=missing.filter(m=>m.named.length&&m.named.length<m.all.length);
+      let why=''; if(notInFile.length) why+=` The crawler${notInFile.length>1?'s':''} behind ${list(notInFile)} ${notInFile.length>1?'are':'is'} not in the file at all.`; partly.forEach(m=>{ why+=` ${m.l.name}'s ${list(m.all.filter(x=>!m.named.includes(x)))} ${m.all.filter(x=>!m.named.includes(x)).length>1?'were':'was'} never added, only ${list(m.named)}.`; });
+      warn.push(`<li class="red"><b>Only some AI companies are on the list.</b> The rules name the crawlers behind ${list(shutL.map(l=>l.name))}.${why} When a crawler is not named it falls back to the site's general rules, which are far more open. So ${list(openL.map(l=>l.name))} can read ${zoneDefs.length?`more of the site than ${list(shutL.map(l=>l.name))} can`:`the whole site while ${list(shutL.map(l=>l.name))} cannot`}. Nobody would choose that on purpose.</li>`); } }
+  const rank=w=>w.includes('class="red"')?0:w.includes('class="amber"')?1:2; warn.sort((a,b)=>rank(a)-rank(b)); const nWrong=warn.filter(w=>rank(w)<2).length; $('#warnhead').textContent=nWrong?`${nWrong===1?'One thing is':nWrong+' things are'} wrong with it, or need confirming`:'For information'; $('#warn').innerHTML=warn.map(w=>w.replace(/<\/li>$/, w.includes('class="red"')?' <em class="tag red">Almost certainly not intended.</em></li>':w.includes('class="amber"')?' <em class="tag amber">Worth confirming.</em></li>':' <em class="tag">For information.</em></li>')).join(''); $('#warnwrap').style.display=warn.length?'':'none';
+  const blockedCount=p=>LLMS.reduce((a,l)=>{ const x=llmAt(g,l,sample(p)); return a+[x.t.allow,x.s.allow,x.u.allow].filter(v=>v===false).length; },0);
+  const st=r=>r.allow===null?'n/a':(r.allow?'allow':'DISALLOW')+(r.via==='*'?' (via *)':'');
+  const report=S.map(x=>({llm:x.l.name,company:x.l.company,share:x.l.share,train:st(x.t),search:st(x.s),user:st(x.u),visibility:x.state.toUpperCase()}));
+  /* folder matrix */
+  const cell=(l,p)=>{ const a=llmAt(g,l,sample(p)); const b=(v,ch)=>v===null?'':`<i class="${v?'y':'n'}" title="${ch==='T'?'train':ch==='S'?'search and cite':'open on request'}: ${v?'allowed':'blocked'}">${ch}</i>`; return `<span class="tsu">${b(a.t.allow,'T')}${b(l.kind==='perplexity'||l.kind==='split'?a.s.allow:a.t.allow,'S')}${b(a.u.allow,'U')}</span>`; };
+  const mrow=p=>`<tr><td class="pth" title="${p}">${p==='/'?'Site default (everything not listed)':p}</td>${LLMS.map(l=>`<td>${cell(l,p)}</td>`).join('')}</tr>`;
+  $('#matrix thead').innerHTML=`<tr><th>Path</th>${LLMS.map(l=>`<th>${l.name}</th>`).join('')}</tr>`;
+  const sorted=diff.slice().sort((a,b)=>blockedCount(b)-blockedCount(a)||a.localeCompare(b));
+  const LIM=5; $('#matrix tbody').innerHTML=['/'].concat(sorted.slice(0,LIM)).map(mrow).join('')+sorted.slice(LIM).map(p=>mrow(p).replace('<tr>','<tr class="extra">')).join('');
+  $('#matrixmore').innerHTML = sorted.length>LIM ? `<a href="#" class="toggle" data-for="matrix">Show all ${sorted.length} paths (${sorted.length-LIM} more)</a>` : '';
+  $('#matrixend').innerHTML = sorted.length>LIM ? `<a href="#" class="toggle end" data-for="matrix">Show less</a>` : '';
+  $('#mwrap').style.display = diff.length ? '' : 'none';
+  const matrix=['/'].concat(sorted).map(p=>{ const o={path:p==='/'?'site default':p}; LLMS.forEach(l=>{ const a=llmAt(g,l,sample(p)); const f=v=>v===null?'n/a':v?'allow':'block'; o[l.name]=`T:${f(a.t.allow)} S:${f(l.kind==='perplexity'||l.kind==='split'?a.s.allow:a.t.allow)} U:${f(a.u.allow)}`; }); return o; });
+
+  /* every other crawler */
+  const oreport=[];
+  const orow=o=>{ const r=allowed(g,o.ua,P); const nm=mentioned(g,o.ua);
+    oreport.push({crawler:o.ua,operator:o.who,type:({llm:'LLM crawler',mixed:'Search index + AI answers',trad:'Search only'})[o.type],job:o.job,status:st(r)+(nm?'':' (not named)')});
+    return `<tr><td class="name">${o.ua}<small>${o.who}</small></td><td><span class="type ${o.type}">${({llm:'LLM crawler',mixed:'Search + AI',trad:'Search only'})[o.type]}</span></td><td>${o.job}</td><td>${ad(r)}${nm?'':' <span class="via">not named</span>'}</td><td class="means">${o.means}</td></tr>`; };
+  const OL=10; $('#others tbody').innerHTML=OTHERS.slice(0,OL).map(orow).join('')+OTHERS.slice(OL).map(o=>orow(o).replace('<tr>','<tr class="extra">')).join('');
+  const blockedOthers=OTHERS.filter(o=>!allowed(g,o.ua,P).allow).length;
+  $('#othersmore').innerHTML=`<a href="#" class="toggle" data-for="others">Show all ${OTHERS.length} crawlers (${OTHERS.length-OL} more, ${blockedOthers} of all ${OTHERS.length} are blocked)</a>`;
+  $('#othersend').innerHTML=`<a href="#" class="toggle end" data-for="others">Show less</a>`;
+  document.querySelectorAll('a.toggle').forEach(a=>{ if(a.dataset.bound) return; a.dataset.bound='1'; a.addEventListener('click',e=>{ e.preventDefault(); const tb=document.getElementById(a.dataset.for); const open=tb.classList.toggle('open'); tb.closest('.card').classList.toggle('open',open);
+    document.querySelectorAll(`a.toggle[data-for="${a.dataset.for}"]`).forEach(x=>{ if(x.classList.contains('end')) return; x.textContent=open?'Show less':x.dataset.label; });
+    if(!open&&a.classList.contains('end')) tb.scrollIntoView({behavior:'smooth',block:'start'}); }); });
+  document.querySelectorAll('a.toggle:not(.end)').forEach(a=>{ a.dataset.label=a.textContent; });
+  $('#results').classList.remove('hidden');
+  LAST={generated:new Date().toISOString(),verdict:items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'').replace(/<li class="st-[a-z]+">/g,' ').replace(/<[^>]+>/g,'').trim()),conclusion:'',zones:zoneDefs.map(z=>({label:z.label.long,paths:z.paths,byLLM:Object.fromEntries(z.at.map((x,i)=>[LLMS[i].name,x.state]))})).concat([{label:zoneDefs.length?'Everything else':'Whole site',paths:[],byLLM:Object.fromEntries(S.map((x,i)=>[LLMS[i].name,x.state]))}]),warnings:warn.map(w=>w.replace(/<[^>]+>/g,'')),llms:report,folders:matrix,others:oreport};
+  $('#results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ---------- exports ---------- */
+function toMd(d){
+  const L=[`# Robots.txt AI Visibility Audit`,`Generated ${d.generated.slice(0,10)}`,'','## The verdict','']; d.verdict.forEach(v=>L.push(`- ${v}`)); L.push('');
+  L.push('## By folder','',`| Folder | ${d.llms.map(r=>r.llm).join(' | ')} |`,`|---|${d.llms.map(()=>'---').join('|')}|`); d.zones.forEach(z=>L.push(`| ${z.label} | ${d.llms.map(r=>z.byLLM[r.llm]).join(' | ')} |`)); L.push('');
+  if(d.warnings.length){ L.push('## Worth checking',''); d.warnings.forEach(h=>L.push(`- ${h}`)); L.push(''); }
+  L.push('## Site default, crawler by crawler','','| LLM | Share | Train | Search | User | AI visibility |','|---|---|---|---|---|---|');
+  d.llms.forEach(r=>L.push(`| ${r.llm} | ${r.share}% | ${r.train} | ${r.search} | ${r.user} | ${r.visibility} |`));
+  if(d.folders.length>1){ L.push('','## Folders the file treats differently','','T train · S search and cite · U open on request','',`| Path | ${d.llms.map(r=>r.llm).join(' | ')} |`,`|---|${d.llms.map(()=>'---').join('|')}|`); d.folders.forEach(m=>L.push(`| ${m.path} | ${d.llms.map(r=>m[r.llm]).join(' | ')} |`)); }
+  L.push('','## Every other crawler','','| Crawler | Operator | Type | Job | Status |','|---|---|---|---|---|');
+  d.others.forEach(r=>L.push(`| ${r.crawler} | ${r.operator} | ${r.type} | ${r.job} | ${r.status} |`));
+  L.push('','Source: Robots.txt AI Visibility Audit by Orit Mutznik, https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/');
+  return L.join('\n');
+}
+function toCsv(d){
+  const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+  const L=[['section','name','operator','share','train','search','user','visibility','type','job','status','meaning'].map(q).join(',')];
+  d.llms.forEach(r=>L.push(['llm',r.llm,r.company,r.share,r.train,r.search,r.user,r.visibility,'','','',''].map(q).join(',')));
+  d.folders.forEach(m=>L.push(['path',m.path,'','','','','','','','',d.llms.map(r=>r.llm+' '+m[r.llm]).join(' | '),''].map(q).join(',')));
+  d.others.forEach(r=>L.push(['other',r.crawler,r.operator,'','','','','',r.type,r.job,r.status,''].map(q).join(',')));
+  return L.join('\n');
+}
+function download(name,body,type){ const b=new Blob([body],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),500); }
+const stamp=()=>'robots-txt-ai-visibility-audit-'+new Date().toISOString().slice(0,10);
+
+const SAMPLE=`# Anonymised subscription-based publisher, September 2026
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Claude-SearchBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: *
+Allow: /
+Disallow: /account/
+Disallow: /cart/
+
+Sitemap: https://www.example.com/sitemap.xml`;
+const SAMPLE2=`# Illustrative example, not a real site: The fallback if you must protect specific folders.
+# The recommendation is still to open everything. If that loses the argument, this is the least
+# damaging way to do it: The site stays open, the paid library and downloads are closed to the
+# training crawlers only, so search and user crawlers can still reach and cite everything.
+User-agent: GPTBot
+Disallow: /library/
+Disallow: /downloads/
+
+User-agent: ClaudeBot
+Disallow: /library/
+Disallow: /downloads/
+
+User-agent: Google-Extended
+Disallow: /library/
+Disallow: /downloads/
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: *
+Allow: /`;
+
+
+const SAMPLE3=`# Anonymised B2B research publisher, September 2026. Real structure, renamed folders.
+User-agent: *
+Sitemap: https://www.example.com/assets/commonassets/code/xml/sitemap-index.xml
+Sitemap: https://www.example.com/reviews/sitemap.xml
+Sitemap: https://www.example.com/community/sitemap_index1.xml.gz
+Sitemap: https://www.example.com/community/sitemap.xml
+Disallow: /cgi-bin/
+Disallow: /tech/media-products/
+Disallow: /legacy/content/
+Disallow: /obj_cache/
+Disallow: /tech/admin/adm_help.jsp
+Disallow: /resources/
+Disallow: /review/view/
+Disallow: /reviews/*/review/view/ 
+Disallow: /reviews/market/*/compare/*-vs-*-vs-*
+Disallow: /reviews/*/pageInfo
+Disallow: /legacy/products/podcasting/attributes/
+Disallow: /tech/html_emails/
+Disallow: /login/
+Disallow: /legacy/sd/
+Disallow: /imagesrv/
+Disallow: /assets/*.doc$
+Disallow: /assets/*.docx$
+Disallow: /assets/*.pdf$
+Disallow: /assets/*.ppt$
+Disallow: /assets/*.pptx$
+Disallow: /assets/*.xls$
+Disallow: /assets/*.xlsx$
+Disallow: /en/*automation-test-area*
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+Disallow: /
+Allow: /en$
+Allow: /en/about$
+Allow: /en/about/
+Allow: /en/ai$
+Allow: /en/articles/
+Allow: /en/event-navigator/
+Allow: /en/audit-risk$
+Allow: /en/audit-risk/
+Allow: /en/become-a-client$
+Allow: /en/chief-information-officer$
+Allow: /en/chief-information-officer/
+Allow: /en/communications$
+Allow: /en/communications/
+Allow: /en/conferences$
+Allow: /en/conferences/
+Allow: /en/connect-with-peers$
+Allow: /en/connect-with-peers/
+Allow: /en/consulting$
+Allow: /en/consulting/
+Allow: /en/contact/
+Allow: /en/corporate-communications/
+Allow: /en/customer-service-support$
+Allow: /en/customer-service-support/
+Allow: /en/customer-success-stories$
+Allow: /en/customer-success-stories/
+Allow: /en/cybersecurity$
+Allow: /en/cybersecurity/
+Allow: /en/data-analytics$
+Allow: /en/data-analytics/
+Allow: /en/doc/
+Allow: /en/documents/
+Allow: /en/enterprise-architecture$
+Allow: /en/enterprise-architecture/
+Allow: /en/executive-guidance/
+Allow: /en/experts$
+Allow: /en/experts/
+Allow: /en/finance$
+Allow: /en/finance/
+Allow: /en/financial-services$
+Allow: /en/financial-services/
+Allow: /en/glossary/
+Allow: /en/human-resources$
+Allow: /en/human-resources/
+Allow: /en/industries/
+Allow: /en/information-technology$
+Allow: /en/information-technology/
+Allow: /en/infrastructure-and-it-operations-leaders$
+Allow: /en/infrastructure-and-it-operations-leaders/
+Allow: /en/innovation-strategy$
+Allow: /en/innovation-strategy/
+Allow: /en/insights$
+Allow: /en/insights/
+Allow: /en/legal-compliance$
+Allow: /en/legal-compliance/
+Allow: /en/marketing$
+Allow: /en/marketing/
+Allow: /en/newsletter-signup$
+Allow: /en/newsroom$
+Allow: /en/newsroom/
+Allow: /en/podcasts/
+Allow: /en/product-management$
+Allow: /en/product-management/
+Allow: /en/products/
+Allow: /en/publications$
+Allow: /en/publications/
+Allow: /en/research/
+Allow: /en/research-development$
+Allow: /en/research-development/
+Allow: /en/sales$
+Allow: /en/sales/
+Allow: /en/site-index$
+Allow: /en/site-map$
+Allow: /en/smarter/
+Allow: /en/software-engineering$
+Allow: /en/software-engineering/
+Allow: /en/strategy-insights$
+Allow: /en/strategy-insights/
+Allow: /en/supply-chain$
+Allow: /en/supply-chain/
+Allow: /en/tech-ceo$
+Allow: /en/tech-ceo/
+Allow: /en/tech-marketing$
+Allow: /en/tech-marketing/
+Allow: /en/tools$
+Allow: /en/tools/
+Allow: /en/topics/
+Allow: /en/trends/
+Allow: /en/videos/
+Allow: /en/webinar/
+Allow: /en/webinars$
+Allow: /en/why-us$
+Allow: /jp/conferences/
+Allow: /pt-br/conferences/
+
+
+User-agent: Applebot-Extended
+User-agent: Arquivo-web-crawler
+User-agent: archive.org_bot
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: ClaudeBot
+User-agent: Crawlspace
+User-agent: Diffbot
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: Meta-ExternalAgent
+User-agent: PanguBot
+User-agent: Timpibot
+User-agent: YandexAdditional
+User-agent: YandexAdditionalBot
+Disallow: /community/*
+Disallow: /reviews/
+Disallow: /ratings/
+
+User-agent: Google-Extended
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+Disallow: /
+Allow: /reviews/
+Allow: /ratings/
+Disallow: /review/view/
+Disallow: /reviews/*/review/view/ 
+`;
+const SAMPLE4=`# Anonymised UK gaming site, September 2026. Real file, renamed domain.
+User-agent: *
+Disallow:
+Disallow: /service*
+Disallow: /index.welcome*
+Disallow: /register.*
+Disallow: /bingo/games/*
+Disallow: /login.*
+Disallow: /registerstepped.*
+Disallow: /*?isIframeCall
+Disallow: /gettingstarted
+Disallow: *?tokens*
+Disallow: /api*
+Disallow: /uk/graphql
+Disallow: /forgottenusernamepassword*
+
+Sitemap: https://www.example.com/uk/sitemap.xml
+`;
+$('#run').addEventListener('click',run);
+$('#sample').addEventListener('click',()=>{$('#robots').value=SAMPLE;run();});
+$('#sample2').addEventListener('click',()=>{$('#robots').value=SAMPLE2;run();});
+$('#sample3').addEventListener('click',()=>{$('#robots').value=SAMPLE3;run();});
+$('#sample4').addEventListener('click',()=>{$('#robots').value=SAMPLE4;run();});
+$('#clear').addEventListener('click',()=>{$('#robots').value='';$('#results').classList.add('hidden');});
+$('#copy').addEventListener('click',async()=>{ if(!LAST) return; try{await navigator.clipboard.writeText(toMd(LAST));$('#copied').textContent='Copied.';setTimeout(()=>$('#copied').textContent='',2000);}catch(e){$('#copied').textContent='Clipboard blocked. Use Download .md instead.';}});
+$('#dlmd').addEventListener('click',()=>LAST&&download(stamp()+'.md',toMd(LAST),'text/markdown'));
+$('#dlcsv').addEventListener('click',()=>LAST&&download(stamp()+'.csv',toCsv(LAST),'text/csv'));
+$('#dljson').addEventListener('click',()=>LAST&&download(stamp()+'.json',JSON.stringify(LAST,null,2),'application/json'));
+$('#print').addEventListener('click',()=>window.print());
+</script>
+</body>
+</html>
