@@ -134,7 +134,7 @@ Allow: /"></textarea>
       <div class="kicker">The verdict</div>
       <ul class="story" id="story"></ul>
       <div class="cards" id="cards"></div>
-      <p class="hint" style="margin-top:10px"><b style="color:var(--text)">T</b> train · <b style="color:var(--text)">S</b> search and cite · <b style="color:var(--text)">U</b> open on request. BLOCKED means every crawler that LLM has is blocked there. CITE ONLY means the training crawler is blocked and the search and user crawlers are open. A letter is left out where that LLM has no crawler for the job (Gemini has one switch for training and grounding, Perplexity does not train).</p>
+      <p class="hint" style="margin-top:10px"><b style="color:var(--text)">T</b> train · <b style="color:var(--text)">S</b> search and cite · <b style="color:var(--text)">U</b> open on request. BLOCKED means the search crawler is blocked, so the LLM cannot cite you, whatever the other letters say. CITE ONLY means the training crawler is blocked and the search crawler is open. A letter is left out where that LLM has no crawler for the job (Gemini has one switch for training and grounding, Perplexity does not train).</p>
       <div class="card" id="warnwrap" style="--accent:var(--amber);margin-top:16px"><h2 style="font-size:15px;margin:0" id="warnhead">Worth checking</h2><p class="hint" style="margin:2px 0 0">Each line ends with a call: Almost certainly not intended, worth confirming, or for information.</p><ol class="warn" id="warn" style="margin-top:8px"></ol></div>
     </div>
 
@@ -187,10 +187,11 @@ Allow: /"></textarea>
           <li>The other 69% of the time the answer comes from memory, where a page the model never trained on does not exist.</li>
         </ul>
       </li>
-      <li><b>Blocked:</b> No crawler that LLM has can reach these pages.
+      <li><b>Blocked:</b> The search crawler is blocked, so the LLM cannot cite these pages.
         <ul>
-          <li>Training, search and user crawlers are all shut out.</li>
-          <li>The LLM cannot learn from these pages or link to them, so for that LLM they do not exist.</li>
+          <li>Search is what earns a citation, so once it is shut the pill is Blocked whatever the other letters say.</li>
+          <li>A green U on a Blocked card means the user fetcher is still open: A page will load when a person pastes its URL, but the LLM will never find it on its own.</li>
+          <li>In most files training is shut too, so for that LLM the pages do not exist.</li>
         </ul>
       </li>
       <li><b>Train only:</b> The LLM learns from these pages but can never link to them.
