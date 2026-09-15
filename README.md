@@ -36,7 +36,7 @@ It is one HTML file with no dependencies beyond Google Fonts. Drop `index.html` 
 
 ## What it cannot tell you
 
-- Robots.txt is a set of directives that nothing enforces. The big companies say their crawlers follow it, but a crawler can ignore it and newer or less careful ones sometimes do. The tool reads what your file asks for, not who actually turns up.
+- Robots.txt is a set of directives. The big companies say their crawlers follow it, but a crawler can ignore it and newer or less careful ones sometimes do. The tool reads what your file asks for, not who actually turns up.
 - It reads only what you paste. It does not fetch your pages, so it cannot tell whether an allowed folder is behind a paywall, redirects somewhere else or has been taken down.
 - It does not see other blocks. A firewall, a CDN rule or a meta tag can stop a crawler your file allows.
 - The 5 LLMs and their crawler names come from each company's own documentation as of September 2026. Companies add and rename crawlers, so re-check your file every quarter against [knownagents.com/agents](https://knownagents.com/agents), which lists every known crawler in one place and is updated daily.
@@ -45,4 +45,4 @@ It is one HTML file with no dependencies beyond Google Fonts. Drop `index.html` 
 
 ## Contact or feedback
 
-Open an issue here, or message Orit on [LinkedIn](https://www.linkedin.com/in/oritsimu/) · [X](https://x.com/OritSiMu)
+Message Orit on [LinkedIn](https://www.linkedin.com/in/oritsimu/) or [X](https://x.com/OritSiMu)
