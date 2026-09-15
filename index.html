@@ -19,7 +19,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.55}
 a{color:var(--sky)}
-body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .snip{display:none;margin:0 0 18px;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px} .snip .sk{font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px} .snip pre{margin:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--text);white-space:pre-wrap;word-break:break-all} .snip .more{color:var(--muted);font-size:12px;margin-top:8px} body.shot .snip{display:block} .xtop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px} .xtop .xl{color:var(--muted);font-size:11px;font-family:var(--disp);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-right:4px} .xtop button{padding:6px 12px;font-size:12px} body.shot .xtop{display:none} #exports button,.xtop button{background:transparent;border-color:var(--text);color:var(--text)} #exports button:hover,.xtop button:hover{background:var(--surf2)} .foot .totop{margin:22px 0 0} body.shot .totop{display:none} .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
+body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .snip{display:none;margin:0 0 18px;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px} .snip .sk{font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px} .snip pre{margin:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--text);white-space:pre-wrap;word-break:break-all} .snip .more{color:var(--muted);font-size:12px;margin-top:8px} body.shot .snip{display:block} .xtop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px} .xtop .xl{color:var(--muted);font-size:11px;font-family:var(--disp);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-right:4px} .xtop button{padding:6px 12px;font-size:12px} body.shot .xtop{display:none} #exports button,.xtop button{background:transparent;border-color:var(--text);color:var(--text)} #exports button:hover,.xtop button:hover{background:var(--surf2)} .foot .totop{margin:22px 0 0} body.shot .totop{display:none} #h1src:empty{display:none} #h1src{color:var(--sky)} .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
 h1,h2{font-family:var(--disp);margin:0}
 h1{font-size:clamp(26px,4vw,36px);line-height:1.15;font-weight:700}
 h2{font-size:18px;font-weight:700;margin-bottom:8px}
@@ -104,7 +104,7 @@ table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
 <body>
 <div class="wrap">
   <div class="kicker">Free tool · Robots.txt for AI search</div>
-  <h1>Robots.txt AI Visibility Audit</h1>
+  <h1>Robots.txt AI Visibility Audit<span id="h1src"></span></h1>
   <p class="lede">Reads a robots.txt file and shows, for every LLM, whether its training, search and user crawlers are allowed or blocked, what that does to your AI visibility and where the file is costing you. Built from <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/" target="_blank" rel="noopener">Can Publishers Block AI Training Without Losing AI Visibility?</a> · <a href="#how">How it works</a></p>
   <div class="instr"><b class="ih">Instructions:</b> Copy-paste the contents of your robots.txt below and hit <span class="co">Check</span>, or click any of the <span class="lb">example buttons</span> for anonymised real robots.txt examples and what they mean. Hit <span class="clr">Clear</span> to paste a new file's content, or simply paste over it and hit <span class="co">Check</span> again.</div>
 
@@ -614,14 +614,15 @@ function run(){
   document.querySelectorAll('a.toggle:not(.end)').forEach(a=>{ a.dataset.label=a.textContent; });
   { const lines=txt.replace(/\r/g,'').split('\n'); const shown=lines.slice(0,6).map(l=>l.length>110?l.slice(0,110)+'…':l); const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); const when=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
     $('#snip').innerHTML=`<div class="sk">The file you checked${srcLabel()?' · '+srcLabel():''} · ${lines.length} line${lines.length===1?'':'s'} · ${when}</div><pre>${esc(shown.join('\n'))}</pre>${lines.length>6?`<div class="more">First 6 lines shown, ${lines.length-6} more in the file.</div>`:''}`; }
+$('#h1src').textContent=srcLabel()?' - '+srcLabel():'';
 $('#results').classList.remove('hidden');
-  LAST={generated:new Date().toISOString(),verdict:items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'').replace(/<li class="st-[a-z]+">/g,' ').replace(/<[^>]+>/g,'').trim()),conclusion:'',zones:zoneDefs.map(z=>({label:z.label.long,paths:z.paths,byLLM:Object.fromEntries(z.at.map((x,i)=>[LLMS[i].name,x.state]))})).concat([{label:zoneDefs.length?'Everything else':'Whole site',paths:[],byLLM:Object.fromEntries(S.map((x,i)=>[LLMS[i].name,x.state]))}]),warnings:warn.map(w=>w.replace(/<[^>]+>/g,'')),llms:report,folders:matrix,others:oreport};
+  LAST={generated:new Date().toISOString(),source:srcLabel()||null,verdict:items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'').replace(/<li class="st-[a-z]+">/g,' ').replace(/<[^>]+>/g,'').trim()),conclusion:'',zones:zoneDefs.map(z=>({label:z.label.long,paths:z.paths,byLLM:Object.fromEntries(z.at.map((x,i)=>[LLMS[i].name,x.state]))})).concat([{label:zoneDefs.length?'Everything else':'Whole site',paths:[],byLLM:Object.fromEntries(S.map((x,i)=>[LLMS[i].name,x.state]))}]),warnings:warn.map(w=>w.replace(/<[^>]+>/g,'')),llms:report,folders:matrix,others:oreport};
   $('#results').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 /* ---------- exports ---------- */
 function toMd(d){
-  const L=[`# Robots.txt AI Visibility Audit`,`Generated ${d.generated.slice(0,10)}`,'','## The verdict','']; d.verdict.forEach(v=>L.push(`- ${v}`)); L.push('');
+  const L=[`# Robots.txt AI Visibility Audit${d.source?' - '+d.source:''}`,`Generated ${d.generated.slice(0,10)}`,'','## The verdict','']; d.verdict.forEach(v=>L.push(`- ${v}`)); L.push('');
   L.push('## By folder','',`| Folder | ${d.llms.map(r=>r.llm).join(' | ')} |`,`|---|${d.llms.map(()=>'---').join('|')}|`); d.zones.forEach(z=>L.push(`| ${z.label} | ${d.llms.map(r=>z.byLLM[r.llm]).join(' | ')} |`)); L.push('');
   if(d.warnings.length){ L.push('## Worth checking',''); d.warnings.forEach(h=>L.push(`- ${h}`)); L.push(''); }
   L.push('## Site default, crawler by crawler','','| LLM | Share | Train | Search | User | AI visibility |','|---|---|---|---|---|---|');
@@ -906,7 +907,7 @@ $('#sample2').addEventListener('click',()=>{SRC='Fallback example';$('#robots').
 $('#sample3').addEventListener('click',()=>{SRC='Multiple blocked folders example';$('#robots').value=SAMPLE3;run();});
 $('#sample4').addEventListener('click',()=>{SRC='Fully open example';$('#robots').value=SAMPLE4;run();});
 $('#robots').addEventListener('input',()=>{SRC='';});
-$('#clear').addEventListener('click',()=>{SRC='';$('#robots').value='';$('#results').classList.add('hidden');});
+$('#clear').addEventListener('click',()=>{SRC='';$('#h1src').textContent='';$('#robots').value='';$('#results').classList.add('hidden');});
 $('#copy').addEventListener('click',async()=>{ if(!LAST) return; try{await navigator.clipboard.writeText(toMd(LAST));$('#copied').textContent='Copied.';setTimeout(()=>$('#copied').textContent='',2000);}catch(e){$('#copied').textContent='Clipboard blocked. Use Download .md instead.';}});
 $('#dlmd').addEventListener('click',()=>LAST&&download(stamp()+'.md',toMd(LAST),'text/markdown'));
 $('#dlcsv').addEventListener('click',()=>LAST&&download(stamp()+'.csv',toCsv(LAST),'text/csv'));
