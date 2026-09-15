@@ -9,7 +9,7 @@ Built from [Can Publishers Block AI Training Without Losing AI Visibility? Robot
 ## Use it
 
 1. Try the 4 example buttons first: **Publisher example** (the file the article is built on), **Multiple blocked folders example** (an anonymised B2B research publisher that blocks everything, then opens named folders), **Fully open example** (an anonymised UK gaming site) and **Fallback example** (illustrative, not a real site: what to do if you must protect specific folders, the site open and two folders closed to training crawlers only. The recommendation is still to open everything).
-2. Open `yoursite.com/robots.txt`, copy the contents, paste them in and press **Check**. Browsers cannot read another site's robots.txt directly, so there is no URL fetch.
+2. Open `yoursite.com/robots.txt`, copy the contents, paste them in and press **Check**. Browsers cannot read another site's robots.txt directly, so there is no URL fetch. Hit **Clear** to paste a new file, or simply paste over it and hit Check again.
 3. Read "Worth checking" last. Every line ends with a call: Almost certainly not intended, worth confirming or for information.
 
 Nothing you paste is retained or shared, not even for learning purposes. There is no server and no tracking: The file is read in your browser and goes nowhere else.
@@ -39,8 +39,8 @@ It is one HTML file with no dependencies beyond Google Fonts. Drop `index.html` 
 - Robots.txt is a set of directives that nothing enforces. The big companies say their crawlers follow it, but a crawler can ignore it and newer or less careful ones sometimes do. The tool reads what your file asks for, not who actually turns up.
 - It reads only what you paste. It does not fetch your pages, so it cannot tell whether an allowed folder is behind a paywall, redirects somewhere else or has been taken down.
 - It does not see other blocks. A firewall, a CDN rule or a meta tag can stop a crawler your file allows.
-- The 5 LLMs and their crawler names come from each company's own documentation as of September 2026: [OpenAI](https://developers.openai.com/api/docs/bots), [Google](https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers), [Anthropic](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler), [Microsoft](https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0) and [Perplexity](https://docs.perplexity.ai/guides/bots). Companies add and rename crawlers, so re-check your file against those pages every quarter. The community-maintained [ai.robots.txt](https://github.com/ai-robots-txt/ai.robots.txt) list is a quick way to spot new names.
-- The traffic shares are Similarweb's August 2026 figures for website visits only. They understate products used mostly inside an app, Gemini above all.
+- The 5 LLMs and their crawler names come from each company's own documentation as of September 2026. Companies add and rename crawlers, so re-check your file every quarter against [knownagents.com/agents](https://knownagents.com/agents), which lists every known crawler in one place and is updated daily.
+- The traffic shares are [Similarweb's August 2026 figures](https://the-decoder.com/chatgpt-claws-back-web-traffic-share-to-55-5-percent-as-geminis-brief-comeback-fades/) for website visits only. They understate products used mostly inside an app, Gemini above all.
 - It is a decision aid, not legal advice and not a substitute for an SEO, GEO or AEO consultation.
 
 ## Contact or feedback
