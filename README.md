@@ -28,7 +28,7 @@ Nothing you paste is retained or shared, not even for learning purposes. There i
 
 ## Export
 
-Copy as markdown, download `.md`, `.csv` or `.json`, or print to PDF.
+Copy as markdown, download `.md`, `.csv` or `.json`, download the whole verdict as a PNG (dark, 2x, rendered in your browser by an inlined copy of html2canvas, MIT, no request leaves the page) or save it as a dark PDF.
 
 ## Host it yourself
 
