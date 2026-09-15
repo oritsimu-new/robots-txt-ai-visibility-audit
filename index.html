@@ -571,6 +571,10 @@ function run(){
   /* 3. the same LLM split by role inside a folder, where the site default is not split */
   LLMS.filter(l=>l.kind==='split').forEach(l=>{ const i=LLMS.indexOf(l); if(S[i].state==='reduced') return;
     const zs=zoneDefs.filter(z=>z.at[i].state==='reduced'); if(zs.length) warn.push(`<li class="amber"><b>${l.name} is split inside ${list(zs.map(z=>z.label.long))}:</b> ${l.train} is kept out while ${l.search} and ${l.user} can enter, so those pages can be cited but not trained on.</li>`); });
+  /* 3b. search blocked but the user fetcher open: why that still rates Blocked */
+  LLMS.filter(l=>l.kind==='split'||l.kind==='perplexity').forEach(l=>{ const i=LLMS.indexOf(l); const hit=x=>x.s.allow===false&&x.u.allow===true;
+    const where=[]; if(hit(S[i])) where.push(zoneDefs.length?'everything else':'the whole site'); zoneDefs.forEach(z=>{ if(hit(z.at[i])) where.push(z.label.long); });
+    if(where.length) warn.push(`<li><b>${l.name} shows Blocked with a green U on ${list(where)}:</b> ${l.search} is blocked and ${l.user} is not. Only the search crawler earns a citation, so the pages rate Blocked. ${l.user} opens a page only when a person pastes its URL into ${l.name}, so it will load on request, but ${l.name} will never find it on its own.</li>`); });
   /* 4. written for some companies, the others fall through to the default */
   { const openL=S.filter(x=>x.state==='full').map(x=>x.l), shutL=S.filter(x=>x.state==='none'||x.state==='reduced').map(x=>x.l);
     if(openL.length&&shutL.length){ const namedFor=l=>l.kind==='split'?[l.train,l.search,l.user].filter(tok=>mentioned(g,tok)):l.kind==='google'?['Google-Extended'].filter(tok=>mentioned(g,tok)):l.kind==='bing'?['Bingbot'].filter(tok=>mentioned(g,tok)):[l.search,l.user].filter(tok=>mentioned(g,tok));
