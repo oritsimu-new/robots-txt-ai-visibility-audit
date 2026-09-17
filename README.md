@@ -10,7 +10,7 @@ Built from [Can Publishers Block AI Training Without Losing AI Visibility? Robot
 
 1. Try the 4 example buttons first: **Publisher example** (the file the article is built on), **Multiple blocked folders example** (an anonymised B2B research publisher that blocks everything, then opens named folders), **Fully open example** (an anonymised UK gaming site) and **Fallback example** (illustrative, not a real site: what to do if you must protect specific folders, the site open and two folders closed to training crawlers only. The recommendation is still to open everything).
 2. Open `yoursite.com/robots.txt`, copy the contents, paste them in and press **Check**. Browsers cannot read another site's robots.txt directly, so there is no URL fetch. Hit **Clear** to paste a new file, or simply paste over it and hit Check again.
-3. Read "Worth checking" last. Every line ends with a call: Almost certainly not intended, worth confirming or for information.
+3. Read "Worth checking" last. Every line ends with a call: Almost certainly not intended, worth confirming or FYI.
 
 Nothing you paste is retained or shared, not even for learning purposes. There is no server and no tracking: The file is read in your browser and goes nowhere else.
 
@@ -28,13 +28,15 @@ Nothing you paste is retained or shared, not even for learning purposes. There i
 
 ## Export
 
-Copy as markdown, download `.md`, `.csv` or `.json`, download the whole verdict as a PNG (dark, 2x, rendered in your browser by an inlined copy of html2canvas, MIT, no request leaves the page) or save it as a dark PDF.
+Copy as markdown, download `.md`, `.csv` or `.json`, download the whole verdict as a PNG (dark, 2x, rendered in your browser by an inlined copy of html2canvas, MIT, no request leaves the page), save it as a dark PDF, or download a narrative report: A standalone HTML page with what robots.txt is, why it matters for search and for AI visibility, the situation for the site, findings, fixes, a timeline and further recommendations, written for someone who has never opened a robots.txt. Every export is named after the domain in the file (from its Host or Sitemap line) or the example you clicked.
 
 ## Host it yourself
 
 It is one HTML file with no dependencies beyond Google Fonts. Drop `index.html` anywhere, including GitHub Pages.
 
 ## What it cannot tell you
+
+- It audits the AI visibility side of robots.txt only. For syntax errors, Googlebot and Bingbot access, sitemap lines or anything else about search engine crawling, use Google Search Console's robots.txt report, Bing Webmaster Tools, TechnicalSEO.com's robots.txt tester or Screaming Frog.
 
 - Robots.txt is a set of directives. The big companies say their crawlers follow it, but a crawler can ignore it and newer or less careful ones sometimes do. The tool reads what your file asks for, not who actually turns up.
 - It reads only what you paste. It does not fetch your pages, so it cannot tell whether an allowed folder is behind a paywall, redirects somewhere else or has been taken down.

@@ -19,7 +19,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.55}
 a{color:var(--sky)}
-body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .snip{display:none;margin:0 0 18px;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px} .snip .sk{font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px} .snip pre{margin:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--text);white-space:pre-wrap;word-break:break-all} .snip .more{color:var(--muted);font-size:12px;margin-top:8px} body.shot .snip{display:block} .xtop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px} .xtop .xl{color:var(--muted);font-size:11px;font-family:var(--disp);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-right:4px} .xtop button{padding:6px 12px;font-size:12px} body.shot .xtop{display:none} #exports button,.xtop button{background:transparent;border-color:var(--text);color:var(--text)} #exports button:hover,.xtop button:hover{background:var(--surf2)} .foot .totop{margin:22px 0 0} body.shot .totop{display:none} #h1src:empty{display:none} #h1src{color:var(--sky)} .warn .st-full{color:var(--green);font-weight:600} .warn .st-none{color:var(--red);font-weight:600} .warn .st-reduced{color:var(--amber);font-weight:600} .story details.langs{display:block;margin:4px 0 0;font-family:var(--body);font-weight:400;font-size:13px} .story details.langs summary{color:var(--sky);cursor:pointer;list-style:none;font-weight:600} .story details.langs[open]{display:block;margin:6px 0 0} .story details.langs .plist code{white-space:normal;font-family:var(--body);font-size:12px} .story li.leak a.warnlink{color:var(--red);font-weight:700;text-decoration:underline} .story li.leak a.fyilink{color:var(--sky);font-weight:700;text-decoration:underline} #warn-copilot{scroll-margin-top:16px} #warn-companies{scroll-margin-top:16px} .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
+body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .snip{display:none;margin:0 0 18px;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px} .snip .sk{font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px} .snip pre{margin:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--text);white-space:pre-wrap;word-break:break-all} .snip .more{color:var(--muted);font-size:12px;margin-top:8px} body.shot .snip{display:block} .xtop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px} .xtop .xl{color:var(--muted);font-size:11px;font-family:var(--disp);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-right:4px} .xtop button{padding:6px 12px;font-size:12px} body.shot .xtop{display:none} #exports button,.xtop button{background:transparent;border-color:var(--text);color:var(--text)} #exports button:hover,.xtop button:hover{background:var(--surf2)} .foot .totop{margin:22px 0 0} body.shot .totop{display:none} #h1src:empty{display:none} #h1src{color:var(--sky)} .warn .st-full{color:var(--green);font-weight:600} .warn .st-none{color:var(--red);font-weight:600} .warn .st-reduced{color:var(--amber);font-weight:600} .story details.langs{display:block;margin:4px 0 0;font-family:var(--body);font-weight:400;font-size:13px} .story details.langs summary{color:var(--sky);cursor:pointer;list-style:none;font-weight:600} .story details.langs[open]{display:block;margin:6px 0 0} .story details.langs .plist code{white-space:normal;font-family:var(--body);font-size:12px} .story li.leak a.warnlink{color:var(--red);font-weight:700;text-decoration:underline} .story li.leak a.fyilink{color:var(--sky);font-weight:700;text-decoration:underline} #warn-copilot{scroll-margin-top:16px} #warn-companies{scroll-margin-top:16px} .foot .scope{margin:0 0 12px;color:var(--muted)} .foot .scope b{color:var(--text)} .foot details.fine>summary{cursor:pointer;color:var(--sky);font-family:var(--disp);font-weight:700;font-size:14px;list-style:none;margin-bottom:6px} .foot details.fine>summary::before{content:'+ ';} .foot details.fine[open]>summary::before{content:'\2212  ';} .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
 h1,h2{font-family:var(--disp);margin:0}
 h1{font-size:clamp(26px,4vw,36px);line-height:1.15;font-weight:700}
 h2{font-size:18px;font-weight:700;margin-bottom:8px}
@@ -98,14 +98,14 @@ details.card>summary{cursor:pointer;list-style:none;font-family:var(--disp);font
 .warn{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px} .warn li{margin:6px 0} .warn b{color:var(--text)} .warn .tag{font-style:normal;font-family:var(--disp);font-weight:700;font-size:12px;color:var(--sky)} .warn .tag.red{color:var(--red)} .warn .tag.amber{color:var(--amber)} .warn code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--text)} .warn li.red b{color:var(--red)} .warn li.amber b{color:var(--amber)}
 table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
 .tog{margin:8px 0 2px} .tog a.toggle{color:var(--sky);font-size:13px;font-weight:600;text-decoration:none} .tog a.end{display:inline} #matrixend,#othersend{margin-top:6px}
-@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} @page{size:A4;margin:0} body{background:var(--bg)!important;color:var(--text)!important;font-size:12px} .wrap{padding:9mm 9mm 12mm;max-width:none} .card::before{display:none} button,.byline,textarea,.instr,#copied,#paste,#exports,.xtop,.lede,.totop{display:none!important} .kicker{margin-bottom:4px} h1{font-size:22px} .snip{display:block!important;margin:8px 0 10px;padding:8px 12px} .snip pre{font-size:9.5px;line-height:1.35} .snip .sk{font-size:9.5px;margin-bottom:4px} .snip .more{font-size:10px;margin-top:4px} .section{margin-top:12px} .story{font-size:12.5px;margin:0 0 8px;line-height:1.3} .story li{margin:3px 0} .story ul{margin:2px 0} .hint{font-size:10.5px} .cards{grid-template-columns:repeat(5,1fr)!important;gap:6px;break-inside:avoid} .lc{padding:8px 9px;break-inside:avoid} .lc h3{font-size:12px} .lc h3 small{font-size:9px} .lc .zones{margin-top:6px} .lc .zones li{padding:3px 0;font-size:10px;gap:2px;flex-direction:column;align-items:flex-start} .lc .zones li .z a{display:none} .lc .zones li .r{flex-direction:row;align-items:center;gap:4px} .lc .zones li .z b{font-size:10px} .lc .zones li .z code{font-size:9px} .lc .pill{padding:2px 6px;font-size:8px} .lc .tsu i{width:14px;height:14px;font-size:8px} .lc .bots{font-size:8.5px;margin-top:6px;line-height:1.35} .foot{break-before:auto;margin-top:16px;padding-top:12px} .foot h3.fh{break-after:avoid} .foot li{break-inside:avoid} details{display:block} details>*{display:block} details summary{list-style:none}}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} @page{size:A4;margin:0} body{background:var(--bg)!important;color:var(--text)!important;font-size:12px} .wrap{padding:9mm 9mm 12mm;max-width:none} .card::before{display:none} button,.byline,textarea,.instr,#copied,#paste,#exports,.xtop,.lede,.totop{display:none!important} .kicker{margin-bottom:4px} h1{font-size:22px} .snip{display:block!important;margin:8px 0 10px;padding:8px 12px} .snip pre{font-size:9.5px;line-height:1.35} .snip .sk{font-size:9.5px;margin-bottom:4px} .snip .more{font-size:10px;margin-top:4px} .section{margin-top:12px} .story{font-size:12.5px;margin:0 0 8px;line-height:1.3} .story li{margin:3px 0} .story ul{margin:2px 0} .hint{font-size:10.5px} .cards{grid-template-columns:repeat(5,1fr)!important;gap:6px;break-inside:avoid} .lc{padding:8px 9px;break-inside:avoid} .lc h3{font-size:12px} .lc h3 small{font-size:9px} .lc .zones{margin-top:6px} .lc .zones li{padding:3px 0;font-size:10px;gap:2px;flex-direction:column;align-items:flex-start} .lc .zones li .z a{display:none} .lc .zones li .r{flex-direction:row;align-items:center;gap:4px} .lc .zones li .z b{font-size:10px} .lc .zones li .z code{font-size:9px} .lc .pill{padding:2px 6px;font-size:8px} .lc .tsu i{width:14px;height:14px;font-size:8px} .lc .bots{font-size:8.5px;margin-top:6px;line-height:1.35} .foot{break-before:auto;margin-top:16px;padding-top:12px} .foot h3.fh{break-after:avoid} .foot li{break-inside:avoid} details{display:block} details>*{display:block} details summary{list-style:none} details.fine>summary{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="kicker">Free tool · Robots.txt for AI search</div>
   <h1>Robots.txt AI Visibility Audit<span id="h1src"></span></h1>
-  <p class="lede">Reads a robots.txt file and shows, for every LLM, whether its training, search and user crawlers are allowed or blocked, what that does to your AI visibility and where the file is costing you. Built from <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/" target="_blank" rel="noopener">Can Publishers Block AI Training Without Losing AI Visibility?</a> · <a href="#how">How it works</a></p>
+  <p class="lede">Reads a robots.txt file and shows, for every LLM, whether its training, search and user crawlers are allowed or blocked, what that does to your AI visibility and where the file is costing you. Built from <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/" target="_blank" rel="noopener">Can Publishers Block AI Training Without Losing AI Visibility?</a> · <a href="#how" id="howlink">How it works</a></p>
   <div class="instr"><b class="ih">Instructions:</b> Copy-paste the contents of your robots.txt below and hit <span class="co">Check</span>, or click any of the <span class="lb">example buttons</span> for anonymised real robots.txt examples and what they mean. Hit <span class="clr">Clear</span> to paste a new file's content, or simply paste over it and hit <span class="co">Check</span> again.</div>
 
   <div class="card" id="paste" style="--accent:var(--coral);margin-top:16px">
@@ -129,7 +129,7 @@ Allow: /"></textarea>
 
   <div id="results" class="hidden">
     <div class="section">
-      <div class="xtop"><span class="xl">Export</span><button id="xcopy">Copy as markdown</button><button id="xmd">.md</button><button id="xcsv">.csv</button><button id="xjson">.json</button><button id="xpng">PNG</button><button id="xpdf">PDF</button></div>
+      <div class="xtop"><span class="xl">Export</span><button id="xcopy">Copy as markdown</button><button id="xmd">.md</button><button id="xcsv">.csv</button><button id="xjson">.json</button><button id="xrep">Report</button><button id="xpng">PNG</button><button id="xpdf">PDF</button></div>
       <div class="snip" id="snip"></div>
       <div class="kicker">The verdict</div>
       <ul class="story" id="story"></ul>
@@ -160,6 +160,7 @@ Allow: /"></textarea>
         <button id="dlmd">Download .md</button>
         <button id="dlcsv">Download .csv</button>
         <button id="dljson">Download .json</button>
+        <button id="dlrep">Download report</button>
         <button id="dlpng">Download PNG</button>
         <button id="print">Save as PDF</button>
         <span class="hint" id="copied" style="margin:0"></span>
@@ -168,6 +169,9 @@ Allow: /"></textarea>
   </div>
 
   <div class="foot" id="how">
+    <p class="scope"><b>Scope:</b> This audits the AI visibility side of robots.txt only, the 5 LLMs and the crawlers behind them. For syntax errors, Googlebot and Bingbot access, sitemap lines or anything else about search engine crawling, use <a href="https://support.google.com/webmasters/answer/6062598" target="_blank" rel="noopener">Google Search Console's robots.txt report</a>, <a href="https://www.bing.com/webmasters/" target="_blank" rel="noopener">Bing Webmaster Tools</a>, <a href="https://technicalseo.com/tools/robots-txt/" target="_blank" rel="noopener">TechnicalSEO.com's robots.txt tester</a> or <a href="https://www.screamingfrog.co.uk/seo-spider/" target="_blank" rel="noopener">Screaming Frog</a>.</p>
+    <details class="fine" id="fine"><summary>How it works and what it cannot tell you</summary>
+
     <h3 class="fh">How it reads your file:</h3>
     <ul>
       <li><b>The standard:</b> It follows RFC 9309, the robots.txt standard, the same way OpenAI and Google document their crawlers.</li>
@@ -211,14 +215,16 @@ Allow: /"></textarea>
     <ul>
       <li><b>Who actually turns up:</b> Robots.txt is a set of directives. The big companies say their crawlers follow it, but a crawler can ignore it and newer or less careful ones sometimes do. The tool reads what your file asks for.</li>
       <li><b>What is behind an allowed folder:</b> It reads only what you paste and does not fetch your pages, so it cannot tell whether a folder is behind a paywall, redirects somewhere else or has been taken down.</li>
-      <li><b>Other blocks:</b> A firewall, a CDN rule or a meta tag can stop a crawler your file allows.</li>
+      <li><b>Other blocks:</b> A firewall, a CDN rule or a meta tag can stop a crawler your file allows. On Cloudflare, since <a href="https://blog.cloudflare.com/accountable-mixed-use-ai-crawlers/" target="_blank" rel="noopener">15 September 2026</a>, the Block setting also stops Googlebot, Bingbot and Applebot; Disallow AI Training is the setting that keeps search, and it writes the no-training lines into your robots.txt for you.</li>
       <li><b>New crawlers:</b> The 5 LLMs and their crawler names come from each company's own documentation as of September 2026. Companies add and rename crawlers, so re-check your file every quarter against <a href="https://knownagents.com/agents" target="_blank" rel="noopener">knownagents.com/agents</a>, which lists every known crawler in one place and is updated daily.</li>
       <li><b>Traffic shares:</b> <a href="https://the-decoder.com/chatgpt-claws-back-web-traffic-share-to-55-5-percent-as-geminis-brief-comeback-fades/" target="_blank" rel="noopener">Similarweb's August 2026 figures</a> for website visits only. They understate products used mostly inside an app, Gemini above all.</li>
       <li><b>Advice:</b> It is a decision aid, not legal advice and not a substitute for an SEO, GEO or AEO consultation.</li>
       <li><b>Latest version and feedback:</b> The latest version lives on <a href="https://github.com/oritsimu-new/robots-txt-ai-visibility-audit" target="_blank" rel="noopener">GitHub</a>. For feedback or a bug, message Orit on <a href="https://www.linkedin.com/in/oritsimu/" target="_blank" rel="noopener">LinkedIn</a> or <a href="https://x.com/OritSiMu" target="_blank" rel="noopener">X</a>.</li>
     </ul>
     <p class="totop"><button class="ghost" id="totop">Back to top</button></p>
-  </div>
+  
+    </details>
+</div>
 </div>
 
 <script>/* html2canvas 1.4.1, MIT, inlined so the tool stays one file with no external requests */
@@ -261,7 +267,7 @@ const TRACKED_SHARE = LLMS.reduce((a,l)=>a+l.share,0);
 /* type: 'mixed' = a search engine index that also feeds AI answers, 'llm' = LLM-first crawler, 'trad' = search only */
 const OTHERS = [
   { ua:'Googlebot', who:'Google', type:'mixed', job:'Search index', means:'The one that matters most. Google Search, AI Overviews and AI Mode all run off this index. Blocking it removes you from Google entirely, which no AI decision is worth.' },
-  { ua:'Bingbot', who:'Microsoft', type:'mixed', job:'Search index + Copilot', means:'Feeds Bing Search and Copilot together. There is no Copilot-only crawler, so this is the second search engine and an AI assistant in one line.' },
+  { ua:'Bingbot', who:'Microsoft', type:'mixed', job:'Search index + Copilot', means:'Feeds Bing Search and Copilot together. There is no Copilot-only crawler, so this is the second search engine and an AI assistant in one line. Microsoft says a no-training preference in robots.txt is coming in early 2027; until then the levers are Bing Webmaster Tools and the NOARCHIVE meta tag.' },
   { ua:'DeepSeekBot', who:'DeepSeek · 3.4%', type:'llm', job:'Training', means:'The only DeepSeek crawler documented, and it trains the model. Block it and you block training. Fetching has no lever, because no search or user crawler is published, so nobody outside DeepSeek can say whether its web search mode still reaches you.' },
   { ua:'xAI-SearchBot', who:'xAI (Grok) · 2.4%', type:'llm', job:'Search', means:'The only xAI crawler documented, and it fetches for live Grok answers. Block it and you block Grok search and citations. Training has no lever, because xAI has never published a training crawler token.' },
   { ua:'CCBot', who:'Common Crawl', type:'llm', job:'Training', means:'The open dataset behind a long list of models at once. The broadest single training block, and the leakiest, because old snapshots stay archived.' },
@@ -408,7 +414,7 @@ function llmAt(g,l,p){
   let t={allow:null},s={allow:null},u={allow:null},m,bots='';
   if(l.kind==='split'){ t=allowed(g,l.train,p); s=allowed(g,l.search,p); u=allowed(g,l.user,p); m=meaningSplit(l,t,s,u); bots=`${l.train} / ${l.search} / ${l.user}`; }
   else if(l.kind==='google'){ const ext=allowed(g,'Google-Extended',p), bot=allowed(g,'Googlebot',p); t=ext; s=ext; m=meaningGoogle(ext,bot); bots='Google-Extended (train + grounding) / Googlebot'; }
-  else if(l.kind==='bing'){ const bot=allowed(g,'Bingbot',p); t=bot; s=bot; m=meaningBing(bot); bots='Bingbot (Bing Search + Copilot)'; }
+  else if(l.kind==='bing'){ const bot=allowed(g,'Bingbot',p); t=bot; s=bot; m=meaningBing(bot); bots='Bingbot (Bing Search + Copilot). No crawler of its own: open unless you block Bing Search'; }
   else { s=allowed(g,l.search,p); u=allowed(g,l.user,p); m=meaningPerplexity(s,u); bots='PerplexityBot (retrieval only) / Perplexity-User'; }
   return {l,t,s,u,m,state:m.v,bots,sig:[t.allow,s.allow,u.allow].join('')};
 }
@@ -475,7 +481,7 @@ function run(){
   const phrase={full:'open to',reduced:'citable but not trained on for',none:'blocked to',training:'trained on but never cited by'};
   const clause=(label,at,plural)=>{ const by={}; at.forEach((x,i)=>{ (by[x.state]=by[x.state]||[]).push(LLMS[i].name); }); const keys=Object.keys(by).sort((a,b)=>worst(b)-worst(a)); const is=plural?'are':'is';
     if(keys.length===1&&keys[0]==='full') return `${label} ${is} <span class="st-full">open to every LLM</span>`;
-    return `${label} ${is} `+keys.map(k=>`<span class="st-${k}">${phrase[k]} ${list(by[k])}</span>`).join(', ');
+    return `${label} ${is} `+keys.map(k=>`<span class="st-${k}">${phrase[k]} ${list(by[k])}${k==='full'&&by[k].length===1&&by[k][0]==='Copilot'?' via Bingbot':''}</span>`).join(', ');
   };
   const plist=(paths,k)=>`<details id="zone-${k}"><summary>Show the ${paths.length} paths</summary><div class="plist">${paths.map(x=>`<code title="${x}">${x}</code>`).join('')}</div></details>`;
   const items=zoneDefs.map((z,k)=>{ const s=clause(`<b>${z.label.long}</b>`,z.at,z.paths.length>1); return `<li>${s.charAt(0).toUpperCase()+s.slice(1)}.${z.label.s?' '+plist(z.paths,k):''}</li>`; });
@@ -555,6 +561,8 @@ function run(){
   else if(blocklistShape){ head=`Open ${openAll?'to every AI crawler ':''}everywhere except ${namedCount} named path${namedCount>1?'s':''}${uneven?', with the LLMs treated differently inside them':''}.`; judge=zoneDefs.some(z=>z.at.some(x=>x.state==='reduced'))&&!zoneDefs.some(z=>z.at.some(x=>x.state==='none'))?'The shape: Site open, specific folders closed to training only. That is the split-by-content-type setup the article recommends.':'The shape: Site open, specific folders closed. Check the closed folders are the ones you meant.'; }
   else if(redNamesH.length&&!shutNames.length){ head=`Blocked from training, still citable${uneven?', for some LLMs':''}.`; judge='The middle path. You keep citations from live searches and give up answers written from memory, which is most definition and how-to questions.'; }
   else { head=`Shut to ${list(shutNames)}${redNamesH.length?`, citable but not trained on for ${list(redNamesH)}`:''}${openNamesH.length?`, open to ${list(openNamesH)}`:''}.`; judge=uneven?'The LLMs are treated differently, which is usually history rather than a plan. Decide whether the gaps are intended.':''; }
+  const REP={headline:head.replace(/<[^>]+>/g,''),judgement:(judge||'').replace(/<[^>]+>/g,'')};
+  { const rk=w=>w.includes('class="red"')?0:w.includes('class="amber"')?1:2; REP.checks=warn.slice().sort((a,b)=>rk(a)-rk(b)).map(w=>({call:rk(w)===0?'Almost certainly not intended':rk(w)===1?'Worth confirming':'FYI',text:w.replace(/<[^>]+>/g,'').trim()})); }
   items.unshift(`<li class="head"><b>${head}</b>${judge?`<span class="judge">${judge}</span>`:''}</li>`);
   $('#story').innerHTML=items.join('');
   const story=items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'')).join(' ');
@@ -626,11 +634,129 @@ function run(){
 $('#h1src').textContent=srcLabel()?' - '+srcLabel():'';
 document.querySelectorAll('details.langs').forEach(d=>d.addEventListener('toggle',()=>{ d.querySelector('summary').textContent=d.open?'Show less':'Show all '+d.dataset.n; }));
 $('#results').classList.remove('hidden');
-  LAST={generated:new Date().toISOString(),source:srcLabel()||null,verdict:items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'').replace(/<li class="st-[a-z]+">/g,' ').replace(/<[^>]+>/g,'').trim()),conclusion:'',zones:zoneDefs.map(z=>({label:z.label.long,paths:z.paths,byLLM:Object.fromEntries(z.at.map((x,i)=>[LLMS[i].name,x.state]))})).concat([{label:zoneDefs.length?'Everything else':'Whole site',paths:[],byLLM:Object.fromEntries(S.map((x,i)=>[LLMS[i].name,x.state]))}]),warnings:warn.map(w=>w.replace(/<[^>]+>/g,'')),llms:report,folders:matrix,others:oreport};
+  LAST={generated:new Date().toISOString(),source:srcLabel()||null,headline:REP.headline,judgement:REP.judgement,checks:(()=>{ const rk=w=>w.includes('class="red"')?0:w.includes('class="amber"')?1:2; return warn.slice().sort((a,b)=>rk(a)-rk(b)).map(w=>({call:rk(w)===0?'Almost certainly not intended':rk(w)===1?'Worth confirming':'FYI',text:w.replace(/<[^>]+>/g,'').trim()})); })(),verdict:items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'').replace(/<li class="st-[a-z]+">/g,' ').replace(/<[^>]+>/g,'').trim()),conclusion:'',zones:zoneDefs.map(z=>({label:z.label.long,paths:z.paths,byLLM:Object.fromEntries(z.at.map((x,i)=>[LLMS[i].name,x.state]))})).concat([{label:zoneDefs.length?'Everything else':'Whole site',paths:[],byLLM:Object.fromEntries(S.map((x,i)=>[LLMS[i].name,x.state]))}]),warnings:warn.map(w=>w.replace(/<[^>]+>/g,'')),llms:report,folders:matrix,others:oreport};
   $('#results').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 /* ---------- exports ---------- */
+/* ---------- narrative report (Download report) ---------- */
+function toReport(d){
+  const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const src=d.source||'';
+  const title='Robots.txt AI Visibility Report'+(src?' - '+src:'');
+  const when=new Date(d.generated).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const raw=$('#robots').value.replace(/\r/g,'');
+  const lines=raw.split('\n'); const snip=lines.slice(0,8).map(l=>l.length>110?l.slice(0,110)+'…':l).join('\n');
+  const headline=d.headline||(d.verdict[0]||''); const judge=d.judgement||'';
+  const rest=d.verdict.slice(1);
+  const cost=rest.find(v=>v.startsWith('What this costs you'))||'';
+  const folderLines=rest.filter(v=>!v.startsWith('What this costs you')&&!v.startsWith('Languages and regions'));
+  const langLine=rest.find(v=>v.startsWith('Languages and regions'))||'';
+  const vis={FULL:'green',REDUCED:'amber',NONE:'red','TRAIN ONLY':'red'};
+  const visWord={FULL:'Full',REDUCED:'Cite only',NONE:'Blocked','TRAIN ONLY':'Train only'};
+  const byName=Object.fromEntries(LLMS.map(l=>[l.name,l]));
+  const cell=v=>v==='n/a'?'<span class="mut">n/a</span>':/^DISALLOW/i.test(v)?'<span class="red">blocked</span>':'<span class="green">open</span>';
+  const llmRows=d.llms.map(r=>`<tr><td><b>${esc(r.llm)}</b><br><span class="mut">${esc(r.company)} · ${r.share}%</span></td><td>${cell(r.train)}</td><td>${cell(r.search)}</td><td>${cell(r.user)}</td><td><span class="${vis[r.visibility]||'mut'}"><b>${visWord[r.visibility]||r.visibility}</b></span></td></tr>`).join('');
+  /* findings */
+  const checks=d.checks||[];
+  const findings=checks.length?`<ol>${checks.map(c=>`<li><span class="${c.call==='Almost certainly not intended'?'red':c.call==='Worth confirming'?'amber':'sky'}"><b>${esc(c.call)}.</b></span> ${esc(c.text)}</li>`).join('')}</ol>`:'<p>Nothing in the file contradicts itself and no crawler is named twice. The findings are the visibility states above.</p>';
+  /* fixes, derived from the site default state and the checks */
+  const fixes=[];
+  d.llms.forEach(r=>{ const l=byName[r.llm]; if(!l) return;
+    if(r.visibility==='NONE'){
+      if(l.kind==='google') fixes.push(`<b>Gemini:</b> Google-Extended is one switch for training and grounding. To be cited in the Gemini app, remove the <code>Disallow: /</code> under <code>User-agent: Google-Extended</code>. There is no way to keep training closed and grounding open.`);
+      else if(l.kind==='bing') fixes.push(`<b>Copilot:</b> Copilot reads the Bing index, so open <code>Bingbot</code>. Blocking it also removes you from Bing Search.`);
+      else if(l.kind==='perplexity') fixes.push(`<b>Perplexity:</b> Allow <code>PerplexityBot</code> (and <code>Perplexity-User</code>). PerplexityBot is retrieval only, so this protects nothing on the training side.`);
+      else fixes.push(`<b>${esc(r.llm)}:</b> Open the search and user crawlers, <code>${esc(l.search)}</code> and <code>${esc(l.user)}</code>. Keep <code>${esc(l.train)}</code> blocked if training is the concern: That is the split that keeps citations without training.`);
+    } else if(r.visibility==='REDUCED'){
+      fixes.push(`<b>${esc(r.llm)}:</b> Already citable. The remaining choice is <code>${esc(l.train)}</code>: Leave it blocked if training is the concern, and accept that answers written from memory will not mention you; open it if reach matters more than the training exposure.`);
+    } else if(r.visibility==='TRAIN ONLY'){
+      fixes.push(`<b>${esc(r.llm)}:</b> The model can learn from the site but never link to it. Open <code>${esc(l.search)}</code> and <code>${esc(l.user)}</code> at once, or block <code>${esc(l.train)}</code> too. Nobody chooses this state on purpose.`);
+    }
+  });
+  checks.forEach(c=>{ const t=c.text;
+    if(/^Legacy agent/.test(t)) fixes.push(`<b>Legacy agents:</b> Delete the retired user agents named in the findings. They do nothing, and they suggest nobody has reviewed the file recently.`);
+    else if(/^Only some AI companies/.test(t)) fixes.push(`<b>Companies missing from the list:</b> Decide the policy first, then apply it to every company the same way. Either name every training crawler you want out, or open everything, so no LLM gets in only because nobody added it.`);
+    else if(/listed more than once/.test(t)) fixes.push(`<b>Duplicate groups:</b> Merge each crawler into one group and remove the contradicting lines, so every crawler reads the file the same way whether or not it follows the standard.`);
+    else if(/skip .* housekeeping/.test(t)) fixes.push(`<b>Housekeeping rules:</b> Copy the wildcard <code>Disallow</code> lines (logins, carts, search results, admin) into every named crawler group, because a named group does not inherit them.`);
+    else if(/is split inside/.test(t)) fixes.push(`<b>Folder splits:</b> Confirm the folders where one company is treated differently by role were meant to be cite-only. If not, align the training and search crawlers.`);
+    else if(/opened to|closed to some LLMs/.test(t)) fixes.push(`<b>Languages:</b> Apply the same rules to every language and region folder, or say in the file which markets are deliberately closed.`);
+  });
+  const fixHtml=fixes.length?`<ol>${[...new Set(fixes)].map(f=>`<li>${f}</li>`).join('')}</ol>`:'<p>No change needed on the AI visibility side. Every LLM on the list can learn from and link to the site.</p>';
+  const openAll=d.llms.every(r=>r.visibility==='FULL');
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0A;--surf:#141414;--surf2:#1C1C1C;--line:#2A2A2A;--text:#F5F5F3;--muted:#9C9C96;--coral:#FF8A70;--sky:#8ECDF8;--green:#5DD39E;--amber:#F5B841;--red:#FF6B6B}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:40px 24px 64px}
+.kicker{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:2.4px;color:var(--coral);font-weight:700;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Space Grotesk',sans-serif;font-size:32px;line-height:1.15;margin:0 0 6px}h1 span{color:var(--sky)}
+.meta{color:var(--muted);margin:0 0 28px}.meta a{color:var(--sky)}
+h2{font-family:'Space Grotesk',sans-serif;font-size:20px;margin:36px 0 10px;padding-top:18px;border-top:1px solid var(--line)}
+h2 small{display:block;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px}
+p{margin:8px 0}ul,ol{margin:8px 0;padding-left:22px}li{margin:6px 0}
+.tldr{background:var(--surf);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:12px;padding:16px 20px;margin:0 0 8px}
+.tldr b.h{font-family:'Space Grotesk',sans-serif;font-size:18px;display:block;margin-bottom:6px}
+.green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}.sky{color:var(--sky)}.mut{color:var(--muted)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:var(--surf2);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+pre{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-all;color:var(--text)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.tl{display:grid;grid-template-columns:120px 1fr;gap:6px 14px}.tl b{color:var(--sky);font-family:'Space Grotesk',sans-serif}
+.foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}.foot a{color:var(--sky)}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}@page{size:A4;margin:0}.wrap{padding:12mm 12mm 16mm;max-width:none}body{font-size:12px}h1{font-size:24px}h2{font-size:16px;break-after:avoid}li,tr,.tldr{break-inside:avoid}}
+</style></head><body><div class="wrap">
+<div class="kicker">Robots.txt for AI search · Audit report</div>
+<h1>Robots.txt AI Visibility Report${src?` <span>- ${esc(src)}</span>`:''}</h1>
+<p class="meta">${esc(when)} · Generated with the <a href="https://www.oritmutznik.com/wp-content/uploads/2026/09/robots-txt-ai-visibility-audit.html">Robots.txt AI Visibility Audit</a> by <a href="https://www.oritmutznik.com/">Orit Mutznik</a></p>
+
+<div class="tldr"><b class="h">${esc(headline)}</b>${judge?`<p>${esc(judge)}</p>`:''}${cost?`<p>${esc(cost)}</p>`:''}</div>
+
+<h2><small>1</small>What robots.txt is</h2>
+<p>A plain text file at the root of a website (<code>${esc(src||'yoursite.com')}/robots.txt</code>) that tells crawlers which parts of the site they may read. Each block names a crawler by its user agent and lists the paths it is allowed or disallowed. A crawler that is not named falls back to the general rules under <code>User-agent: *</code>.</p>
+<p>It is a set of directives, and nothing enforces them. The big search engines and AI companies say their crawlers follow it. Newer or less careful ones sometimes do not.</p>
+
+<h2><small>2</small>Why it matters for search</h2>
+<p>Googlebot and Bingbot decide what goes into the search index from this file. A wrong line here can remove a whole folder from Google and Bing overnight, and a blanket <code>Disallow: /</code> under <code>User-agent: *</code> removes the entire site. Search access is not the subject of this report, but every change below should be checked against it: Nothing here should touch Googlebot or Bingbot.</p>
+
+<h2><small>3</small>Why it matters for AI visibility</h2>
+<p>Most AI companies run separate crawlers for separate jobs. A <b>training crawler</b> collects content to train the model. A <b>search crawler</b> fetches pages for a live answer and earns the citation. A <b>user crawler</b> opens one page only when a person pastes its URL. Blocking one does not block the others, so a file can keep a model from training on the site while still letting it cite the site, or block the wrong one and lose the citations by accident.</p>
+<p>Two of the five do not split: Google-Extended is one switch for Gemini training and grounding, and Copilot has no crawler of its own because it reads the Bing index. The catch with training blocks is memory: Nectiv found ChatGPT runs a live web search on about 31% of prompts. The other 69% of the time the answer comes from what the model learned in training, and a site it never trained on does not exist there.</p>
+
+<h2><small>4</small>The situation${src?` for ${esc(src)}`:''}</h2>
+<ul>${folderLines.map(v=>`<li>${esc(v)}</li>`).join('')}${langLine?`<li>${esc(langLine)}</li>`:''}</ul>
+<table><thead><tr><th>LLM</th><th>Train</th><th>Search</th><th>User</th><th>AI visibility</th></tr></thead><tbody>${llmRows}</tbody></table>
+<p class="mut">Share is Similarweb's August 2026 share of visits to AI products, website visits only, there for scale. Blocked means the search crawler is blocked, so the LLM cannot cite the site, whatever the other columns say.</p>
+<p><b>The file, first ${Math.min(8,lines.length)} of ${lines.length} lines:</b></p><pre>${esc(snip)}</pre>
+
+<h2><small>5</small>Findings</h2>
+${findings}
+
+<h2><small>6</small>Fixes</h2>
+${openAll?'':`<p><b>Recommendation:</b> Open everything you want found. If specific folders must be protected, block those folders by path under the training crawlers only, and leave the search and user crawlers open everywhere else.</p>`}
+${fixHtml}
+
+<h2><small>7</small>Timeline</h2>
+<div class="tl">
+<b>This week</b><span>Fix anything marked "Almost certainly not intended": Retired agents, contradicting lines, crawlers that fell through to the default. These are edits, not decisions.</span>
+<b>Next 2 weeks</b><span>Decide the training policy per company with legal and editorial, then apply it the same way to every company. Write the decision at the top of the file as a comment so the next person knows it was deliberate.</span>
+<b>Month 1</b><span>Check the server logs for the crawlers you opened, and run 10 to 20 of your own questions through ChatGPT, Gemini, Claude and Perplexity to see whether the site is now cited.</span>
+<b>Every quarter</b><span>Re-run this audit. Companies add and rename crawlers, so check the list against <a href="https://knownagents.com/agents" class="sky">knownagents.com/agents</a> and add the new names to the file.</span>
+</div>
+
+<h2><small>8</small>Further recommendations</h2>
+<ul>
+<li>Check what sits in front of the file. A CDN or firewall rule can override everything above without a line in robots.txt. On Cloudflare, since 15 September 2026, Search, Training and Agent are set separately: Disallow AI Training keeps search and writes the no-training lines into robots.txt, while Block now stops Googlebot, Bingbot and Applebot too.</li>
+<li>Keep Googlebot and Bingbot open whatever you decide about AI. AI Overviews, AI Mode and Copilot all run off the search indexes.</li>
+<li>Skip llms.txt. Ahrefs found 97% of the files published receive no requests, and no major crawler asks for one.</li>
+<li>Give the file an owner. Most of the mess in these files comes from lines added by different people at different times with nobody deciding the whole.</li>
+<li>Measure before and after. Citation counts per LLM, from a tool or from your own prompt set, are the only way to know whether a change did anything.</li>
+</ul>
+
+<div class="foot">This report covers the AI visibility side of robots.txt only. It reads what the file asks for, not who turns up, and cannot see paywalls, firewalls or meta tags. Crawler names are from each company's documentation as of September 2026. It is a decision aid, not legal advice and not a substitute for an SEO, GEO or AEO consultation. Source: <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/">Can Publishers Block AI Training Without Losing AI Visibility?</a> by Orit Mutznik.</div>
+</div></body></html>`;
+}
+
 function toMd(d){
   const L=[`# Robots.txt AI Visibility Audit${d.source?' - '+d.source:''}`,`Generated ${d.generated.slice(0,10)}`,'','## The verdict','']; d.verdict.forEach(v=>L.push(`- ${v}`)); L.push('');
   L.push('## By folder','',`| Folder | ${d.llms.map(r=>r.llm).join(' | ')} |`,`|---|${d.llms.map(()=>'---').join('|')}|`); d.zones.forEach(z=>L.push(`| ${z.label} | ${d.llms.map(r=>z.byLLM[r.llm]).join(' | ')} |`)); L.push('');
@@ -923,17 +1049,20 @@ $('#dlmd').addEventListener('click',()=>LAST&&download(stamp()+'.md',toMd(LAST),
 $('#dlcsv').addEventListener('click',()=>LAST&&download(stamp()+'.csv',toCsv(LAST),'text/csv'));
 $('#dljson').addEventListener('click',()=>LAST&&download(stamp()+'.json',JSON.stringify(LAST,null,2),'application/json'));
 const TITLE0=document.title; window.addEventListener('beforeprint',()=>{ document.title=stamp(); }); window.addEventListener('afterprint',()=>{ document.title=TITLE0; });
+$('#howlink').addEventListener('click',()=>{ $('#fine').open=true; });
+$('#dlrep').addEventListener('click',()=>LAST&&download(stamp().replace('Visibility Audit','Visibility Report')+'.html',toReport(LAST),'text/html'));
 $('#print').addEventListener('click',()=>{ document.title=stamp(); setTimeout(()=>window.print(),30); });
 $('#totop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-[['xcopy','copy'],['xmd','dlmd'],['xcsv','dlcsv'],['xjson','dljson'],['xpng','dlpng'],['xpdf','print']].forEach(([a,b])=>$('#'+a).addEventListener('click',()=>$('#'+b).click()));
+[['xcopy','copy'],['xmd','dlmd'],['xcsv','dlcsv'],['xjson','dljson'],['xrep','dlrep'],['xpng','dlpng'],['xpdf','print']].forEach(([a,b])=>$('#'+a).addEventListener('click',()=>$('#'+b).click()));
 $('#dlpng').addEventListener('click',async()=>{ if(!LAST) return; const b=$('#dlpng'); b.textContent='Rendering, a few seconds'; b.disabled=true; $('#copied').textContent='';
+  const fineWas=$('#fine').open; $('#fine').open=true;
   try{ document.body.classList.add('shot'); window.scrollTo(0,0); await new Promise(r=>setTimeout(r,80));
     const bg=getComputedStyle(document.body).backgroundColor;
     const c=await html2canvas(document.body,{backgroundColor:bg,scale:2,useCORS:true,logging:false,scrollX:0,scrollY:0,windowWidth:document.documentElement.clientWidth});
     document.body.classList.remove('shot');
     await new Promise(res=>c.toBlob(bl=>{ const u=URL.createObjectURL(bl); const a=document.createElement('a'); a.download=stamp()+'.png'; a.href=u; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),5000); res(); },'image/png'));
   }catch(e){ document.body.classList.remove('shot'); $('#copied').textContent='PNG failed: '+(e&&e.message||e); }
-  b.textContent='Download PNG'; b.disabled=false; });
+  $('#fine').open=fineWas; b.textContent='Download PNG'; b.disabled=false; });
 </script>
 </body>
 </html>
