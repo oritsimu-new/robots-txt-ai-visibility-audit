@@ -358,7 +358,7 @@ const OTHERS = [
   { ua:'bedrockbot', who:'Amazon', type:'llm', job:'Retrieval for Bedrock', means:'Crawls URLs that Bedrock customers add to a knowledge base.' },
   { ua:'meta-externalagent', who:'Meta', type:'llm', job:'Training', means:'Trains Meta AI. Meta-ExternalFetcher is the user-triggered counterpart.' },
   { ua:'meta-webindexer', who:'Meta', type:'llm', job:'Search', means:'Retrieval index for Meta AI answers, split out from training in 2026.' },
-  { ua:'Meta-ExternalFetcher', who:'Meta', type:'llm', job:'User', means:'Fetches a page when someone asks Meta AI to read it.' },
+  { ua:'Meta-ExternalFetcher', who:'Meta', type:'llm', job:'User', means:'Fetches a page when someone asks Meta AI to read it. Meta\u2019s Muse agent (September 2026) browses sites as a user and does not announce itself with any Meta token, which is why Amazon blocked it at its anti-bot wall on 21 September 2026 rather than in robots.txt.' },
   { ua:'FacebookBot', who:'Meta', type:'llm', job:'Training', means:'Meta’s older crawler, used for speech and language model training.' },
   { ua:'MistralBot', who:'Mistral', type:'llm', job:'Training', means:'Collects data for Mistral’s models.' },
   { ua:'MistralAI-Index', who:'Mistral', type:'llm', job:'Search', means:'Retrieval index for Le Chat answers.' },
