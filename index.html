@@ -166,6 +166,14 @@ table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
 /* round 45: what-to-do disclaimer */
 .sumcard h2 .ast{color:var(--sky);font-size:13px;margin-left:3px;line-height:0;vertical-align:super} .disc{margin:10px 2px 0;font-family:var(--body);font-weight:400;font-size:12.5px;line-height:1.5;color:var(--muted)} .disc .ast{color:var(--sky);font-size:11px;margin-right:2px}
 @media print{.disc{font-size:10px;margin-top:6px}}
+
+/* round 46: letters and notes in the tiles, legend under them */
+.tile .st .tsu{margin-left:6px} .tile .st .tsu i{width:20px;height:20px;font-size:10.5px} .tile .note{color:var(--muted);font-family:var(--body);font-size:12px;line-height:1.45;margin-top:6px} .legend{margin:-8px 0 10px;color:var(--muted);font-size:12.5px;line-height:1.5} .legend b{color:var(--text)} body.shot .legend{display:block} #p-llms{display:none!important} .tile .st{flex-wrap:wrap;row-gap:4px} .tile .flag{white-space:nowrap}
+@media print{.legend{font-size:9.5px;margin:-4px 0 6px} .tile .st .tsu i{width:14px;height:14px;font-size:8px} .tile .note{font-size:8.5px}}
+
+/* round 48: folder-group table */
+.zh{font-family:var(--disp);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);margin:0 0 6px;font-weight:700} #zgt td.grp{font-family:var(--body);font-size:13.5px;color:var(--text);white-space:nowrap} #zgt td.grp a{color:var(--sky);font-size:12px} #zgt .cell{display:flex;flex-direction:column;align-items:flex-start;gap:5px} #zgt td{vertical-align:top;padding:9px 8px}
+@media print{.zh{font-size:10px} #zgt td.grp{font-size:10px} #zgt .cell{gap:2px}}
 </style>
 </head>
 <body>
@@ -199,11 +207,11 @@ Allow: /"></textarea>
       <div class="vtop"><div class="vhead"><div class="kicker">The verdict</div><div id="headline"></div></div><div class="export" id="xwrap"><button type="button" id="xbtn" aria-haspopup="menu" aria-expanded="false">Export <span aria-hidden="true">&#9662;</span></button><div class="xtop menu" id="xmenu" hidden><span class="xl">Export</span><button id="xcopy">Copy as markdown</button><button id="xmd">.md</button><button id="xcsv">.csv</button><button id="xjson">.json</button><button id="xrep">Report</button><button id="xpng">PNG</button><button id="xpdf">PDF</button></div></div></div>
       <div class="snip" id="snip"></div>
       <div class="tiles" id="tiles"></div>
+      <p class="legend" id="legend"><b>T</b> train · <b>S</b> search and cite · <b>U</b> open on request, green allowed, red blocked. Blocked means the search crawler is blocked, so the LLM cannot cite you whatever the other letters say, and Cite only means training is blocked while search is open. A letter is left out where the LLM has no crawler for that job.</p>
       <p class="guide" id="guide"><span class="arrow" aria-hidden="true">&#8595;</span> That is the short answer. The full audit sits in the tabs below: Start with <b>Summary</b> for the cost and the fixes, then <b>Worth checking</b> for the things to confirm. The rest is reference.</p>
       <div class="tabs" role="tablist" aria-label="Audit sections" id="tabs">
         <button class="tab" role="tab" aria-selected="true" aria-controls="p-summary" id="t-summary" type="button">Summary</button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="p-checks" id="t-checks" type="button">Worth checking<span class="c" id="c-checks"></span></button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="p-llms" id="t-llms" type="button">The 5 LLMs<span class="c">crawler by crawler</span></button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="p-others" id="t-others" type="button">Other crawlers<span class="c" id="c-others"></span></button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="p-folders" id="t-folders" type="button">Folders<span class="c" id="c-folders"></span></button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="p-file" id="t-file" type="button">Your file<span class="c" id="c-file"></span></button>
@@ -214,16 +222,14 @@ Allow: /"></textarea>
       <div class="two"><div class="card sumcard" id="costs" style="--accent:var(--amber)"><h2>What this costs you</h2><div id="costsbody"></div></div><div class="card sumcard" id="todo" style="--accent:var(--green)"><h2>What to do<sup class="ast">*</sup></h2><ol id="fixes"></ol></div></div>
       <p class="disc" id="disc"><sup class="ast">*</sup> These are suggestions: Confirm them against the business and its IP goals before changing anything, because every site is different. To test a change, edit the robots.txt and paste it here again, it does not need to be live first.</p>
       </section>
-      <section class="pane" id="p-llms" role="tabpanel" aria-labelledby="t-llms" data-title="The 5 LLMs, crawler by crawler" hidden>
-      <div class="cards" id="cards"></div>
-      <p class="hint" style="margin-top:10px"><b style="color:var(--text)">T</b> train · <b style="color:var(--text)">S</b> search and cite · <b style="color:var(--text)">U</b> open on request. BLOCKED means the search crawler is blocked, so the LLM cannot cite you, whatever the other letters say. CITE ONLY means the training crawler is blocked and the search crawler is open. A letter is left out where that LLM has no crawler for the job (Gemini has one switch for training and grounding, Perplexity does not train).</p>
-      </section>
+      <div id="p-llms" hidden><div class="cards" id="cards"></div></div>
       <section class="pane" id="p-checks" role="tabpanel" aria-labelledby="t-checks" data-title="Worth checking" hidden>
       <div class="card" id="warnwrap" style="--accent:var(--amber);margin-top:0"><h2 style="font-size:15px;margin:0" id="warnhead">Worth checking</h2><p class="hint" style="margin:2px 0 0">Each line ends with a call: Almost certainly not intended, worth confirming, or FYI.</p><ol class="warn" id="warn" style="margin-top:8px"></ol></div>
       </section>
       <section class="pane" id="p-folders" role="tabpanel" aria-labelledby="t-folders" data-title="Folders the file treats differently" hidden>
     <div class="section card" style="--accent:var(--sky);margin-top:0" id="mwrap">
       <h2>Folders the file treats differently</h2>
+      <div id="zgroups" hidden><p class="zh">By folder group</p><p class="hint" style="margin:0 0 6px">The paths the file treats alike, grouped, with each LLM's verdict and letters for that group. This is the view the tiles link to.</p><div class="tblwrap"><table class="matrix zg" id="zgt"><thead></thead><tbody></tbody></table></div><p class="zh" style="margin-top:18px">Path by path</p></div>
       <p class="hint" style="margin:0 0 6px">One row per path that behaves differently from the site default, most restrictive first, and what each LLM's crawlers can do there. <b style="color:var(--text)">T</b> train, <b style="color:var(--text)">S</b> search and cite, <b style="color:var(--text)">U</b> open on request. Green allowed, red blocked. A letter is left out where that LLM has no crawler for the job.</p>
       <div id="matrixmore" class="tog"></div>
       <div class="tblwrap"><table class="matrix" id="matrix"><thead></thead><tbody></tbody></table></div>
@@ -257,7 +263,7 @@ Allow: /"></textarea>
   </div>
 
   <div class="foot" id="how">
-    <p class="scope"><b>Scope:</b> This audits the AI visibility side of robots.txt only, the 5 LLMs and the crawlers behind them. For syntax errors, Googlebot and Bingbot access, sitemap lines or anything else about search engine crawling, use <a href="https://support.google.com/webmasters/answer/6062598" target="_blank" rel="noopener">Google Search Console's robots.txt report</a>, <a href="https://www.bing.com/webmasters/" target="_blank" rel="noopener">Bing Webmaster Tools</a>, <a href="https://technicalseo.com/tools/robots-txt/" target="_blank" rel="noopener">TechnicalSEO.com's robots.txt tester</a> or <a href="https://www.screamingfrog.co.uk/seo-spider/" target="_blank" rel="noopener">Screaming Frog</a>.</p>
+    <p class="scope"><b>Scope:</b> This audits the AI visibility side of robots.txt only. For syntax errors, Googlebot and Bingbot access, sitemap lines or anything else about search engine crawling, use <a href="https://support.google.com/webmasters/answer/6062598" target="_blank" rel="noopener">Google Search Console's robots.txt report</a>, <a href="https://www.bing.com/webmasters/" target="_blank" rel="noopener">Bing Webmaster Tools</a>, <a href="https://technicalseo.com/tools/robots-txt/" target="_blank" rel="noopener">TechnicalSEO.com's robots.txt tester</a> or <a href="https://www.screamingfrog.co.uk/seo-spider/" target="_blank" rel="noopener">Screaming Frog</a>.</p>
     <details class="fine" id="fine"><summary>How it works and what it cannot tell you</summary>
 
     <h3 class="fh">How it reads your file:</h3>
@@ -564,6 +570,14 @@ function run(){
     const rowsX=zoneDefs.map(z=>z.at[i]).concat([d]);
     return `<div class="lc" style="--accent:${accent}"><h3>${l.name}<small>${l.company} · ${l.share}% of AI product web visits</small></h3><ul class="zones">${rowsZ.map((r,k)=>`<li><span class="z"><b>${r.label.b}</b>${r.label.s?`<a href="#zone-${k}" data-zone="${k}">${r.label.s}</a>`:''}</span><span class="r">${stPill(r.st)}${tsu(rowsX[k])}</span></li>`).join('')}</ul><div class="bots">${d.bots}</div></div>`; }).join('');
   document.querySelectorAll('#cards a[data-zone]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const d=document.getElementById('zone-'+a.dataset.zone); if(d){ d.open=true; d.scrollIntoView({behavior:'smooth',block:'center'}); } }));
+  /* folder-group table in the Folders tab */
+  { const zg=$('#zgroups'); if(zoneDefs.length){ zg.hidden=false;
+      const tsuG=(l,x)=>{ const b=(v,ch,job)=>v===null?'':`<i class="${v?'y':'n'}" title="${job}: ${v?'allowed':'blocked'}">${ch}</i>`; const sv=l.kind==='perplexity'||l.kind==='split'?x.s.allow:x.t.allow; return `<span class="tsu">${b(x.t.allow,'T','train')}${b(sv,'S','search and cite')}${b(x.u.allow,'U','open on request')}</span>`; };
+      const rows=zoneDefs.map((z,k)=>({label:z.label,k,cells:LLMS.map((l,i)=>[z.at[i].state,z.at[i],l])})).concat([{label:restLabel,k:null,cells:LLMS.map((l,i)=>[S[i].state,S[i],l])}]);
+      $('#zgt thead').innerHTML=`<tr><th>Folder group</th>${LLMS.map(l=>`<th>${l.name}</th>`).join('')}</tr>`;
+      $('#zgt tbody').innerHTML=rows.map(r=>`<tr><td class="grp"><b>${r.label.b}</b>${r.label.s?`<br><a href="#zone-${r.k}" data-zone="${r.k}">${r.label.s}</a>`:''}</td>${r.cells.map(([st,x,l])=>`<td><div class="cell">${stPill(st)}${tsuG(l,x)}</div></td>`).join('')}</tr>`).join('');
+      document.querySelectorAll('#zgt a[data-zone]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); showTab('p-summary'); const d=document.getElementById('zone-'+a.dataset.zone); if(d){ d.open=true; d.scrollIntoView({behavior:'smooth',block:'center'}); } }));
+    } else { zg.hidden=true; $('#zgt tbody').innerHTML=''; } }
 
   /* one sentence, built from the zones */
   const phrase={full:'open to',reduced:'citable but not trained on for',none:'blocked to',training:'trained on but never cited by'};
@@ -729,7 +743,7 @@ $('#results').classList.remove('hidden');
   afterCheck();
   $('#results').scrollIntoView({behavior:'smooth',block:'start'});
 }
-const TAB_IDS=['p-summary','p-checks','p-llms','p-others','p-folders','p-file'];
+const TAB_IDS=['p-summary','p-checks','p-others','p-folders','p-file'];
 function showTab(id){ document.querySelectorAll('#tabs [role=tab]').forEach(t=>t.setAttribute('aria-selected', t.getAttribute('aria-controls')===id?'true':'false')); TAB_IDS.forEach(p=>{ const el=document.getElementById(p); if(el) el.hidden=(p!==id); }); }
 function afterCheck(){
   if(!LAST) return;
@@ -753,9 +767,13 @@ function afterCheck(){
     const parts=[]; if(blocked.length) parts.push(`<i>blocked</i> ${blocked.join(', ')}`); const opn=open.concat(never); if(opn.length) parts.push(`<i>open</i> ${opn.join(', ')}${(!open.length&&never.length&&!blocked.length)?' <i>(never named)</i>':''}`);
     const flag=new RegExp('\\b'+r.llm+'\\b').test(leakText)&&/not intended/i.test(leakText.split('|').find(t=>new RegExp('\\b'+r.llm+'\\b').test(t))||'')?`<span class="flag"><a href="#warn-companies" data-tab="p-checks">Not intended?</a></span>`:'';
     const differs=otherZones.filter(z=>z.byLLM[r.llm]!==restZone.byLLM[r.llm]).length;
-    const zn=differs?`<div class="zn"><a href="#p-llms" data-tab="p-llms">Differs on ${differs} folder group${differs>1?'s':''}</a></div>`:'';
-    return `<div class="tile" style="--state:${COL[v]||'var(--muted)'}"><p class="nm">${r.llm}</p><div class="st"><span class="dot"></span>${WORD[v]||v}${flag}</div><div class="sh">${r.share}% of visits to AI products</div><div class="bots">${parts.join(' · ')}</div>${zn}</div>`; }).join('');
-  document.querySelectorAll('#tiles a[data-tab]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); showTab(a.dataset.tab); const t=document.querySelector(a.getAttribute('href')); if(t&&a.getAttribute('href')!=='#p-llms') t.scrollIntoView({behavior:'smooth',block:'center'}); else $('#tabs').scrollIntoView({behavior:'smooth',block:'start'}); }));
+    const zn=differs?`<div class="zn"><a href="#p-folders" data-tab="p-folders">Differs on ${differs} folder group${differs>1?'s':''}, see Folders</a></div>`:'';
+    const lt=(cell,ch,job)=>{ if(!cell||cell==='n/a') return ''; const ok=!/^DISALLOW/i.test(cell); return `<i class="${ok?'y':'n'}" title="${job}: ${ok?'allowed':'blocked'}">${ch}</i>`; };
+    const tsu=`<span class="tsu">${lt(r.train,'T','train')}${lt(r.search,'S','search and cite')}${lt(r.user,'U','open on request')}</span>`;
+    const NOTE={google:'One switch: Google-Extended covers training and Gemini grounding, Googlebot stays separate.',bing:'No crawler of its own: Open unless you block Bingbot, which is Bing Search too.',perplexity:'No training crawler: PerplexityBot retrieves, Perplexity-User opens on request.'};
+    const note=NOTE[l.kind]?`<div class="note">${NOTE[l.kind]}</div>`:'';
+    return `<div class="tile" style="--state:${COL[v]||'var(--muted)'}"><p class="nm">${r.llm}</p><div class="st"><span class="dot"></span>${WORD[v]||v}${tsu}${flag}</div><div class="sh">${r.share}% of visits to AI products</div><div class="bots">${parts.join(' · ')}</div>${note}${zn}</div>`; }).join('');
+  document.querySelectorAll('#tiles a[data-tab]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); showTab(a.dataset.tab); const t=document.querySelector(a.getAttribute('href')); if(t&&!/^#p-/.test(a.getAttribute('href'))) t.scrollIntoView({behavior:'smooth',block:'center'}); else $('#tabs').scrollIntoView({behavior:'smooth',block:'start'}); }));
   /* counts on the tabs */
   const nChecks=document.querySelectorAll('#warn li').length; $('#c-checks').textContent=nChecks?String(nChecks):'0';
   const nBlockedOthers=[...document.querySelectorAll('#others tbody tr')].filter(tr=>/DISALLOW/.test(tr.textContent)).length; $('#c-others').textContent=`${OTHERS.length} · ${nBlockedOthers} blocked`;
