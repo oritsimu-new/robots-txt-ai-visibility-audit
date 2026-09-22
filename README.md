@@ -10,7 +10,7 @@ Built from [Can Publishers Block AI Training Without Losing AI Visibility? Robot
 
 1. Try the 4 example buttons first: **Publisher example** (the file the article is built on), **Multiple blocked folders example** (an anonymised B2B research publisher that blocks everything, then opens named folders), **Fully open example** (an anonymised UK gaming site) and **Fallback example** (illustrative, not a real site: what to do if you must protect specific folders, the site open and two folders closed to training crawlers only. The recommendation is still to open everything).
 2. Open `yoursite.com/robots.txt`, copy the contents, paste them in and press **Check**. Browsers cannot read another site's robots.txt directly, so there is no URL fetch. Hit **Clear** to paste a new file, or simply paste over it and hit Check again.
-3. Read "Worth checking" last. Every line ends with a call: Almost certainly not intended, worth confirming or FYI.
+3. The result is one screen: The verdict headline, one tile per LLM (open, cite only or blocked, and which crawler decided it) and tabs underneath: Summary (three cards: the short version, what it costs you and what to do, with a note that the fixes are suggestions to confirm with the business before anything changes, and that an edited file can be pasted again to test it before it goes live), Worth checking (every line ends with a call: Almost certainly not intended, worth confirming or FYI), The 5 LLMs (one card per LLM, crawler by crawler, folder by folder), Other crawlers, Folders, Your file (with the lines Worth checking points at highlighted) and How it works.
 
 Nothing you paste is retained or shared, not even for learning purposes. There is no server and no tracking: The file is read in your browser and goes nowhere else.
 
@@ -20,7 +20,7 @@ Nothing you paste is retained or shared, not even for learning purposes. There i
 - Every training, search and user crawler each one documents, evaluated per [RFC 9309](https://www.rfc-editor.org/rfc/rfc9309) (exact user-agent match, several groups for one agent merged, then `*`, longest rule wins, Allow wins a tie)
 - A headline that names the shape of the file (allowlist, blocklist, middle path, open, shut) and a one-line judgement on it
 - A verdict in bullets: Which LLMs can train on and cite your pages, which can only cite them and which are blocked, folder by folder when the file treats folders differently, then what that costs you in plain words
-- One card per LLM with a pill per folder group and a green or red letter for each crawler it runs (train, search, user)
+- One tile per LLM on the first screen and one card per LLM under The 5 LLMs tab, with a pill per folder group and a green or red letter for each crawler it runs (train, search, user)
 - A "Worth checking" list: Conflicting rules for the same crawler and path with line numbers, crawlers listed more than once, named crawlers that skip the wildcard housekeeping, one LLM split by role inside a folder, only some AI companies on the list, legacy agents
 - A "Languages and regions" line when the file names at least two language or region folders (or one with a region code): Which languages are open to which LLMs, plus a check when only some languages are opened
 - A table of every path the file treats differently from the site default, most restrictive first
