@@ -19,7 +19,62 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.55}
 a{color:var(--sky)}
-body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .snip{display:none;margin:0 0 18px;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px} .snip .sk{font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px} .snip pre{margin:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--text);white-space:pre-wrap;word-break:break-all} .snip .more{color:var(--muted);font-size:12px;margin-top:8px} body.shot .snip{display:block} .xtop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px} .xtop .xl{color:var(--muted);font-size:11px;font-family:var(--disp);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-right:4px} .xtop button{padding:6px 12px;font-size:12px} body.shot .xtop{display:none} #exports button,.xtop button{background:transparent;border-color:var(--text);color:var(--text)} #exports button:hover,.xtop button:hover{background:var(--surf2)} .foot .totop{margin:22px 0 0} body.shot .totop{display:none} #h1src:empty{display:none} #h1src{color:var(--sky)} .warn .st-full{color:var(--green);font-weight:600} .warn .st-none{color:var(--red);font-weight:600} .warn .st-reduced{color:var(--amber);font-weight:600} .story details.langs{display:block;margin:4px 0 0;font-family:var(--body);font-weight:400;font-size:13px} .story details.langs summary{color:var(--sky);cursor:pointer;list-style:none;font-weight:600} .story details.langs[open]{display:block;margin:6px 0 0} .story details.langs .plist code{white-space:normal;font-family:var(--body);font-size:12px} .story li.leak a.warnlink{color:var(--red);font-weight:700;text-decoration:underline} .story li.leak a.fyilink{color:var(--sky);font-weight:700;text-decoration:underline} #warn-copilot{scroll-margin-top:16px} #warn-companies{scroll-margin-top:16px} .foot .scope{margin:0 0 12px;color:var(--muted)} .foot .scope b{color:var(--text)} .foot details.fine>summary{cursor:pointer;color:var(--sky);font-family:var(--disp);font-weight:700;font-size:14px;list-style:none;margin-bottom:6px} .foot details.fine>summary::before{content:'+ ';} .foot details.fine[open]>summary::before{content:'\2212  ';} .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
+body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:none!important} body.shot details:not([open])>*:not(summary){display:none!important} .snip{display:none;margin:0 0 18px;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px} .snip .sk{font-family:var(--disp);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px} .snip pre{margin:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--text);white-space:pre-wrap;word-break:break-all} .snip .more{color:var(--muted);font-size:12px;margin-top:8px} body.shot .snip{display:block} .xtop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px} .xtop .xl{color:var(--muted);font-size:11px;font-family:var(--disp);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-right:4px} .xtop button{padding:6px 12px;font-size:12px} body.shot .xtop{display:none} #exports button,.xtop button{background:transparent;border-color:var(--text);color:var(--text)} #exports button:hover,.xtop button:hover{background:var(--surf2)} .foot .totop{margin:22px 0 0} body.shot .totop{display:none} #h1src:empty{display:none} #h1src{color:var(--sky)} .warn .st-full{color:var(--green);font-weight:600} .warn .st-none{color:var(--red);font-weight:600} .warn .st-reduced{color:var(--amber);font-weight:600} .story details.langs{display:block;margin:4px 0 0;font-family:var(--body);font-weight:400;font-size:13px} .story details.langs summary{color:var(--sky);cursor:pointer;list-style:none;font-weight:600} .story details.langs[open]{display:block;margin:6px 0 0} .story details.langs .plist code{white-space:normal;font-family:var(--body);font-size:12px} .story li.leak a.warnlink{color:var(--red);font-weight:700;text-decoration:underline} .story li.leak a.fyilink{color:var(--sky);font-weight:700;text-decoration:underline} #warn-copilot{scroll-margin-top:16px} #warn-companies{scroll-margin-top:16px} .foot .scope{margin:0 0 12px;color:var(--muted)} .foot .scope b{color:var(--text)} .foot details.fine>summary{cursor:pointer;color:var(--sky);font-family:var(--disp);font-weight:700;font-size:14px;list-style:none;margin-bottom:6px} .foot details.fine>summary::before{content:'+ ';} .foot details.fine[open]>summary::before{content:'\2212  ';} .vtop{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:6px}
+.vhead{flex:1;min-width:0}
+#headline{font-family:var(--disp);font-size:24px;line-height:1.2;font-weight:700;margin:2px 0 4px}
+#headline .judge{display:block;font-family:var(--body);font-weight:400;font-size:15px;color:var(--muted);margin-top:4px}
+.export{position:relative;flex:none}
+#xbtn{background:transparent;border:1px solid var(--sky);color:var(--sky);border-radius:999px;padding:7px 14px;font:600 13px var(--body);cursor:pointer}
+.xtop.menu{position:absolute;right:0;top:calc(100% + 6px);min-width:230px;background:#1A1A1A;border:1px solid #333;border-radius:10px;padding:6px;z-index:5;box-shadow:0 12px 30px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:2px;margin:0}
+.xtop.menu .xl{display:none}
+.xtop.menu button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:6px;color:var(--text);font:500 14px var(--body);padding:8px 10px;cursor:pointer}
+.xtop.menu button:hover{background:#242424}
+.xtop.menu[hidden]{display:none}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0 20px}
+.tile{background:var(--surf);border:1px solid var(--line);border-top:3px solid var(--state);border-radius:10px;padding:14px 16px 12px}
+.tile .nm{font-family:var(--disp);font-size:20px;font-weight:700;color:var(--text);margin:0 0 8px;letter-spacing:-.01em}
+.tile .st{font-weight:700;display:flex;align-items:center;gap:8px}
+.tile .st .dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--state)}
+.tile .st .flag{color:var(--red);font-size:12px;margin-left:auto;font-weight:700}
+.tile .st .flag a{color:var(--red)}
+.tile .sh{color:var(--muted);font-size:12.5px;margin-top:8px}
+.tile .bots{color:#6B6B66;font:12px ui-monospace,Menlo,Consolas,monospace;margin-top:6px;line-height:1.45}
+.tile .bots i{font-style:normal;color:var(--muted)}
+.tile .zn{margin-top:6px;font-size:12px}
+.tile .zn a{color:var(--sky)}
+.guide{margin:0 0 10px;color:var(--muted);font-size:13.5px}
+.guide b{color:var(--text);font-weight:600}
+.guide .arrow{color:var(--sky);margin-right:6px}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;margin-bottom:4px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:10px 14px;color:var(--muted);font:600 14px var(--body);cursor:pointer;white-space:nowrap;border-radius:0}
+.tab .c{color:#6B6B66;font-weight:400;margin-left:5px}
+.tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--sky)}
+.tab:hover{color:var(--text);background:none}
+.pane{padding-top:18px}
+.pane[hidden]{display:none}
+.pane>.section.card{margin-top:0}
+.panel{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:14px}
+.panel .h3{font-family:var(--disp);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+#fixes{margin:0;padding-left:22px}
+#fixes li{margin:8px 0}
+#fixes li b{color:var(--sky)}
+#fixes code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:var(--muted)}
+.filev{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:14px 0;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto}
+.filev .ln{display:grid;grid-template-columns:48px 1fr;padding:0 14px;white-space:pre}
+.filev .ln .n{color:#6B6B66;text-align:right;padding-right:14px;user-select:none}
+.filev .ln.flag{background:rgba(245,184,65,.08)}
+.filev .ln.flag .c{color:var(--amber)}
+#filenote{margin:10px 0 0}
+#exports[hidden]{display:none}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}.vtop{flex-direction:column}}
+@media (max-width:480px){.tiles{grid-template-columns:1fr}}
+body.shot .tabs,body.shot .guide,body.shot .export{display:none!important}
+body.shot .pane{display:block!important;padding-top:14px}
+body.shot .pane::before,body.print .pane::before{content:attr(data-title);display:block;font-family:var(--disp);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin:0 0 8px}
+body.shot #p-summary::before{display:none}
+body.shot #p-file{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 20px 64px}
 h1,h2{font-family:var(--disp);margin:0}
 h1{font-size:clamp(26px,4vw,36px);line-height:1.15;font-weight:700}
 h2{font-size:18px;font-weight:700;margin-bottom:8px}
@@ -98,7 +153,7 @@ details.card>summary{cursor:pointer;list-style:none;font-family:var(--disp);font
 .warn{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px} .warn li{margin:6px 0} .warn b{color:var(--text)} .warn .tag{font-style:normal;font-family:var(--disp);font-weight:700;font-size:12px;color:var(--sky)} .warn .tag.red{color:var(--red)} .warn .tag.amber{color:var(--amber)} .warn code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--text)} .warn li.red b{color:var(--red)} .warn li.amber b{color:var(--amber)}
 table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
 .tog{margin:8px 0 2px} .tog a.toggle{color:var(--sky);font-size:13px;font-weight:600;text-decoration:none} .tog a.end{display:inline} #matrixend,#othersend{margin-top:6px}
-@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} @page{size:A4;margin:0} body{background:var(--bg)!important;color:var(--text)!important;font-size:12px} .wrap{padding:9mm 9mm 12mm;max-width:none} .card::before{display:none} button,.byline,textarea,.instr,#copied,#paste,#exports,.xtop,.lede,.totop{display:none!important} .kicker{margin-bottom:4px} h1{font-size:22px} .snip{display:block!important;margin:8px 0 10px;padding:8px 12px} .snip pre{font-size:9.5px;line-height:1.35} .snip .sk{font-size:9.5px;margin-bottom:4px} .snip .more{font-size:10px;margin-top:4px} .section{margin-top:12px} .story{font-size:12.5px;margin:0 0 8px;line-height:1.3} .story li{margin:3px 0} .story ul{margin:2px 0} .hint{font-size:10.5px} .cards{grid-template-columns:repeat(5,1fr)!important;gap:6px;break-inside:avoid} .lc{padding:8px 9px;break-inside:avoid} .lc h3{font-size:12px} .lc h3 small{font-size:9px} .lc .zones{margin-top:6px} .lc .zones li{padding:3px 0;font-size:10px;gap:2px;flex-direction:column;align-items:flex-start} .lc .zones li .z a{display:none} .lc .zones li .r{flex-direction:row;align-items:center;gap:4px} .lc .zones li .z b{font-size:10px} .lc .zones li .z code{font-size:9px} .lc .pill{padding:2px 6px;font-size:8px} .lc .tsu i{width:14px;height:14px;font-size:8px} .lc .bots{font-size:8.5px;margin-top:6px;line-height:1.35} .foot{break-before:auto;margin-top:16px;padding-top:12px} .foot h3.fh{break-after:avoid} .foot li{break-inside:avoid} details{display:block} details>*{display:block} details summary{list-style:none} details.fine>summary{display:none}}
+@media print{.tabs,.guide,.export,#p-file{display:none!important} .pane{display:block!important;padding-top:10px} .pane::before{content:attr(data-title);display:block;font-family:var(--disp);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin:0 0 4px} #p-summary::before{display:none} .tiles{grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0 10px} .tile{padding:8px 10px} .tile .nm{font-size:13px} .tile .bots{font-size:8.5px} .tile .sh{font-size:9px} #headline{font-size:16px} #headline .judge{font-size:11px} *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} @page{size:A4;margin:0} body{background:var(--bg)!important;color:var(--text)!important;font-size:12px} .wrap{padding:9mm 9mm 12mm;max-width:none} .card::before{display:none} button,.byline,textarea,.instr,#copied,#paste,#exports,.xtop,.lede,.totop{display:none!important} .kicker{margin-bottom:4px} h1{font-size:22px} .snip{display:block!important;margin:8px 0 10px;padding:8px 12px} .snip pre{font-size:9.5px;line-height:1.35} .snip .sk{font-size:9.5px;margin-bottom:4px} .snip .more{font-size:10px;margin-top:4px} .section{margin-top:12px} .story{font-size:12.5px;margin:0 0 8px;line-height:1.3} .story li{margin:3px 0} .story ul{margin:2px 0} .hint{font-size:10.5px} .cards{grid-template-columns:repeat(5,1fr)!important;gap:6px;break-inside:avoid} .lc{padding:8px 9px;break-inside:avoid} .lc h3{font-size:12px} .lc h3 small{font-size:9px} .lc .zones{margin-top:6px} .lc .zones li{padding:3px 0;font-size:10px;gap:2px;flex-direction:column;align-items:flex-start} .lc .zones li .z a{display:none} .lc .zones li .r{flex-direction:row;align-items:center;gap:4px} .lc .zones li .z b{font-size:10px} .lc .zones li .z code{font-size:9px} .lc .pill{padding:2px 6px;font-size:8px} .lc .tsu i{width:14px;height:14px;font-size:8px} .lc .bots{font-size:8.5px;margin-top:6px;line-height:1.35} .foot{break-before:auto;margin-top:16px;padding-top:12px} .foot h3.fh{break-after:avoid} .foot li{break-inside:avoid} details{display:block} details>*{display:block} details summary{list-style:none} details.fine>summary{display:none}}
 </style>
 </head>
 <body>
@@ -129,32 +184,52 @@ Allow: /"></textarea>
 
   <div id="results" class="hidden">
     <div class="section">
-      <div class="xtop"><span class="xl">Export</span><button id="xcopy">Copy as markdown</button><button id="xmd">.md</button><button id="xcsv">.csv</button><button id="xjson">.json</button><button id="xrep">Report</button><button id="xpng">PNG</button><button id="xpdf">PDF</button></div>
+      <div class="vtop"><div class="vhead"><div class="kicker">The verdict</div><div id="headline"></div></div><div class="export" id="xwrap"><button type="button" id="xbtn" aria-haspopup="menu" aria-expanded="false">Export <span aria-hidden="true">&#9662;</span></button><div class="xtop menu" id="xmenu" hidden><span class="xl">Export</span><button id="xcopy">Copy as markdown</button><button id="xmd">.md</button><button id="xcsv">.csv</button><button id="xjson">.json</button><button id="xrep">Report</button><button id="xpng">PNG</button><button id="xpdf">PDF</button></div></div></div>
       <div class="snip" id="snip"></div>
-      <div class="kicker">The verdict</div>
+      <div class="tiles" id="tiles"></div>
+      <p class="guide" id="guide"><span class="arrow" aria-hidden="true">&#8595;</span> That is the short answer. The full audit sits in the tabs below: Start with <b>Summary</b> for the cost and the fixes, then <b>Worth checking</b> for the things to confirm. The rest is reference.</p>
+      <div class="tabs" role="tablist" aria-label="Audit sections" id="tabs">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="p-summary" id="t-summary" type="button">Summary</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-checks" id="t-checks" type="button">Worth checking<span class="c" id="c-checks"></span></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-llms" id="t-llms" type="button">The 5 LLMs<span class="c">crawler by crawler</span></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-others" id="t-others" type="button">Other crawlers<span class="c" id="c-others"></span></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-folders" id="t-folders" type="button">Folders<span class="c" id="c-folders"></span></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-file" id="t-file" type="button">Your file<span class="c" id="c-file"></span></button>
+        <button class="tab" role="tab" aria-selected="false" id="t-how" type="button">How it works</button>
+      </div>
+      <section class="pane" id="p-summary" role="tabpanel" aria-labelledby="t-summary" data-title="Summary">
       <ul class="story" id="story"></ul>
+      <div class="panel" id="todo"><p class="h3">What to do</p><ol id="fixes"></ol></div>
+      </section>
+      <section class="pane" id="p-llms" role="tabpanel" aria-labelledby="t-llms" data-title="The 5 LLMs, crawler by crawler" hidden>
       <div class="cards" id="cards"></div>
       <p class="hint" style="margin-top:10px"><b style="color:var(--text)">T</b> train · <b style="color:var(--text)">S</b> search and cite · <b style="color:var(--text)">U</b> open on request. BLOCKED means the search crawler is blocked, so the LLM cannot cite you, whatever the other letters say. CITE ONLY means the training crawler is blocked and the search crawler is open. A letter is left out where that LLM has no crawler for the job (Gemini has one switch for training and grounding, Perplexity does not train).</p>
-      <div class="card" id="warnwrap" style="--accent:var(--amber);margin-top:16px"><h2 style="font-size:15px;margin:0" id="warnhead">Worth checking</h2><p class="hint" style="margin:2px 0 0">Each line ends with a call: Almost certainly not intended, worth confirming, or FYI.</p><ol class="warn" id="warn" style="margin-top:8px"></ol></div>
-    </div>
-
-    <div class="section card" style="--accent:var(--sky)" id="mwrap">
+      </section>
+      <section class="pane" id="p-checks" role="tabpanel" aria-labelledby="t-checks" data-title="Worth checking" hidden>
+      <div class="card" id="warnwrap" style="--accent:var(--amber);margin-top:0"><h2 style="font-size:15px;margin:0" id="warnhead">Worth checking</h2><p class="hint" style="margin:2px 0 0">Each line ends with a call: Almost certainly not intended, worth confirming, or FYI.</p><ol class="warn" id="warn" style="margin-top:8px"></ol></div>
+      </section>
+      <section class="pane" id="p-folders" role="tabpanel" aria-labelledby="t-folders" data-title="Folders the file treats differently" hidden>
+    <div class="section card" style="--accent:var(--sky);margin-top:0" id="mwrap">
       <h2>Folders the file treats differently</h2>
       <p class="hint" style="margin:0 0 6px">One row per path that behaves differently from the site default, most restrictive first, and what each LLM's crawlers can do there. <b style="color:var(--text)">T</b> train, <b style="color:var(--text)">S</b> search and cite, <b style="color:var(--text)">U</b> open on request. Green allowed, red blocked. A letter is left out where that LLM has no crawler for the job.</p>
       <div id="matrixmore" class="tog"></div>
       <div class="tblwrap"><table class="matrix" id="matrix"><thead></thead><tbody></tbody></table></div>
       <div id="matrixend" class="tog"></div>
     </div>
-
-    <div class="section card other" style="--accent:var(--muted)">
+      </section>
+      <section class="pane" id="p-others" role="tabpanel" aria-labelledby="t-others" data-title="Every other crawler worth knowing" hidden>
+    <div class="section card other" style="--accent:var(--muted);margin-top:0">
       <h2>Every other crawler worth knowing</h2>
       <p class="hint" style="margin:0 0 6px" id="othersum">Googlebot and Bingbot first, then DeepSeek and Grok, then Common Crawl and the LLM-first crawlers most people have never heard of. Full list at <a href="https://knownagents.com/agents" target="_blank" rel="noopener">knownagents.com/agents</a>.</p>
       <div id="othersmore" class="tog"></div>
       <div class="tblwrap"><table id="others"><thead><tr><th>Crawler</th><th>Type</th><th>Job</th><th>Status</th><th>What it means</th></tr></thead><tbody></tbody></table></div>
       <div id="othersend" class="tog"></div>
     </div>
+      </section>
+      <section class="pane" id="p-file" role="tabpanel" aria-labelledby="t-file" data-title="Your file" hidden><div class="filev" id="filev"></div><p class="hint" id="filenote"></p></section>
+    </div>
 
-    <div class="section card" id="exports" style="--accent:var(--sky)">
+    <div class="section card" id="exports" style="--accent:var(--sky)" hidden>
       <div class="row">
         <button id="copy">Copy as markdown</button>
         <button id="dlmd">Download .md</button>
@@ -638,32 +713,63 @@ $('#h1src').textContent=srcLabel()?' - '+srcLabel():'';
 document.querySelectorAll('details.langs').forEach(d=>d.addEventListener('toggle',()=>{ d.querySelector('summary').textContent=d.open?'Show less':'Show all '+d.dataset.n; }));
 $('#results').classList.remove('hidden');
   LAST={generated:new Date().toISOString(),source:srcLabel()||null,headline:REP.headline,judgement:REP.judgement,checks:(()=>{ const rk=w=>w.includes('class="red"')?0:w.includes('class="amber"')?1:2; return warn.slice().sort((a,b)=>rk(a)-rk(b)).map(w=>({call:rk(w)===0?'Almost certainly not intended':rk(w)===1?'Worth confirming':'FYI',text:w.replace(/<[^>]+>/g,'').trim()})); })(),verdict:items.map(x=>x.replace(/<details[\s\S]*?<\/details>/g,'').replace(/<li class="st-[a-z]+">/g,' ').replace(/<[^>]+>/g,'').trim()),conclusion:'',zones:zoneDefs.map(z=>({label:z.label.long,paths:z.paths,byLLM:Object.fromEntries(z.at.map((x,i)=>[LLMS[i].name,x.state]))})).concat([{label:zoneDefs.length?'Everything else':'Whole site',paths:[],byLLM:Object.fromEntries(S.map((x,i)=>[LLMS[i].name,x.state]))}]),warnings:warn.map(w=>w.replace(/<[^>]+>/g,'')),llms:report,folders:matrix,others:oreport};
+  afterCheck();
   $('#results').scrollIntoView({behavior:'smooth',block:'start'});
 }
+const TAB_IDS=['p-summary','p-checks','p-llms','p-others','p-folders','p-file'];
+function showTab(id){ document.querySelectorAll('#tabs [role=tab]').forEach(t=>t.setAttribute('aria-selected', t.getAttribute('aria-controls')===id?'true':'false')); TAB_IDS.forEach(p=>{ const el=document.getElementById(p); if(el) el.hidden=(p!==id); }); }
+function afterCheck(){
+  if(!LAST) return;
+  /* headline moves out of the story into the slot above the tiles */
+  const head=$('#story li.head'); if(head){ $('#headline').innerHTML=head.innerHTML; head.remove(); }
+  /* what to do */
+  const fx=fixesFor(LAST); $('#fixes').innerHTML=fx.length?fx.map(f=>`<li>${f}</li>`).join(''):'<li>No change needed on the AI visibility side. Every LLM on the list can learn from and link to the site.</li>';
+  /* tiles */
+  const WORD={FULL:'Open',REDUCED:'Cite only',NONE:'Blocked','TRAIN ONLY':'Train only'};
+  const COL={FULL:'var(--green)',REDUCED:'var(--amber)',NONE:'var(--red)','TRAIN ONLY':'var(--red)'};
+  const leakText=[...document.querySelectorAll('#story li.leak')].map(li=>li.textContent).join(' | ');
+  const restZone=LAST.zones[LAST.zones.length-1]; const otherZones=LAST.zones.slice(0,-1);
+  $('#tiles').innerHTML=LAST.llms.map(r=>{ const l=LLMS.find(x=>x.name===r.llm); const v=r.visibility;
+    const blocked=[],open=[],never=[];
+    const add=(name,cell)=>{ if(!name||cell==='n/a') return; if(/^DISALLOW/i.test(cell)) blocked.push(name); else if(/via \*|not named/i.test(cell)&&/ALLOW/i.test(cell)) never.push(name); else open.push(name); };
+    if(l.kind==='google'){ add('Google-Extended',r.train); } else if(l.kind==='bing'){ add('Bingbot',r.train); } else { add(l.train,r.train); add(l.search,r.search); add(l.user,r.user); }
+    const parts=[]; if(blocked.length) parts.push(`<i>blocked</i> ${blocked.join(', ')}`); const opn=open.concat(never); if(opn.length) parts.push(`<i>open</i> ${opn.join(', ')}${(!open.length&&never.length&&!blocked.length)?' <i>(never named)</i>':''}`);
+    const flag=new RegExp('\\b'+r.llm+'\\b').test(leakText)&&/not intended/i.test(leakText.split('|').find(t=>new RegExp('\\b'+r.llm+'\\b').test(t))||'')?`<span class="flag"><a href="#warn-companies" data-tab="p-checks">Not intended?</a></span>`:'';
+    const differs=otherZones.filter(z=>z.byLLM[r.llm]!==restZone.byLLM[r.llm]).length;
+    const zn=differs?`<div class="zn"><a href="#p-llms" data-tab="p-llms">Differs on ${differs} folder group${differs>1?'s':''}</a></div>`:'';
+    return `<div class="tile" style="--state:${COL[v]||'var(--muted)'}"><p class="nm">${r.llm}</p><div class="st"><span class="dot"></span>${WORD[v]||v}${flag}</div><div class="sh">${r.share}% of visits to AI products</div><div class="bots">${parts.join(' · ')}</div>${zn}</div>`; }).join('');
+  document.querySelectorAll('#tiles a[data-tab]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); showTab(a.dataset.tab); const t=document.querySelector(a.getAttribute('href')); if(t&&a.getAttribute('href')!=='#p-llms') t.scrollIntoView({behavior:'smooth',block:'center'}); else $('#tabs').scrollIntoView({behavior:'smooth',block:'start'}); }));
+  /* counts on the tabs */
+  const nChecks=document.querySelectorAll('#warn li').length; $('#c-checks').textContent=nChecks?String(nChecks):'0';
+  const nBlockedOthers=[...document.querySelectorAll('#others tbody tr')].filter(tr=>/DISALLOW/.test(tr.textContent)).length; $('#c-others').textContent=`${OTHERS.length} · ${nBlockedOthers} blocked`;
+  const nFolders=document.querySelectorAll('#matrix tbody tr').length; $('#c-folders').textContent=String(Math.max(0,nFolders-1)); $('#mwrap').style.display='';
+  /* your file, with the lines the checks point at highlighted */
+  const raw=$('#robots').value.replace(/\r/g,''); const lines=raw.split('\n'); if(lines.length&&lines[lines.length-1]==='') lines.pop();
+  const warnTxt=$('#warn').textContent; const hot=new Set(); (warnTxt.match(/lines? \d+(?:(?:,| and) \d+)*/gi)||[]).forEach(m=>(m.match(/\d+/g)||[]).forEach(n=>hot.add(+n)));
+  const escf=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  $('#filev').innerHTML=lines.map((l,i)=>`<div class="ln${hot.has(i+1)?' flag':''}"><span class="n">${i+1}</span><span class="c">${escf(l)||' '}</span></div>`).join('');
+  $('#c-file').textContent=`${lines.length} line${lines.length===1?'':'s'}`;
+  $('#filenote').textContent=hot.size?`Highlighted: The ${hot.size===1?'line':'lines'} Worth checking points at.`:'';
+  showTab('p-summary');
+}
+document.querySelectorAll('#tabs [role=tab]').forEach((t,i,all)=>{
+  t.addEventListener('click',()=>{ if(t.id==='t-how'){ $('#fine').open=true; $('#how').scrollIntoView({behavior:'smooth',block:'start'}); return; } showTab(t.getAttribute('aria-controls')); });
+  t.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); const n=all[(i+(e.key==='ArrowRight'?1:all.length-1))%all.length]; n.focus(); n.click(); } });
+});
+(function(){ const btn=$('#xbtn'), menu=$('#xmenu'); const close=()=>{ menu.hidden=true; btn.setAttribute('aria-expanded','false'); };
+  btn.addEventListener('click',e=>{ e.stopPropagation(); const open=menu.hidden; menu.hidden=!open; btn.setAttribute('aria-expanded',open?'true':'false'); });
+  document.addEventListener('click',e=>{ if(!menu.contains(e.target)) close(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+  menu.querySelectorAll('button').forEach(b=>b.addEventListener('click',close)); })();
+document.querySelectorAll('#warn a[href^="#"], #story a[href^="#"]').forEach(()=>{});
+document.addEventListener('click',e=>{ const a=e.target.closest('a[href^="#warn-"], a[href^="#zone-"]'); if(!a) return; const id=a.getAttribute('href').slice(1); const el=document.getElementById(id); if(!el) return; const pane=el.closest('.pane'); if(pane&&pane.hidden){ e.preventDefault(); showTab(pane.id); el.scrollIntoView({behavior:'smooth',block:'center'}); } });
 
 /* ---------- exports ---------- */
-/* ---------- narrative report (Download report) ---------- */
-function toReport(d){
+/* fixes, derived from the site default state and the checks; shared by the report and the What to do panel */
+function fixesFor(d){
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const src=d.source||'';
-  const title='Robots.txt AI Visibility Report'+(src?' - '+src:'');
-  const when=new Date(d.generated).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  const raw=$('#robots').value.replace(/\r/g,'');
-  const lines=raw.split('\n'); const snip=lines.slice(0,8).map(l=>l.length>110?l.slice(0,110)+'…':l).join('\n');
-  const headline=d.headline||(d.verdict[0]||''); const judge=d.judgement||'';
-  const rest=d.verdict.slice(1);
-  const cost=rest.find(v=>v.startsWith('What this costs you'))||'';
-  const folderLines=rest.filter(v=>!v.startsWith('What this costs you')&&!v.startsWith('Languages and regions'));
-  const langLine=rest.find(v=>v.startsWith('Languages and regions'))||'';
-  const vis={FULL:'green',REDUCED:'amber',NONE:'red','TRAIN ONLY':'red'};
-  const visWord={FULL:'Full',REDUCED:'Cite only',NONE:'Blocked','TRAIN ONLY':'Train only'};
   const byName=Object.fromEntries(LLMS.map(l=>[l.name,l]));
-  const cell=v=>v==='n/a'?'<span class="mut">n/a</span>':/^DISALLOW/i.test(v)?'<span class="red">blocked</span>':'<span class="green">open</span>';
-  const llmRows=d.llms.map(r=>`<tr><td><b>${esc(r.llm)}</b><br><span class="mut">${esc(r.company)} · ${r.share}%</span></td><td>${cell(r.train)}</td><td>${cell(r.search)}</td><td>${cell(r.user)}</td><td><span class="${vis[r.visibility]||'mut'}"><b>${visWord[r.visibility]||r.visibility}</b></span></td></tr>`).join('');
-  /* findings */
   const checks=d.checks||[];
-  const findings=checks.length?`<ol>${checks.map(c=>`<li><span class="${c.call==='Almost certainly not intended'?'red':c.call==='Worth confirming'?'amber':'sky'}"><b>${esc(c.call)}.</b></span> ${esc(c.text)}</li>`).join('')}</ol>`:'<p>Nothing in the file contradicts itself and no crawler is named twice. The findings are the visibility states above.</p>';
-  /* fixes, derived from the site default state and the checks */
   const fixes=[];
   d.llms.forEach(r=>{ const l=byName[r.llm]; if(!l) return;
     if(r.visibility==='NONE'){
@@ -685,7 +791,31 @@ function toReport(d){
     else if(/is split inside/.test(t)) fixes.push(`<b>Folder splits:</b> Confirm the folders where one company is treated differently by role were meant to be cite-only. If not, align the training and search crawlers.`);
     else if(/opened to|closed to some LLMs/.test(t)) fixes.push(`<b>Languages:</b> Apply the same rules to every language and region folder, or say in the file which markets are deliberately closed.`);
   });
-  const fixHtml=fixes.length?`<ol>${[...new Set(fixes)].map(f=>`<li>${f}</li>`).join('')}</ol>`:'<p>No change needed on the AI visibility side. Every LLM on the list can learn from and link to the site.</p>';
+  return [...new Set(fixes)];
+}
+/* ---------- narrative report (Download report) ---------- */
+function toReport(d){
+  const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const src=d.source||'';
+  const title='Robots.txt AI Visibility Report'+(src?' - '+src:'');
+  const when=new Date(d.generated).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const raw=$('#robots').value.replace(/\r/g,'');
+  const lines=raw.split('\n'); const snip=lines.slice(0,8).map(l=>l.length>110?l.slice(0,110)+'…':l).join('\n');
+  const headline=d.headline||(d.verdict[0]||''); const judge=d.judgement||'';
+  const rest=d.verdict.slice(1);
+  const cost=rest.find(v=>v.startsWith('What this costs you'))||'';
+  const folderLines=rest.filter(v=>!v.startsWith('What this costs you')&&!v.startsWith('Languages and regions'));
+  const langLine=rest.find(v=>v.startsWith('Languages and regions'))||'';
+  const vis={FULL:'green',REDUCED:'amber',NONE:'red','TRAIN ONLY':'red'};
+  const visWord={FULL:'Full',REDUCED:'Cite only',NONE:'Blocked','TRAIN ONLY':'Train only'};
+  const byName=Object.fromEntries(LLMS.map(l=>[l.name,l]));
+  const cell=v=>v==='n/a'?'<span class="mut">n/a</span>':/^DISALLOW/i.test(v)?'<span class="red">blocked</span>':'<span class="green">open</span>';
+  const llmRows=d.llms.map(r=>`<tr><td><b>${esc(r.llm)}</b><br><span class="mut">${esc(r.company)} · ${r.share}%</span></td><td>${cell(r.train)}</td><td>${cell(r.search)}</td><td>${cell(r.user)}</td><td><span class="${vis[r.visibility]||'mut'}"><b>${visWord[r.visibility]||r.visibility}</b></span></td></tr>`).join('');
+  /* findings */
+  const checks=d.checks||[];
+  const findings=checks.length?`<ol>${checks.map(c=>`<li><span class="${c.call==='Almost certainly not intended'?'red':c.call==='Worth confirming'?'amber':'sky'}"><b>${esc(c.call)}.</b></span> ${esc(c.text)}</li>`).join('')}</ol>`:'<p>Nothing in the file contradicts itself and no crawler is named twice. The findings are the visibility states above.</p>';
+  const fixes=fixesFor(d);
+  const fixHtml=fixes.length?`<ol>${fixes.map(f=>`<li>${f}</li>`).join('')}</ol>`:'<p>No change needed on the AI visibility side. Every LLM on the list can learn from and link to the site.</p>';
   const openAll=d.llms.every(r=>r.visibility==='FULL');
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -707,7 +837,7 @@ pre{background:var(--surf);border:1px solid var(--line);border-radius:10px;paddi
 table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
 .tl{display:grid;grid-template-columns:120px 1fr;gap:6px 14px}.tl b{color:var(--sky);font-family:'Space Grotesk',sans-serif}
 .foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}.foot a{color:var(--sky)}
-@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}@page{size:A4;margin:0}.wrap{padding:12mm 12mm 16mm;max-width:none}body{font-size:12px}h1{font-size:24px}h2{font-size:16px;break-after:avoid}li,tr,.tldr{break-inside:avoid}}
+@media print{.tabs,.guide,.export,#p-file{display:none!important} .pane{display:block!important;padding-top:10px} .pane::before{content:attr(data-title);display:block;font-family:var(--disp);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin:0 0 4px} #p-summary::before{display:none} .tiles{grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0 10px} .tile{padding:8px 10px} .tile .nm{font-size:13px} .tile .bots{font-size:8.5px} .tile .sh{font-size:9px} #headline{font-size:16px} #headline .judge{font-size:11px} *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}@page{size:A4;margin:0}.wrap{padding:12mm 12mm 16mm;max-width:none}body{font-size:12px}h1{font-size:24px}h2{font-size:16px;break-after:avoid}li,tr,.tldr{break-inside:avoid}}
 </style></head><body><div class="wrap">
 <div class="kicker">Robots.txt for AI search · Audit report</div>
 <h1>Robots.txt AI Visibility Report${src?` <span>- ${esc(src)}</span>`:''}</h1>
