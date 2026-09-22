@@ -58,7 +58,7 @@ body.shot #exports,body.shot #paste,body.shot .instr,body.shot #copied{display:n
 .panel .h3{font-family:var(--disp);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
 #fixes{margin:0;padding-left:22px}
 #fixes li{margin:8px 0}
-#fixes li b{color:var(--sky)}
+#fixes li b{color:var(--text);font-weight:700}
 #fixes code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:var(--muted)}
 .filev{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:14px 0;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto}
 .filev .ln{display:grid;grid-template-columns:48px 1fr;padding:0 14px;white-space:pre}
@@ -154,6 +154,18 @@ details.card>summary{cursor:pointer;list-style:none;font-family:var(--disp);font
 table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
 .tog{margin:8px 0 2px} .tog a.toggle{color:var(--sky);font-size:13px;font-weight:600;text-decoration:none} .tog a.end{display:inline} #matrixend,#othersend{margin-top:6px}
 @media print{.tabs,.guide,.export,#p-file{display:none!important} .pane{display:block!important;padding-top:10px} .pane::before{content:attr(data-title);display:block;font-family:var(--disp);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin:0 0 4px} #p-summary::before{display:none} .tiles{grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0 10px} .tile{padding:8px 10px} .tile .nm{font-size:13px} .tile .bots{font-size:8.5px} .tile .sh{font-size:9px} #headline{font-size:16px} #headline .judge{font-size:11px} *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} @page{size:A4;margin:0} body{background:var(--bg)!important;color:var(--text)!important;font-size:12px} .wrap{padding:9mm 9mm 12mm;max-width:none} .card::before{display:none} button,.byline,textarea,.instr,#copied,#paste,#exports,.xtop,.lede,.totop{display:none!important} .kicker{margin-bottom:4px} h1{font-size:22px} .snip{display:block!important;margin:8px 0 10px;padding:8px 12px} .snip pre{font-size:9.5px;line-height:1.35} .snip .sk{font-size:9.5px;margin-bottom:4px} .snip .more{font-size:10px;margin-top:4px} .section{margin-top:12px} .story{font-size:12.5px;margin:0 0 8px;line-height:1.3} .story li{margin:3px 0} .story ul{margin:2px 0} .hint{font-size:10.5px} .cards{grid-template-columns:repeat(5,1fr)!important;gap:6px;break-inside:avoid} .lc{padding:8px 9px;break-inside:avoid} .lc h3{font-size:12px} .lc h3 small{font-size:9px} .lc .zones{margin-top:6px} .lc .zones li{padding:3px 0;font-size:10px;gap:2px;flex-direction:column;align-items:flex-start} .lc .zones li .z a{display:none} .lc .zones li .r{flex-direction:row;align-items:center;gap:4px} .lc .zones li .z b{font-size:10px} .lc .zones li .z code{font-size:9px} .lc .pill{padding:2px 6px;font-size:8px} .lc .tsu i{width:14px;height:14px;font-size:8px} .lc .bots{font-size:8.5px;margin-top:6px;line-height:1.35} .foot{break-before:auto;margin-top:16px;padding-top:12px} .foot h3.fh{break-after:avoid} .foot li{break-inside:avoid} details{display:block} details>*{display:block} details summary{list-style:none} details.fine>summary{display:none}}
+
+/* round 44: summary tab, layout D */
+.sumcard{padding:20px 22px;margin-top:0} .sumcard h2{font-size:15px;margin:0 0 10px} #short .story{margin:0}
+.two{display:grid;grid-template-columns:5fr 7fr;gap:14px;margin-top:14px} @media(max-width:900px){.two{grid-template-columns:1fr}}
+#costs ul{margin:0;padding-left:20px;font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--text)} #costs ul li{margin:8px 0} #costs .none{margin:0;font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--text)}
+#costs .st-full{color:var(--green)} #costs .st-reduced{color:var(--amber)} #costs .st-none,#costs .st-training{color:var(--red)} #costs a{color:inherit;text-decoration:underline} #costs b{font-weight:700;color:inherit;font-family:var(--body)}
+#fixes li{margin:8px 0;font-size:14px}
+@media print{.two{display:block} .two .card{margin-top:10px} .sumcard{padding:10px 12px} .sumcard h2{font-size:12px;margin:0 0 4px} #costs ul{font-size:11px} #fixes li{font-size:11px}}
+
+/* round 45: what-to-do disclaimer */
+.sumcard h2 .ast{color:var(--sky);font-size:13px;margin-left:3px;line-height:0;vertical-align:super} .disc{margin:10px 2px 0;font-family:var(--body);font-weight:400;font-size:12.5px;line-height:1.5;color:var(--muted)} .disc .ast{color:var(--sky);font-size:11px;margin-right:2px}
+@media print{.disc{font-size:10px;margin-top:6px}}
 </style>
 </head>
 <body>
@@ -198,8 +210,9 @@ Allow: /"></textarea>
         <button class="tab" role="tab" aria-selected="false" id="t-how" type="button">How it works</button>
       </div>
       <section class="pane" id="p-summary" role="tabpanel" aria-labelledby="t-summary" data-title="Summary">
-      <ul class="story" id="story"></ul>
-      <div class="panel" id="todo"><p class="h3">What to do</p><ol id="fixes"></ol></div>
+      <div class="card sumcard" id="short" style="--accent:var(--sky)"><h2>The short version</h2><ul class="story" id="story"></ul></div>
+      <div class="two"><div class="card sumcard" id="costs" style="--accent:var(--amber)"><h2>What this costs you</h2><div id="costsbody"></div></div><div class="card sumcard" id="todo" style="--accent:var(--green)"><h2>What to do<sup class="ast">*</sup></h2><ol id="fixes"></ol></div></div>
+      <p class="disc" id="disc"><sup class="ast">*</sup> These are suggestions: Confirm them against the business and its IP goals before changing anything, because every site is different. To test a change, edit the robots.txt and paste it here again, it does not need to be live first.</p>
       </section>
       <section class="pane" id="p-llms" role="tabpanel" aria-labelledby="t-llms" data-title="The 5 LLMs, crawler by crawler" hidden>
       <div class="cards" id="cards"></div>
@@ -722,6 +735,10 @@ function afterCheck(){
   if(!LAST) return;
   /* headline moves out of the story into the slot above the tiles */
   const head=$('#story li.head'); if(head){ $('#headline').innerHTML=head.innerHTML; head.remove(); }
+  /* what this costs you moves out of the story into its own card */
+  const miss=$('#story li.miss'); const cb=$('#costsbody'); cb.innerHTML='';
+  if(miss){ const ul=miss.querySelector('ul'); if(ul){ cb.appendChild(ul); } else { const b=miss.querySelector('b'); if(b) b.remove(); const p=document.createElement('p'); p.className='none'; p.innerHTML=miss.innerHTML.trim(); cb.appendChild(p); } miss.remove(); }
+  else { cb.innerHTML='<p class="none">Nothing on the AI visibility side.</p>'; }
   /* what to do */
   const fx=fixesFor(LAST); $('#fixes').innerHTML=fx.length?fx.map(f=>`<li>${f}</li>`).join(''):'<li>No change needed on the AI visibility side. Every LLM on the list can learn from and link to the site.</li>';
   /* tiles */
