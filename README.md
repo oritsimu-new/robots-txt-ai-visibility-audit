@@ -2,7 +2,7 @@
 
 Reads a robots.txt file and shows, for every LLM, whether its training, search and user crawlers are allowed or blocked, what that does to your AI visibility and which line is costing you.
 
-Built from [Should Publishers Block AI Training? Why Block It, When to Allow It and What the Data Says](https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/) by [Orit Mutznik](https://www.oritmutznik.com/). The article explains why publishers block AI training, what blocking costs in AI visibility, how much a robots.txt block actually holds and how to decide by concern, with a decision tree. This is the tool the article uses.
+Built from [Should Publishers Block AI Training? Why Block It, When to Allow It and What the Data Says](https://www.oritmutznik.com/ai-search-optimisation/publishers-block-or-allow-ai-training-free-robots-txt-tool) by [Orit Mutznik](https://www.oritmutznik.com/). The article explains why publishers block AI training, what blocking costs in AI visibility, how much a robots.txt block actually holds and how to decide by concern, with a decision tree. This is the tool the article uses.
 
 **Use it in the browser:** https://www.oritmutznik.com/wp-content/uploads/2026/09/robots-txt-ai-visibility-audit.html
 
@@ -39,7 +39,7 @@ It is one HTML file with no dependencies beyond Google Fonts. Drop `index.html` 
 - It audits the AI visibility side of robots.txt only. For syntax errors, Googlebot and Bingbot access, sitemap lines or anything else about search engine crawling, use Google Search Console's robots.txt report, Bing Webmaster Tools, TechnicalSEO.com's robots.txt tester or Screaming Frog.
 
 - Robots.txt is a set of directives and nothing enforces them. When university researchers [tested the crawlers](https://arxiv.org/html/2411.15091v2) in 2025, the OpenAI, Anthropic, Common Crawl, Apple, Amazon and Meta crawlers respected it, while Bytespider ignored it and 20 of 23 smaller AI assistant crawlers never fetched it. The tool reads what your file asks for, not who actually turns up.
-- Whether to block at all is a legal, IP and business decision. The article's [decision tree](https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/#decision-tree) walks through it by concern.
+- Whether to block at all is a legal, IP and business decision. The article's [decision tree](https://www.oritmutznik.com/ai-search-optimisation/publishers-block-or-allow-ai-training-free-robots-txt-tool#decision-tree) walks through it by concern.
 - It reads only what you paste. It does not fetch your pages, so it cannot tell whether an allowed folder is behind a paywall, redirects somewhere else or has been taken down.
 - It does not see other blocks. A firewall, a CDN rule or a meta tag can stop a crawler your file allows.
 - The 5 LLMs and their crawler names come from each company's own documentation as of September 2026. Companies add and rename crawlers, so re-check your file every quarter against [knownagents.com/agents](https://knownagents.com/agents), which lists every known crawler in one place and is updated daily.
