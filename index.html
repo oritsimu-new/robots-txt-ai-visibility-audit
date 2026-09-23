@@ -180,7 +180,7 @@ table tbody tr.extra{display:none} table.open tbody tr.extra{display:table-row}
 <div class="wrap">
   <div class="kicker">Free tool · Robots.txt for AI search</div>
   <h1>Robots.txt AI Visibility Audit<span id="h1src"></span></h1>
-  <p class="lede">Reads a robots.txt file and shows, for every LLM, whether its training, search and user crawlers are allowed or blocked, what that does to your AI visibility and where the file is costing you. Built from <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/" target="_blank" rel="noopener">Can Publishers Block AI Training Without Losing AI Visibility?</a> · <a href="#how" id="howlink">How it works</a></p>
+  <p class="lede">Reads a robots.txt file and shows, for every LLM, whether its training, search and user crawlers are allowed or blocked, what that does to your AI visibility and where the file is costing you. Built from <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/" target="_blank" rel="noopener">Should Publishers Block AI Training? Why Block It, When to Allow It and What the Data Says</a> · <a href="#how" id="howlink">How it works</a></p>
   <div class="instr"><b class="ih">Instructions:</b> Copy-paste the contents of your robots.txt below and hit <span class="co">Check</span>, or click any of the <span class="lb">example buttons</span> for anonymised real robots.txt examples and what they mean. Hit <span class="clr">Clear</span> to paste a new file's content, or simply paste over it and hit <span class="co">Check</span> again.</div>
 
   <div class="card" id="paste" style="--accent:var(--coral);margin-top:16px">
@@ -282,14 +282,14 @@ Allow: /"></textarea>
         <ul>
           <li>The LLM can link to these pages only after a live web search.</li>
           <li><a href="https://searchengineland.com/chatgpt-search-prompts-data-463407" target="_blank" rel="noopener">Nectiv</a> found that happens on about 31% of ChatGPT prompts.</li>
-          <li>The other 69% of the time the answer comes from memory, where a page the model never trained on does not exist.</li>
+          <li>The other 69% of the time the answer comes from memory, where a page the model never trained on plays no part.</li>
         </ul>
       </li>
       <li><b>Blocked:</b> The search crawler is blocked, so the LLM cannot cite these pages.
         <ul>
           <li>Search is what earns a citation, so once it is shut the pill is Blocked whatever the other letters say.</li>
           <li>A green U on a Blocked card means the user fetcher is still open: A page will load when a person pastes its URL, but the LLM will never find it on its own.</li>
-          <li>In most files training is shut too, so for that LLM the pages do not exist.</li>
+          <li>In most files training is shut too, so that LLM can neither cite the pages nor draw on them from memory.</li>
         </ul>
       </li>
       <li><b>Train only:</b> The LLM learns from these pages but can never link to them.
@@ -307,7 +307,8 @@ Allow: /"></textarea>
     </ul>
     <h3 class="fh">What this tool cannot tell you:</h3>
     <ul>
-      <li><b>Who actually turns up:</b> Robots.txt is a set of directives. The big companies say their crawlers follow it, but a crawler can ignore it and newer or less careful ones sometimes do. The tool reads what your file asks for.</li>
+      <li><b>Who actually turns up:</b> Robots.txt is a set of directives and nothing enforces them. When researchers at UC San Diego and the University of Chicago <a href="https://arxiv.org/html/2411.15091v2" target="_blank" rel="noopener">tested the crawlers</a> in 2025, the OpenAI, Anthropic, Common Crawl, Apple, Amazon and Meta crawlers respected it, while Bytespider ignored it and 20 of 23 smaller AI assistant crawlers never fetched it. <a href="https://mediacopilot.ai/ai-scrapers-bypassing-publisher-protections/" target="_blank" rel="noopener">TollBit</a> measured 30% of AI scrapes ignoring it in late 2025. The tool reads what your file asks for, not who turns up.</li>
+      <li><b>Whether to block at all:</b> That is a legal, IP and business decision, which the article's <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/#decision-tree" target="_blank" rel="noopener">decision tree</a> walks through by concern. The tool shows what the file does, so you can check it matches the decision.</li>
       <li><b>What is behind an allowed folder:</b> It reads only what you paste and does not fetch your pages, so it cannot tell whether a folder is behind a paywall, redirects somewhere else or has been taken down.</li>
       <li><b>Other blocks:</b> A firewall, a CDN rule or a meta tag can stop a crawler your file allows. On Cloudflare, since <a href="https://blog.cloudflare.com/accountable-mixed-use-ai-crawlers/" target="_blank" rel="noopener">15 September 2026</a>, Block and Block on pages with ads apply to Googlebot, Bingbot and Applebot too, and Cloudflare's post says either setting affects search as well as training. Disallow AI Training is the setting that stops training and keeps search, and it writes the no-training lines into your robots.txt for you.</li>
       <li><b>New crawlers:</b> The 5 LLMs and their crawler names come from each company's own documentation as of September 2026. Companies add and rename crawlers, so re-check your file every quarter against <a href="https://knownagents.com/agents" target="_blank" rel="noopener">knownagents.com/agents</a>, which lists every known crawler in one place and is updated daily.</li>
@@ -382,7 +383,7 @@ const OTHERS = [
   { ua:'MistralBot', who:'Mistral', type:'llm', job:'Training', means:'Collects data for Mistral’s models.' },
   { ua:'MistralAI-Index', who:'Mistral', type:'llm', job:'Search', means:'Retrieval index for Le Chat answers.' },
   { ua:'MistralAI-User', who:'Mistral', type:'llm', job:'User', means:'Fetches a page when someone asks Le Chat to read it.' },
-  { ua:'Bytespider', who:'ByteDance', type:'llm', job:'Training', means:'Trains the models behind TikTok’s AI features. Widely blocked and widely reported to ignore the file.' },
+  { ua:'Bytespider', who:'ByteDance', type:'llm', job:'Training', means:'Trains the models behind TikTok’s AI features. It ignored robots.txt when university researchers tested it in 2025, so a block here is a statement more than a barrier.' },
   { ua:'QwenBot', who:'Alibaba', type:'llm', job:'Training', means:'Trains the Qwen models. TongyiBot is the user-triggered fetcher for the Tongyi assistant.' },
   { ua:'TongyiBot', who:'Alibaba', type:'llm', job:'User', means:'Fetches a page for the Tongyi Qianwen assistant on request.' },
   { ua:'ERNIEBot', who:'Baidu', type:'llm', job:'Training', means:'Trains Baidu’s ERNIE models. YiyanBot is the user-triggered fetcher.' },
@@ -494,7 +495,7 @@ function meaningPerplexity(s,u){
   const M={
     '11':{v:'full',txt:`<b>Open, with nothing to train.</b> Perplexity can fetch and cite you. By its stated policy PerplexityBot is not used to train models, so there is no training exposure to weigh here.`},
     '10':{v:'full',txt:`<b>Open for search, closed to direct fetch.</b> PerplexityBot can cite you, but Perplexity-User is blocked, so a pasted URL fails. Nothing to train either way.`},
-    '01':{v:'none',txt:`<b>Out of Perplexity search.</b> PerplexityBot is retrieval only, so this block removes the citation and protects nothing extra. A pasted URL still opens. At 0.9% of AI product web traffic it is the cheapest place to test the opposite setting.`},
+    '01':{v:'none',txt:`<b>Out of Perplexity search.</b> PerplexityBot is retrieval only, so this block removes the citation and protects nothing extra. Columbia's Tow Center also found Perplexity identifying excerpts from a site that blocks it, so the block may not hold completely. A pasted URL still opens. At 0.9% of AI product web traffic it is the cheapest place to test the opposite setting.`},
     '00':{v:'none',txt:`<b>Out of Perplexity entirely.</b> No citations and no direct fetch. PerplexityBot is retrieval only, so this protects nothing extra. At 0.9% of AI product web traffic it is the cheapest place to test the opposite setting.`},
   };
   return M[key];
@@ -590,7 +591,7 @@ function run(){
   { const s=clause(`<b>${zoneDefs.length?'Everything else':'The whole site'}</b>`,S,false); items.push(`<li>${s.charAt(0).toUpperCase()+s.slice(1)}.</li>`); }
   if(extraZones.length) items.push(`<li><span class="cul">Plus ${extraZones.reduce((a,z)=>a+z.length,0)} other paths with their own rules, in the folder table.</span></li>`);
   /* what this costs you, in plain words */
-  const CITE_NOTE=` In practice that is a big gap: <a href="https://searchengineland.com/chatgpt-search-prompts-data-463407" target="_blank" rel="noopener">Nectiv</a> found ChatGPT runs a live web search on about <span class="st-reduced">31%</span> of prompts. <b>The other <span class="st-reduced">69%</span> of the time the answer comes from memory, and a page it never trained on does not exist there, so your brand will not be referenced.</b>`;
+  const CITE_NOTE=` In practice that is a big gap: <a href="https://searchengineland.com/chatgpt-search-prompts-data-463407" target="_blank" rel="noopener">Nectiv</a> found ChatGPT runs a live web search on about <span class="st-reduced">31%</span> of prompts. <b>The other <span class="st-reduced">69%</span> of the time the answer comes from memory, and a page the model never trained on plays no part in it.</b>`;
   const miss=[];
   const restNone=S.filter(x=>x.state==='none').map(x=>x.l), restRed=S.filter(x=>x.state==='reduced').map(x=>x.l), restTr=S.filter(x=>x.state==='training').map(x=>x.l);
   const shareOf=ls=>Math.round(ls.reduce((a,l)=>a+l.share,0));
@@ -813,7 +814,7 @@ function fixesFor(d){
       else if(l.kind==='perplexity') fixes.push(`<b>Perplexity:</b> Allow <code>PerplexityBot</code> (and <code>Perplexity-User</code>). PerplexityBot is retrieval only, so this protects nothing on the training side.`);
       else fixes.push(`<b>${esc(r.llm)}:</b> Open the search and user crawlers, <code>${esc(l.search)}</code> and <code>${esc(l.user)}</code>. Keep <code>${esc(l.train)}</code> blocked if training is the concern: That is the split that keeps citations without training.`);
     } else if(r.visibility==='REDUCED'){
-      fixes.push(`<b>${esc(r.llm)}:</b> Already citable. The remaining choice is <code>${esc(l.train)}</code>: Leave it blocked if training is the concern, and accept that answers written from memory will not mention you; open it if reach matters more than the training exposure.`);
+      fixes.push(`<b>${esc(r.llm)}:</b> Already citable. The remaining choice is <code>${esc(l.train)}</code>: Leave it blocked if training is the concern, and accept that answers written from memory will not draw on your pages; open it if reach matters more than the training exposure.`);
     } else if(r.visibility==='TRAIN ONLY'){
       fixes.push(`<b>${esc(r.llm)}:</b> The model can learn from the site but never link to it. Open <code>${esc(l.search)}</code> and <code>${esc(l.user)}</code> at once, or block <code>${esc(l.train)}</code> too. Nobody chooses this state on purpose.`);
     }
@@ -882,14 +883,15 @@ table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}th,td{t
 
 <h2><small>1</small>What robots.txt is</h2>
 <p>A plain text file at the root of a website (<code>${esc(src||'yoursite.com')}/robots.txt</code>) that tells crawlers which parts of the site they may read. Each block names a crawler by its user agent and lists the paths it is allowed or disallowed. A crawler that is not named falls back to the general rules under <code>User-agent: *</code>.</p>
-<p>It is a set of directives, and nothing enforces them. The big search engines and AI companies say their crawlers follow it. Newer or less careful ones sometimes do not.</p>
+<p>It is a set of directives and nothing enforces them. When university researchers tested the crawlers in 2025, the OpenAI, Anthropic, Common Crawl, Apple, Amazon and Meta crawlers respected it, while Bytespider ignored it and most smaller AI assistant crawlers never read the file. TollBit measured 30% of AI scrapes ignoring it in late 2025.</p>
 
 <h2><small>2</small>Why it matters for search</h2>
 <p>Googlebot and Bingbot decide what goes into the search index from this file. A wrong line here can remove a whole folder from Google and Bing overnight, and a blanket <code>Disallow: /</code> under <code>User-agent: *</code> removes the entire site. Search access is not the subject of this report, but every change below should be checked against it: Nothing here should touch Googlebot or Bingbot.</p>
 
 <h2><small>3</small>Why it matters for AI visibility</h2>
 <p>Most AI companies run separate crawlers for separate jobs. A <b>training crawler</b> collects content to train the model. A <b>search crawler</b> fetches pages for a live answer and earns the citation. A <b>user crawler</b> opens one page only when a person pastes its URL. Blocking one does not block the others, so a file can keep a model from training on the site while still letting it cite the site, or block the wrong one and lose the citations by accident.</p>
-<p>Two of the five do not split: Google-Extended is one switch for Gemini training and grounding, and Copilot has no crawler of its own because it reads the Bing index. The catch with training blocks is memory: Nectiv found ChatGPT runs a live web search on about 31% of prompts. The other 69% of the time the answer comes from what the model learned in training, and a site it never trained on does not exist there.</p>
+<p>Three of the five do not split by purpose: Google-Extended is one switch for Gemini training and grounding, Perplexity has no training crawler (so blocking PerplexityBot only costs citations) and Copilot has no crawler of its own because it reads the Bing index. The catch with training blocks is memory: Nectiv found ChatGPT runs a live web search on about 31% of prompts. The other 69% of the time the answer comes from what the model learned in training, where a site it never trained on plays no part.</p>
+<p>Whether to block training at all is a legal, IP and business decision. For a business whose content is the product, the law in Europe reads a robots.txt line as the opt-out from training and the licensing money goes to the sites that can say no. Blocking has a visibility price, which the biggest publishers feel most. The <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/#decision-tree" class="sky">decision tree in the article</a> walks through it by concern.</p>
 
 <h2><small>4</small>The situation${src?` for ${esc(src)}`:''}</h2>
 <ul>${folderLines.map(v=>`<li>${esc(v)}</li>`).join('')}${langLine?`<li>${esc(langLine)}</li>`:''}</ul>
@@ -901,7 +903,7 @@ table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}th,td{t
 ${findings}
 
 <h2><small>6</small>Fixes</h2>
-${openAll?'':`<p><b>Recommendation:</b> Open everything you want found. If specific folders must be protected, block those folders by path under the training crawlers only, and leave the search and user crawlers open everywhere else.</p>`}
+${openAll?'':`<p><b>Recommendation, by concern:</b> If the content is not the product, open everything. If it is the product and nobody is paying for it yet, block training on the product folders only. If there is a licensing deal or a legal claim in play, block training by name across the site. On every branch the search and user crawlers stay open, because that is where citations come from. These are suggestions to confirm with the business and its IP goals before anything changes.</p>`}
 ${fixHtml}
 
 <h2><small>7</small>Timeline</h2>
@@ -921,7 +923,7 @@ ${fixHtml}
 <li>Measure before and after. Citation counts per LLM, from a tool or from your own prompt set, are the only way to know whether a change did anything.</li>
 </ul>
 
-<div class="foot">This report covers the AI visibility side of robots.txt only. It reads what the file asks for, not who turns up, and cannot see paywalls, firewalls or meta tags. Crawler names are from each company's documentation as of September 2026. It is a decision aid, not legal advice and not a substitute for an SEO, GEO or AEO consultation. Source: <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/">Can Publishers Block AI Training Without Losing AI Visibility?</a> by Orit Mutznik.</div>
+<div class="foot">This report covers the AI visibility side of robots.txt only. It reads what the file asks for, not who turns up, and cannot see paywalls, firewalls or meta tags. Crawler names are from each company's documentation as of September 2026. It is a decision aid, not legal advice and not a substitute for an SEO, GEO or AEO consultation. Source: <a href="https://www.oritmutznik.com/ai-search-optimisation/robots-txt-ai-search-best-practices-free-audit-tool/">Should Publishers Block AI Training? Why Block It, When to Allow It and What the Data Says</a> by Orit Mutznik.</div>
 </div></body></html>`;
 }
 
@@ -1003,10 +1005,10 @@ Disallow: /account/
 Disallow: /cart/
 
 Sitemap: https://www.example.com/sitemap.xml`;
-const SAMPLE2=`# Illustrative example, not a real site: The fallback if you must protect specific folders.
-# The recommendation is still to open everything. If that loses the argument, this is the least
-# damaging way to do it: The site stays open, the paid library and downloads are closed to the
-# training crawlers only, so search and user crawlers can still reach and cite everything.
+const SAMPLE2=`# Illustrative example, not a real site: Training blocked on the product folders only.
+# The setup the article recommends when the content is the product and nobody is paying for it
+# yet: The site stays open, the paid library and downloads are closed to the training crawlers
+# only, so search and user crawlers can still reach and cite everything.
 User-agent: GPTBot
 Disallow: /library/
 Disallow: /downloads/
